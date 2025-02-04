@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="justify-content-center col-6 mb-4 p-4 align-self-end">
                                         <!--<img src="{{ url('public/img/hypernet-logo.png') }}" alt="" class="img-fluid"> -->
-                                        <a class="text-dark text-center"><h1>INI LOGO</h1></a>
+                                        <a class="text-dark text-center"><h1>INI LOGOKU</h1></a>
                                     </div>
                                 </div>
                             </div>
