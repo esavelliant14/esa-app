@@ -5,9 +5,9 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Default Datatable</h4>
+                <h4 class="card-title"></h4>
                 <div class="">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#newCustomerModal" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCustomers-modal"><i class="mdi mdi-plus me-1"></i>New User</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddUser" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCustomers-modal"><i class="mdi mdi-plus me-1"></i>New User</button>
                 </div>
 
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">

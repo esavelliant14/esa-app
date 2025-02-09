@@ -100,7 +100,7 @@
                                     <span key="t-authentication">Management Menu</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('user/list') }}" key="t-login">Menu</a></li>
+                                    <li><a href="{{ url('menu/') }}" key="t-login">Menu</a></li>
                                     <li><a href="auth-login-2.html" key="t-login-2">Sub Menu</a></li>
                                 </ul>
                             </li>

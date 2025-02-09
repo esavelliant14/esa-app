@@ -63,5 +63,9 @@
         <!-- START JAVASCRIPT CODE -->
             @include('_partials.js')
         <!-- END JAVASCRIPT CODE -->
+
+        <!-- START MODAL CODE -->
+            @include('_partials.modal')
+        <!-- END MODAL CODE -->
     </body>
 </html>
