@@ -50,4 +50,20 @@
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
+<!--
+<script>
+    window.onload = function() {
+        var modal = new bootstrap.Modal(document.getElementById('ModalAddUser'));
+        modal.show();
+    }
+</script>
+-->
+@if ($errors->any())
+        <script>
+            window.onload = function() {
+            var myModal = new bootstrap.Modal(document.getElementById('ModalAddUser'));
+            myModal.show();
+            }
+        </script>
+@endif
 @endsection

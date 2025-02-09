@@ -32,4 +32,6 @@
 <script src="{{ url('/public/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
 <!-- Datatable init js -->
-<script src="{{ url('/public/js/pages/datatables.init.js') }}"></script>    
+<script src="{{ url('/public/js/pages/datatables.init.js') }}"></script>  
+  
+  

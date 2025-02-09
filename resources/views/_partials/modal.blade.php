@@ -13,35 +13,65 @@
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label for="name-input" class="form-label">Name</label>
-                                <input type="text" name="txt_name" id="name-input" class="form-control" placeholder="Enter name" required />
+                                <input type="text" name="txt_name" id="name-input" class="form-control @error('txt_name') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name') }}"required />
+                                <div class="invalid-feedback">
+                                    @error('txt_name')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email-input" class="form-label">Email</label>
-                                <input type="email" name="txt_email" id="email-input" class="form-control" placeholder="Enter email" required />
+                                <input type="email" name="txt_email" id="email-input" class="form-control @error('txt_email') is-invalid @enderror" placeholder="Enter email" {{ old('txt_email') }} required />
+                                <div class="invalid-feedback">
+                                    @error('txt_email')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="company-input" class="form-label">Company</label>
-                                <select name="txt_company" id="" class="form-select" required>
+                                <select name="txt_company" id="" class="form-select @error('txt_company') is-invalid @enderror" required>
                                     <option value="">--- Choose Company ---</option>
                                     <option value="ESA NET">ESA NET</option>
                                     <option value="ESA DEV">ESA DEV</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    @error('txt_company')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="privilege-input" class="form-label">Privileged</label>
-                                <select name="txt_privileged" id="" class="form-select" required>
+                                <select name="txt_privileged" id="" class="form-select @error('txt_privileged') is-invalid @enderror" required>
                                     <option value="">--- Choose Privileged ---</option>
                                     <option value="1">Administrator</option>
                                     <option value="2">Operator</option>
+                                    <div class="invalid-feedback">
+                                        @error('txt_privileged')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="password-1-input" class="form-label">Password</label>
-                                <input type="password" name="txt_password" id="email-input" class="form-control" placeholder="Enter password" required />
+                                <input type="password" name="txt_password" id="email-input" class="form-control @error('txt_password') is-invalid @enderror" placeholder="Enter password" required />
+                                <div class="invalid-feedback">
+                                    @error('txt_password')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="password-2-input" class="form-label">Repeat Password</label>
-                                <input type="password" name="txt_password_confirmation" id="email-input" class="form-control" placeholder="Enter password" required />
+                                <input type="password" name="txt_password_confirmation" id="email-input" class="form-control @error('txt_password_confirmation') is-invalid @enderror" placeholder="Enter password" required />
+                                <div class="invalid-feedback">
+                                    @error('txt_password_confirmation')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         
