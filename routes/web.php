@@ -14,6 +14,7 @@ Route::get('/main' , [MainController::class , 'index']);
 // ADMINISTRATOR 
 Route::get('/user/list/', [UserController::class , 'index']);
 Route::get('/user', [UserController::class , 'index']);
+Route::post('/user' , [UserController::class , 'add_user']);
 
 
 //NAS
