@@ -17,11 +17,15 @@ class Login extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    protected $table = 'table_logins';
+    protected $guarded = [
+        'id',
     ];
+//    protected $fillable = [
+//        'name',
+//        'email',
+//        'password',
+//    ];
 
     /**
      * The attributes that should be hidden for serialization.
