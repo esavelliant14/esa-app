@@ -55,4 +55,9 @@ class Login extends Authenticatable
     {
         return $this->belongsTo(Privilege::class , 'id_privilege');
     }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class , 'id_company');
+    }
 }

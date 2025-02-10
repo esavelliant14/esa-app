@@ -39,8 +39,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>{{ $item->id_company }}</td>
-                                <td>{{ $item->id_privilege }}</td>
+                                <td>{{ $item->company->name_company }}</td>
+                                <td>{{ $item->privilege->name_privilege }}</td>
                                 <td>
                                     {{ ($item->status === 1) ? 'Active' : 'Inactive'  }} 
                                 </td>
