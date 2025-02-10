@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('table_privileges', function (Blueprint $table) {
             $table->id();
             $table->string('name_privilege');
+            $table->foreignId('id_company');
             $table->timestamps();
         });
     }

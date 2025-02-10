@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Privilege;
+use App\Models\Company;
 
 class PrivilegeController extends Controller
 {
@@ -15,6 +16,7 @@ class PrivilegeController extends Controller
             'title_menu' => 'PRIVILEGE',
             'title_submenu' => 'PRIVILEGE',
             'var_show' => Privilege::all(),
+            'var_show_company' => Company::all(),
         ]);
     }
 
@@ -22,6 +24,7 @@ class PrivilegeController extends Controller
     {
         $var_data = Validator::make($post_create_privilege->all(), [
             'txt_name_privilege' => 'required|unique:table_privileges,name_privilege',
+            'txt_company' => 'required',
         ]);
         
         if( $var_data->fails() ){
@@ -33,6 +36,7 @@ class PrivilegeController extends Controller
 //            dd($var_data_valid);
             Privilege::create([
                 'name_privilege' => $var_data_valid['txt_name_privilege'],
+                'id_company' => $var_data_valid['txt_company'],
             ]);
             return redirect('/privilege')->with('success', 'Create Company Successfully');
         };

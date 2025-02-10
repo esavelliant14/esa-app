@@ -181,7 +181,24 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <div class="mb-3">
+                            <label for="company-input" class="form-label">Company</label>
+                            <select name="txt_company" id="" class="form-select @error('txt_company') is-invalid @enderror" required>
+                                <option value="">--- Choose Company ---</option>
+                                @if ($active === 'privilege')
+                                    @foreach ( $var_show_company as $item_company )
+                                        <option value="{{ $item_company->id }}">{{ $item_company->name_company }}</option>
+                                    @endforeach
+                                @else
+                                    ''
+                                @endif
+                            </select>
+                            <div class="invalid-feedback">
+                                @error('txt_company')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-lg-12">
                             <div class="text-end">
                                 <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>

@@ -23,6 +23,7 @@
                     <tr>
                         <th>No</th>
                         <th>Privilege</th>
+                        <th>Company</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -31,6 +32,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name_privilege }}</td>
+                                <td>{{ $item->company->name_company }}</td>
                                 <td></td>
                             </tr>
                         @endforeach

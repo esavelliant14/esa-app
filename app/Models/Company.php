@@ -16,4 +16,8 @@ class Company extends Model
     {
         return $this->hasMany(Login::class);
     }
+    public function privilege(): HasMany
+    {
+        return $this->hasMany(Privilege::class);
+    }
 }
