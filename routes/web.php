@@ -6,8 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
-
-
+use App\Http\Controllers\PrivilegeController;
 
 Route::get('/main' , [MainController::class , 'index']);
 
@@ -20,7 +19,9 @@ Route::post('/user' , [UserController::class , 'add']);
 Route::get('/company', [CompanyController::class , 'index']);
 Route::post('/company' , [CompanyController::class , 'add']);
 
-
+// PRIVILEGE
+Route::get('/privilege', [PrivilegeController::class , 'index']);
+Route::post('/privilege' , [PrivilegeController::class , 'add']);
 
 
 //NAS

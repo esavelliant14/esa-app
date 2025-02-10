@@ -33,8 +33,13 @@
                                 <label for="company-input" class="form-label">Company</label>
                                 <select name="txt_company" id="" class="form-select @error('txt_company') is-invalid @enderror" required>
                                     <option value="">--- Choose Company ---</option>
-                                    <option value="ESA NET">ESA NET</option>
-                                    <option value="ESA DEV">ESA DEV</option>
+                                    @if ($active === 'user')
+                                        @foreach ( $var_show_company as $item_company )
+                                            <option value="{{ $item_company->id }}">{{ $item_company->name_company }}</option>
+                                        @endforeach
+                                    @else
+                                        ''
+                                    @endif
                                 </select>
                                 <div class="invalid-feedback">
                                     @error('txt_company')
@@ -46,10 +51,28 @@
                                 <label for="privilege-input" class="form-label">Privileged</label>
                                 <select name="txt_privileged" id="" class="form-select @error('txt_privileged') is-invalid @enderror" required>
                                     <option value="">--- Choose Privileged ---</option>
-                                    <option value="1">Administrator</option>
-                                    <option value="2">Operator</option>
+                                   @if ($active === 'user')
+                                        @foreach ( $var_show_privilege as $item_privilege)
+                                            <option value="{{ $item_privilege->id }}">{{ $item_privilege->name_privilege }}</option>
+                                        @endforeach
+                                    @else
+                                        ''
+                                   @endif
                                     <div class="invalid-feedback">
                                         @error('txt_privileged')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="privilege-input" class="form-label">Status</label>
+                                <select name="txt_status" id="" class="form-select @error('txt_status') is-invalid @enderror" required>
+                                    <option value="">--- Choose Status ---</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Inactive</option>
+                                    <div class="invalid-feedback">
+                                        @error('txt_status')
                                             {{ $message }}
                                         @enderror
                                     </div>
@@ -136,23 +159,23 @@
 
 
 <!-- START MODAL ADD PRIVILEGE -->
-<div class="modal fade" id="ModalAddPrivilege" tabindex="-1" aria-labelledby="newCompanyModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalAddPrivilege" tabindex="-1" aria-labelledby="newPrivilegeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newCustomerModalLabel">Add Privilege</h5>
+                <h5 class="modal-title" id="newPrivilegeModalLabel">Add Privilege</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/esa-app/company">
+                <form method="post" action="/esa-app/privilege">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label for="name-input" class="form-label">Name Privilege</label>
-                                <input type="text" name="txt_name_company" id="name-input" class="form-control @error('txt_name_company') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_company') }}"required />
+                                <input type="text" name="txt_name_privilege" id="name-input" class="form-control @error('txt_name_company') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_privilege') }}"required />
                                 <div class="invalid-feedback">
-                                    @error('txt_name_company')
+                                    @error('txt_name_privilege')
                                         {{ $message }}
                                     @enderror
                                 </div>

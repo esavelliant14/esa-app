@@ -18,7 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('id_company');
-            $table->integer('id_privileged');
+            $table->integer('id_privilege');
+            $table->boolean('status');
             $table->rememberToken();
             $table->timestamps();
         });

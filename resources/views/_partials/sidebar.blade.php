@@ -91,7 +91,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ url('user/') }}" key="t-account">Users</a></li>
-                                    <li><a href="{{ url('privileged/') }}" key="t-privileges">Priviledges</a></li>
+                                    <li><a href="{{ url('privilege/') }}" key="t-privileges">Privilege</a></li>
                                     <li><a href="{{ url('company/') }}" key="t-privileges">Company</a></li>
                                 </ul>
                             </li>
