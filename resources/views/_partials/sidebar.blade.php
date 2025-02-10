@@ -90,8 +90,9 @@
                                     <span key="t-authentication">Management Users</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('user/list') }}" key="t-account">Users</a></li>
-                                    <li><a href="auth-login-2.html" key="t-privileges">Priviledges</a></li>
+                                    <li><a href="{{ url('user/') }}" key="t-account">Users</a></li>
+                                    <li><a href="{{ url('privileged/') }}" key="t-privileges">Priviledges</a></li>
+                                    <li><a href="{{ url('company/') }}" key="t-privileges">Company</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -101,7 +102,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ url('menu/') }}" key="t-login">Menu</a></li>
-                                    <li><a href="auth-login-2.html" key="t-login-2">Sub Menu</a></li>
+                                    <li><a href="{{ url('sub-menu/') }}" key="t-login-2">Sub Menu</a></li>
                                 </ul>
                             </li>
 

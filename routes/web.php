@@ -5,6 +5,7 @@ use App\Http\Controllers\NasController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 
 
 
@@ -12,9 +13,13 @@ Route::get('/main' , [MainController::class , 'index']);
 
 
 // ADMINISTRATOR 
-Route::get('/user/list/', [UserController::class , 'index']);
 Route::get('/user', [UserController::class , 'index']);
 Route::post('/user' , [UserController::class , 'add']);
+
+// COMPANY
+Route::get('/company', [CompanyController::class , 'index']);
+Route::post('/company' , [CompanyController::class , 'add']);
+
 
 
 

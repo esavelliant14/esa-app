@@ -15,6 +15,7 @@ class UserController extends Controller
             'active' => 'user',
             'title_menu' => 'USER',
             'title_submenu' => 'USER',
+            'var_show' => Login::all(),
         ]);
     }
 
@@ -57,7 +58,10 @@ class UserController extends Controller
                 'privileged' => $var_data_valid['txt_privileged'],
                 'password' => bcrypt($var_data_valid['txt_password']),
             ]);
+            return redirect('/user')->with('success', 'Create User Successfully');
         };
   }
+
+
 
 }

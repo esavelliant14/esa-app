@@ -78,7 +78,7 @@
                         <div class="col-lg-12">
                             <div class="text-end">
                                 <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" id="addCustomer-btn" class="btn btn-sm rounded-pill btn-success">Add User</button>
+                                <button type="submit" id="addCustomer-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                             </div>
                         </div>
                     </div>
@@ -91,3 +91,87 @@
     <!-- end modal-dialog -->
 </div>
 <!-- END MODAL ADD USER -->
+
+
+<!-- START MODAL ADD COMPANY -->
+<div class="modal fade" id="ModalAddCompany" tabindex="-1" aria-labelledby="newCompanyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newCustomerModalLabel">Add Company</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/esa-app/company">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="name-input" class="form-label">Name Company</label>
+                                <input type="text" name="txt_name_company" id="name-input" class="form-control @error('txt_name_company') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_company') }}"required />
+                                <div class="invalid-feedback">
+                                    @error('txt_name_company')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" id="addCompany-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+<!-- END MODAL ADD COMPANY -->
+
+
+<!-- START MODAL ADD PRIVILEGE -->
+<div class="modal fade" id="ModalAddPrivilege" tabindex="-1" aria-labelledby="newCompanyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newCustomerModalLabel">Add Privilege</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/esa-app/company">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="name-input" class="form-label">Name Privilege</label>
+                                <input type="text" name="txt_name_company" id="name-input" class="form-control @error('txt_name_company') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_company') }}"required />
+                                <div class="invalid-feedback">
+                                    @error('txt_name_company')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" id="addCompany-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+<!-- END MODAL ADD PRIVILEGE -->

@@ -15,33 +15,22 @@
 
                 <h4 class="card-title"></h4>
                 <div class="">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddUser" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCustomers-modal"><i class="mdi mdi-plus me-1"></i>New User</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddCompany" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCompany-modal"><i class="mdi mdi-plus me-1"></i>New Company</button>
                 </div>
 
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Email</th>
                         <th>Company</th>
-                        <th>Privileged</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
-
-
-                    <tbody>
-                    
+                    <tbody>       
                         @foreach ( $var_show as $item )
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->company }}</td>
-                                <td>{{ $item->privileged }}</td>
-                                <td>{{ $item->status }}</td>
+                                <td>{{ $item->name_company }}</td>
                                 <td></td>
                             </tr>
                         @endforeach
@@ -64,7 +53,7 @@
 @if ($errors->any())
         <script>
             window.onload = function() {
-            var myModal = new bootstrap.Modal(document.getElementById('ModalAddUser'));
+            var myModal = new bootstrap.Modal(document.getElementById('ModalAddCompany'));
             myModal.show();
             }
         </script>
