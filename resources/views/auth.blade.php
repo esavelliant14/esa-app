@@ -12,17 +12,27 @@
                             <div class="bg-white">
                                 <div class="row">
                                     <div class="col-3">
+
+
                                         <!--
                                         <div class="text-black p-4">
                                              <h5 class="text-black">Welcome Back !</h5> 
                                             <p>Sign in to SUPERAPPS.</p>
                                         </div>
                                         -->
+                                        
                                     </div>
                                     <div class="justify-content-center col-6 mb-4 p-4 align-self-end">
                                         <!--<img src="{{ url('public/img/hypernet-logo.png') }}" alt="" class="img-fluid"> -->
                                         <a class="text-dark text-center"><h1>INI LOGOKU YA</h1></a>
                                     </div>
+                                    @if(session()->has('failed'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ session('failed') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" arial-label="Close">
+                                            </button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card-body pt-0"> 
@@ -46,17 +56,17 @@
                                     -->
                                 </div>
                                 <div class="p-2">
-                                    <form class="form-horizontal" action="index.html">
-        
+                                    <form class="form-horizontal" action="/esa-app/auth" method="post">
+                                        @csrf
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                            <label for="username" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="txt_email" placeholder="Enter email" required>
                                         </div>
                 
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                                                <input type="password" class="form-control" id="password" name="txt_password" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon" required>
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>

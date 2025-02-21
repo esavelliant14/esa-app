@@ -15,6 +15,9 @@ Route::get('/main' , [MainController::class , 'index']);
 Route::get('/user', [UserController::class , 'index']);
 Route::post('/user' , [UserController::class , 'add']);
 
+Route::get('/auth' , [AuthController::class , 'index']);
+Route::post('/auth' , [AuthController::class , 'authenticate']);
+
 // COMPANY
 Route::get('/company', [CompanyController::class , 'index']);
 Route::post('/company' , [CompanyController::class , 'add']);
@@ -26,6 +29,3 @@ Route::post('/privilege' , [PrivilegeController::class , 'add']);
 
 //NAS
 Route::get('/nas/attribute', [NasController::class , 'attribute']);
-
-//AUTH
-Route::get('/auth' , [AuthController::class , 'index']);

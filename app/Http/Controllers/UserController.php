@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Login;
+use App\Models\User;
 use App\Models\Company;
 use App\Models\Privilege;
 
@@ -17,7 +17,7 @@ class UserController extends Controller
             'active' => 'user',
             'title_menu' => 'USER',
             'title_submenu' => 'USER',
-            'var_show' => Login::all(),
+            'var_show' => User::all(),
             'var_show_company' => Company::all(),
             'var_show_privilege' => Privilege::all(),
         ]);
@@ -56,7 +56,7 @@ class UserController extends Controller
         }else{
             $var_data_valid = $var_data->validated();
 //            dd($var_data_valid);
-            Login::create([
+            User::create([
                 'name' => $var_data_valid['txt_name'],
                 'email' => $var_data_valid['txt_email'],
                 'id_company' => $var_data_valid['txt_company'],
