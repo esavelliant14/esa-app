@@ -33,5 +33,11 @@
 
 <!-- Datatable init js -->
 <script src="{{ url('/public/js/pages/datatables.init.js') }}"></script>  
+
+<!-- Sweet Alerts js -->
+<script src="{{ url('/public/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+<!-- Sweet alert init js-->
+<script src="{{ url('/public/js/pages/sweet-alerts.init.js') }}"></script>
+
   
   

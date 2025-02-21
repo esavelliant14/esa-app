@@ -11,15 +11,27 @@ use App\Models\Privilege;
 
 class UserController extends Controller
 {
+    
     public function index(){
+
+        if ( auth()->user()->id_company == 1 ){
+            $show_privilege = Privilege::all();
+            $show_company = Company::all();
+            $show_user = User::all();
+        } else {
+            $show_privilege = Privilege::where('id_company' , auth()->user()->id_company)->get();
+            $show_company = Company::where('id' , auth()->user()->id_company)->get();
+            $show_user = User::where('id_company' , auth()->user()->id_company)->get();
+        }
+
         return view('user',[
             'title_url' => 'USER | ESA.NET',
             'active' => 'user',
             'title_menu' => 'USER',
             'title_submenu' => 'USER',
-            'var_show' => User::all(),
-            'var_show_company' => Company::all(),
-            'var_show_privilege' => Privilege::all(),
+            'var_show' => $show_user,
+            'var_show_company' => $show_company,
+            'var_show_privilege' => $show_privilege,
         ]);
     }
 
@@ -36,6 +48,8 @@ class UserController extends Controller
 //
 //        dd($test);
 //    }
+
+
 
     public function add(Request $post_create_user)
     {

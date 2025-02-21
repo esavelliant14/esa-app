@@ -12,9 +12,9 @@ class Company extends Model
     protected $guarded = [
         'id',
     ];
-    public function login(): HasMany
+    public function user(): HasMany
     {
-        return $this->hasMany(Login::class);
+        return $this->hasMany(user::class);
     }
     public function privilege(): HasMany
     {

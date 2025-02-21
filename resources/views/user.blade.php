@@ -44,7 +44,10 @@
                                 <td>
                                     {{ ($item->status === 1) ? 'Active' : 'Inactive'  }} 
                                 </td>
-                                <td></td>
+                                <td>
+                                    <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
+                                    <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>
+                                </td>
                             </tr>
                         @endforeach
 

@@ -31,7 +31,9 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name_company }}</td>
-                                <td></td>
+                                <td>
+                                    <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>
+                                </td>
                             </tr>
                         @endforeach
 

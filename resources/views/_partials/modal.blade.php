@@ -173,7 +173,7 @@
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label for="name-input" class="form-label">Name Privilege</label>
-                                <input type="text" name="txt_name_privilege" id="name-input" class="form-control @error('txt_name_company') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_privilege') }}"required />
+                                <input type="text" name="txt_name_privilege" id="name-input" class="form-control @error('txt_name_privilege') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_privilege') }}"required />
                                 <div class="invalid-feedback">
                                     @error('txt_name_privilege')
                                         {{ $message }}

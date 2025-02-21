@@ -14,9 +14,9 @@ class Privilege extends Model
         'id',
     ];
 
-    public function login(): HasMany
+    public function user(): HasMany
     {
-        return $this->hasMany(Login::class);
+        return $this->hasMany(User::class);
     }
 
     public function company(): BelongsTo

@@ -36,13 +36,32 @@ class AuthController extends Controller
     }
 
     public function logout(Request $post_logout): RedirectResponse
-{
-    Auth::logout();
- 
-    $post_logout->session()->invalidate();
- 
-    $post_logout->session()->regenerateToken();
- 
-    return redirect('main');
-}
+    {
+        Auth::logout();
+    
+        $post_logout->session()->invalidate();
+    
+        $post_logout->session()->regenerateToken();
+    
+        return redirect('main');
+    }
+
+    public function profile(){
+        return view('profile',[
+            'title_url' => 'PROFILE',
+            'active' => 'profile',
+            'title_menu' => 'PROFILE',
+            'title_submenu' => 'PROFILE',
+        ]);
+    }
+
+    public function change_password(){
+        return view('change-password',[
+            'title_url' => 'PROFILE',
+            'active' => 'profile',
+            'title_menu' => 'PROFILE',
+            'title_submenu' => 'PROFILE',
+        ]);
+    }
+
 }

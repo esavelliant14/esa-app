@@ -33,7 +33,10 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name_privilege }}</td>
                                 <td>{{ $item->company->name_company }}</td>
-                                <td></td>
+                                <td>
+                                    <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
+                                    <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>
+                                </td>
                             </tr>
                         @endforeach
 

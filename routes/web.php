@@ -20,6 +20,8 @@ Route::post('/user' , [UserController::class , 'add']);
 // AUTH
 Route::get('/auth' , [AuthController::class , 'index'])->middleware(RedirectIfAuthenticated::class);
 Route::post('/auth' , [AuthController::class , 'authenticate']);
+Route::get('/profile' , [AuthController::class , 'profile'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/change-password' , [AuthController::class , 'change_password'])->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/logout' , [AuthController::class , 'logout']);
 
 // COMPANY
