@@ -215,3 +215,28 @@
     <!-- end modal-dialog -->
 </div>
 <!-- END MODAL ADD PRIVILEGE -->
+
+
+
+<!-- START MODAL LOGOUT -->
+<div class="modal fade" id="ModalLogout" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to logout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form action="/esa-app/logout" method="POST">
+                    @csrf
+                    <button type="submit" id="logout-btn" class="btn btn-sm rounded-pill btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MODAL LOGOUT -->

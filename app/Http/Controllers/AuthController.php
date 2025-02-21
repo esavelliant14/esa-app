@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\auth;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -33,4 +34,15 @@ class AuthController extends Controller
         }
         return back()->with('failed','Wrong Username/Password');
     }
+
+    public function logout(Request $post_logout): RedirectResponse
+{
+    Auth::logout();
+ 
+    $post_logout->session()->invalidate();
+ 
+    $post_logout->session()->regenerateToken();
+ 
+    return redirect('main');
+}
 }
