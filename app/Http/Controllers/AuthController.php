@@ -60,17 +60,17 @@ class AuthController extends Controller
         return view('profile',[
             'title_url' => 'PROFILE',
             'active' => 'profile',
-            'title_menu' => 'PROFILE',
+            'title_menu' => 'AUTH',
             'title_submenu' => 'PROFILE',
         ]);
     }
 
     public function change_password(){
         return view('change-password',[
-            'title_url' => 'PROFILE',
-            'active' => 'profile',
-            'title_menu' => 'PROFILE',
-            'title_submenu' => 'PROFILE',
+            'title_url' => 'CHANGE PASSWORD',
+            'active' => 'change-password',
+            'title_menu' => 'AUTH',
+            'title_submenu' => 'CHANGE PASSWORD',
         ]);
     }
 
