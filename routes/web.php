@@ -17,7 +17,7 @@ Route::get('/main' , [MainController::class , 'index'])->middleware(RedirectIfNo
 // ADMINISTRATOR 
 Route::get('/user', [UserController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/user' , [UserController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-Route::delete('/user/delete/{id}', [UserController::class, 'delete']);
+Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->middleware(RedirectIfNotAuthenticated::class);
 
 // AUTH
 Route::get('/auth' , [AuthController::class , 'index'])->middleware(RedirectIfAuthenticated::class);
@@ -42,4 +42,7 @@ Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comb
 Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class);
 
 //WEB KOSONG
-//Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
+Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
+
+//TEST
+//Route::get('/user/test/', [UserController::class , 'test']);
