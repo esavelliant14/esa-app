@@ -77,7 +77,7 @@ class PrivilegeController extends Controller
         if (!$request->ajax()) {
             return redirect('/main');
         }
-        $privileges = Privilege::where('id', $id)->pluck('name_privilege', 'id'); // Sesuaikan dengan kolom tabel
+        $privileges = Privilege::where('id_company', $id)->pluck('name_privilege', 'id'); // Sesuaikan dengan kolom tabel
         return response()->json($privileges);
     }
 

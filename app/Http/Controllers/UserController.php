@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Privilege;
-
+use App\Models\TitleMenu;
 class UserController extends Controller
 {
     
@@ -88,4 +88,9 @@ class UserController extends Controller
             return redirect('/user')->with('success', 'Delete User Successfully');
     }
 
+    public function test()
+    {
+
+    return view('test');
+    }
 }
