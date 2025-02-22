@@ -31,7 +31,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="company-input" class="form-label">Company</label>
-                                <select name="txt_company" id="" class="form-select @error('txt_company') is-invalid @enderror" required>
+                                <select name="txt_company" id="id_company" class="form-select @error('txt_company') is-invalid @enderror" required>
                                     <option value="">--- Choose Company ---</option>
                                     @if ($active === 'user')
                                         @foreach ( $var_show_company as $item_company )
@@ -48,8 +48,8 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="privilege-input" class="form-label">Privileged</label>
-                                <select name="txt_privileged" id="" class="form-select @error('txt_privileged') is-invalid @enderror" required>
+                                <label for="privilege-input" class="form-label">Privilege</label>
+                                <select name="txt_privileged" id="id_privilege" class="form-select @error('txt_privileged') is-invalid @enderror" required>
                                     <option value="">--- Choose Privileged ---</option>
                                    @if ($active === 'user')
                                         @foreach ( $var_show_privilege as $item_privilege)
@@ -240,3 +240,6 @@
     </div>
 </div>
 <!-- END MODAL LOGOUT -->
+
+
+

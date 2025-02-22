@@ -39,6 +39,11 @@
 <!-- Sweet alert init js-->
 <script src="{{ url('/public/js/pages/sweet-alerts.init.js') }}"></script>
 
+<!-- CUSTOM JS -->
+<script src="{{ url('/public/js/pages/custom.js') }}"></script>
+
+
+
 
   
   

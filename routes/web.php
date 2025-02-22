@@ -29,16 +29,17 @@ Route::post('/logout' , [AuthController::class , 'logout']);
 // COMPANY
 Route::get('/company', [CompanyController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/company' , [CompanyController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-Route::post('/company' , [CompanyController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+//Route::post('/company' , [CompanyController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
 
 // PRIVILEGE
 Route::get('/privilege', [PrivilegeController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/privilege' , [PrivilegeController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-Route::post('/privilege' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+//Route::post('/privilege' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comboPrivilege'])->middleware(RedirectIfNotAuthenticated::class);
 
 
 //NAS
 Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class);
 
 //WEB KOSONG
-Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
+//Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);

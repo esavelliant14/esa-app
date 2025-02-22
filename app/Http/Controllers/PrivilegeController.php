@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
+
 class PrivilegeController extends Controller
 {
     public function index(){
-
+        
         if ( auth()->user()->id_company == 1 ){
             $show_privilege = Privilege::all();
             $show_company = Company::all();
@@ -70,4 +71,14 @@ class PrivilegeController extends Controller
             return redirect('/privilege')->with('success', 'Create Privilege Successfully');
         };
   }
+
+  public function comboPrivilege($id, Request $request)
+    {
+        if (!$request->ajax()) {
+            return redirect('/main');
+        }
+        $privileges = Privilege::where('id', $id)->pluck('name_privilege', 'id'); // Sesuaikan dengan kolom tabel
+        return response()->json($privileges);
+    }
+
 }
