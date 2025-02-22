@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+    <script src="{{ url('/public/js/pages/sweet-alert.js') }}"></script>
     @include('_partials.head')
 
     <body>
@@ -27,11 +27,25 @@
                                         <a class="text-dark text-center"><h1>INI LOGOKU YA</h1></a>
                                     </div>
                                     @if(session()->has('failed'))
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            {{ session('failed') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" arial-label="Close">
-                                            </button>
-                                        </div>
+                                        <script>
+                                            Swal.fire({
+                                                title:"Login Failed!",
+                                                html:"{{ session('failed') }}",
+                                                icon: "error",
+                                                timer:2e3,
+                                                confirmButtonColor:"#34c38f",
+                                                customClass: {
+                                                    confirmButton: "rounded-pill",
+                                                },
+                                                onBeforeOpen:function(){
+                                                    Swal.showLoading(),t=setInterval(function(){
+                                                        Swal.getContent().querySelector("strong").textContent=Swal.getTimerLeft()
+                                                    },
+                                                    100)
+                                                },
+                                                onClose:function(){clearInterval(t)}
+                                            })
+                                        </script>
                                     @endif
                                 </div>
                             </div>
@@ -59,8 +73,13 @@
                                     <form class="form-horizontal" action="/esa-app/auth" method="post">
                                         @csrf
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="txt_email" placeholder="Enter email" required>
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control @error('txt_email') is-invalid @enderror" id="email" name="txt_email" placeholder="Enter email" required>
+                                            <div class="invalid-feedback">
+                                                @error('txt_email')
+                                                    {{ $message }}
+                                                @enderror
+                                            </div>
                                         </div>
                 
                                         <div class="mb-3">
@@ -79,7 +98,7 @@
                                         </div>
                                         
                                         <div class="mt-1 d-grid">
-                                            <button class="btn waves-effect waves-light text-white" type="submit" style="background-color:#19daa0;">Log In</button>
+                                            <button class="btn waves-effect waves-light text-white" type="submit" style="background-color:#19daa0;">Login</button>
                                         </div>
                                         <!--
                                         <div class="mt-4 text-center">

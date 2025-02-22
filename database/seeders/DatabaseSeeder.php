@@ -26,6 +26,15 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
         ]);
 
+        User::create([
+            'name' => 'Putri Dwi',
+            'email' => 'putri@gmail.com',
+            'password' => bcrypt('asdasdasd'),
+            'id_company' => 1,
+            'id_privilege' => 1,
+            'status' => 1,
+        ]);
+
         Company::create([
             'name_company' => 'GLOBAL ADMIN'
         ]);

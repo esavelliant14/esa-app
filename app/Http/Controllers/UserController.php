@@ -80,7 +80,19 @@ class UserController extends Controller
             ]);
             return redirect('/user')->with('success', 'Create User Successfully');
         };
-  }
+    }
+
+    public function delete(User $id)
+    {
+
+            User::destroy($id->id);
+
+           
+            return redirect('/user')->with('success', 'Delete User Successfully');
+        
+
+
+    }
 
 
 

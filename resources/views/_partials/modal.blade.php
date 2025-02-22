@@ -100,7 +100,7 @@
                         
                         <div class="col-lg-12">
                             <div class="text-end">
-                                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" id="addCustomer-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                         
                         <div class="col-lg-12">
                             <div class="text-end">
-                                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" id="addCompany-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="text-end">
-                                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" id="addCompany-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                             </div>
                         </div>

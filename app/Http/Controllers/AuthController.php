@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 
@@ -20,6 +20,8 @@ class AuthController extends Controller
         $post_login->validate([
             'txt_email' => 'required|email:dns',
             'txt_password' => 'required',
+        ],[
+            'txt_email.email' => 'Wrong format email',
         ]);
 
         
@@ -29,10 +31,18 @@ class AuthController extends Controller
         ];
 
         if(Auth::attempt($var_data)) {
-            $post_login->session()->regenerate();
-            return redirect()->intended('main/');
+            $user = Auth::user();
+
+            if($user->status == 1) {
+                $post_login->session()->regenerate();
+                return redirect()->intended('main/');
+            }else{
+                Auth::logout();
+                return back()->with('failed','Wrong Username/Password');
+            }
         }
         return back()->with('failed','Wrong Username/Password');
+        
     }
 
     public function logout(Request $post_logout): RedirectResponse

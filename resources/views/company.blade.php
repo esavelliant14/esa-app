@@ -1,14 +1,22 @@
 @extends('_templates.main')
 @section('body')
+<script src="{{ url('/public/js/pages/sweet-alert.js') }}"></script>
 <div class="row">
     <div class="col-12">
         @if(session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" arial-label="Close">
-
-                </button>
-            </div>
+        <script>
+            Swal.fire({
+                title:"Success!",
+                text: "{{ session('success') }}",
+                icon:"success",
+                confirmButtonColor:"#34c38f",
+                customClass: {
+                    confirmButton: "rounded-pill",
+                    cancelButton: "rounded-pill"
+                }
+            })
+        
+    </script>
         @endif
         <div class="card">
             <div class="card-body">
