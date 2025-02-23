@@ -15,7 +15,8 @@ Route::get('/main' , [MainController::class , 'index'])->middleware(RedirectIfNo
 
 
 // ADMINISTRATOR 
-Route::get('/user', [UserController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/user', [UserController::class , 'index']);
+//->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/user' , [UserController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->middleware(RedirectIfNotAuthenticated::class);
 

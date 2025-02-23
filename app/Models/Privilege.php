@@ -23,5 +23,12 @@ class Privilege extends Model
     {
         return $this->belongsTo(Company::class , 'id_company');
     }
+
+    public function permission(): HasMany
+    {
+        return $this->hasMany(User::class , 'id_privilege');
+    }
+
+
 }
 

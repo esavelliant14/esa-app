@@ -5,7 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Privilege;
-use App\Models\TitleMenu;
+use App\Models\Permission;
+use App\Models\UserPermission;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -45,16 +46,10 @@ class DatabaseSeeder extends Seeder
             'id_company' => 1,
         ]);
 
-        TitleMenu::create([
-            'name_title_menu' => 'Administrator',
-            'id_privilege' => '1',
-            'id_company' => '1',
+        Permission::create([
+            'name_permission' => 'Create User',
+            'id_privilege' => 1,
         ]);
-        TitleMenu::create([
-            'name_title_menu' => 'User',
-            'id_privilege' => '1',
-            'id_company' => '1',
-        ]);
-        
+
     }
 }
