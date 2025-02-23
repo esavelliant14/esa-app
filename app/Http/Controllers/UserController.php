@@ -8,12 +8,18 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\group;
 use App\Models\Privilege;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 use App\Models\TitleMenu;
 class UserController extends Controller
 {
-    
+   
     public function index(){
 
+        if (!Gate::allows('access-permission' , '1')) {
+            return redirect('/main');
+        }
         if ( auth()->user()->id_group == 1 ){
             $show_privilege = Privilege::all();
             $show_group = group::all();

@@ -10,6 +10,7 @@ use App\Models\PrivilegePermission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 
 
@@ -17,6 +18,9 @@ class PrivilegeController extends Controller
 {
     public function index(){
         
+        if (!Gate::allows('access-permission' , '1')) {
+            return redirect('/main');
+        }
         if ( auth()->user()->id_group == 1 ){
             $show_privilege = Privilege::all();
             $show_group = Group::all();

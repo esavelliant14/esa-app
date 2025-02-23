@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Group;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
 
 class GroupController extends Controller
 {
     public function index(){
-
+        
+        if (!Gate::allows('access-permission' , '1')) {
+            return redirect('/main');
+        }
         if ( auth()->user()->id_group == 1 ){
             $show_group = Group::all();
         } else {
