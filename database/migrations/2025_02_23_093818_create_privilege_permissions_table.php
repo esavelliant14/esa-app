@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_permissions', function (Blueprint $table) {
+        Schema::create('table_privilege_permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('name_permission');
+            $table->foreignId('id_permission');
+            $table->foreignId('id_privilege');
             $table->timestamps();
+
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('table_privilege_permissions');
     }
 };

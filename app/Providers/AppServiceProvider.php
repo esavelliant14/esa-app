@@ -25,8 +25,10 @@ class AppServiceProvider extends ServiceProvider
     {
 
         // Menambahkan Gate untuk create_post
-        Gate::define('create-user', function (User $user) {
-            return $user->privilege->permission->contains('id', 1);
+        Gate::define('access-permission', function (User $user, $idPermission) {
+            return $user->privilege->permission->contains('id', $idPermission);
+            //return $user->privilege()->permission()->where('id', $idPermission)->exists();
         });
+        
     }
 }

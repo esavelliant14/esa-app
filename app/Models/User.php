@@ -57,8 +57,9 @@ class User extends Authenticatable
         return $this->belongsTo(Privilege::class , 'id_privilege');
     }
 
-    public function company(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(Company::class , 'id_company');
+        return $this->belongsTo(Group::class , 'id_group');
     }
+
 }

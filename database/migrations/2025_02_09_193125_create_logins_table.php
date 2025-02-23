@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('id_company');
+            $table->foreignId('id_group');
             $table->foreignId('id_privilege');
             $table->boolean('status');
             $table->rememberToken();

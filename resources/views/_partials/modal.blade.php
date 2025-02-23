@@ -30,19 +30,19 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="company-input" class="form-label">Company</label>
-                                <select name="txt_company" id="id_company" class="form-select @error('txt_company') is-invalid @enderror" required>
-                                    <option value="">--- Choose Company ---</option>
+                                <label for="group-input" class="form-label">Group</label>
+                                <select name="txt_group" id="id_group" class="form-select @error('txt_group') is-invalid @enderror" required>
+                                    <option value="">--- Choose Group ---</option>
                                     @if ($active === 'user')
-                                        @foreach ( $var_show_company as $item_company )
-                                            <option value="{{ $item_company->id }}">{{ $item_company->name_company }}</option>
+                                        @foreach ( $var_show_group as $item_group )
+                                            <option value="{{ $item_group->id }}">{{ $item_group->name_group }}</option>
                                         @endforeach
                                     @else
                                         ''
                                     @endif
                                 </select>
                                 <div class="invalid-feedback">
-                                    @error('txt_company')
+                                    @error('txt_group')
                                         {{ $message }}
                                     @enderror
                                 </div>
@@ -100,8 +100,8 @@
                         
                         <div class="col-lg-12">
                             <div class="text-end">
-                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" id="addCustomer-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -116,24 +116,24 @@
 <!-- END MODAL ADD USER -->
 
 
-<!-- START MODAL ADD COMPANY -->
-<div class="modal fade" id="ModalAddCompany" tabindex="-1" aria-labelledby="newCompanyModalLabel" aria-hidden="true">
+<!-- START MODAL ADD GROUP -->
+<div class="modal fade" id="ModalAddGroup" tabindex="-1" aria-labelledby="newGroupModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newCustomerModalLabel">Add Company</h5>
+                <h5 class="modal-title" id="newCustomerModalLabel">Add Group</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/esa-app/company">
+                <form method="post" action="/esa-app/group">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="name-input" class="form-label">Name Company</label>
-                                <input type="text" name="txt_name_company" id="name-input" class="form-control @error('txt_name_company') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_company') }}"required />
+                                <label for="name-input" class="form-label">Name Group</label>
+                                <input type="text" name="txt_name_group" id="name-input" class="form-control @error('txt_name_group') is-invalid @enderror" placeholder="Enter Group Name" value="{{ old('txt_name_group') }}"required />
                                 <div class="invalid-feedback">
-                                    @error('txt_name_company')
+                                    @error('txt_name_group')
                                         {{ $message }}
                                     @enderror
                                 </div>
@@ -142,8 +142,8 @@
                         
                         <div class="col-lg-12">
                             <div class="text-end">
+                                <button type="submit" id="addGroup-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                                 <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" id="addCompany-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
     </div>
     <!-- end modal-dialog -->
 </div>
-<!-- END MODAL ADD COMPANY -->
+<!-- END MODAL ADD GROUP -->
 
 
 <!-- START MODAL ADD PRIVILEGE -->
@@ -182,27 +182,27 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="company-input" class="form-label">Company</label>
-                            <select name="txt_company" id="" class="form-select @error('txt_company') is-invalid @enderror" required>
-                                <option value="">--- Choose Company ---</option>
+                            <label for="group-input" class="form-label">Group</label>
+                            <select name="txt_group" id="" class="form-select @error('txt_group') is-invalid @enderror" required>
+                                <option value="">--- Choose Group ---</option>
                                 @if ($active === 'privilege')
-                                    @foreach ( $var_show_company as $item_company )
-                                        <option value="{{ $item_company->id }}">{{ $item_company->name_company }}</option>
+                                    @foreach ( $var_show_group as $item_group )
+                                        <option value="{{ $item_group->id }}">{{ $item_group->name_group }}</option>
                                     @endforeach
                                 @else
                                     ''
                                 @endif
                             </select>
                             <div class="invalid-feedback">
-                                @error('txt_company')
+                                @error('txt_group')
                                     {{ $message }}
                                 @enderror
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="text-end">
+                                <button type="submit" id="addGroup-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                                 <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" id="addCompany-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                             </div>
                         </div>
                     </div>
@@ -230,16 +230,17 @@
                 Are you sure you want to logout?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 <form action="/esa-app/logout" method="POST">
                     @csrf
                     <button type="submit" id="logout-btn" class="btn btn-sm rounded-pill btn-danger">Logout</button>
                 </form>
+                <button type="button" class="btn btn-sm rounded-pill btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
 <!-- END MODAL LOGOUT -->
+
 
 
 

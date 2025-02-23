@@ -5,7 +5,7 @@ use App\Http\Controllers\NasController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PrivilegeController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
@@ -27,9 +27,9 @@ Route::get('/profile' , [AuthController::class , 'profile'])->middleware(Redirec
 Route::get('/change-password' , [AuthController::class , 'change_password'])->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/logout' , [AuthController::class , 'logout']);
 
-// COMPANY
-Route::get('/company', [CompanyController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
-Route::post('/company' , [CompanyController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
+// GROUP
+Route::get('/group', [GroupController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
+Route::post('/group' , [GroupController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
 //Route::post('/company' , [CompanyController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
 
 // PRIVILEGE

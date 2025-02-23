@@ -6,7 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use App\Models\Company;
+use App\Models\group;
 use App\Models\Privilege;
 use App\Models\TitleMenu;
 class UserController extends Controller
@@ -14,14 +14,14 @@ class UserController extends Controller
     
     public function index(){
 
-        if ( auth()->user()->id_company == 1 ){
+        if ( auth()->user()->id_group == 1 ){
             $show_privilege = Privilege::all();
-            $show_company = Company::all();
+            $show_group = group::all();
             $show_user = User::all();
         } else {
-            $show_privilege = Privilege::where('id_company' , auth()->user()->id_company)->get();
-            $show_company = Company::where('id' , auth()->user()->id_company)->get();
-            $show_user = User::where('id_company' , auth()->user()->id_company)->get();
+            $show_privilege = Privilege::where('id_group' , auth()->user()->id_group)->get();
+            $show_group = group::where('id' , auth()->user()->id_group)->get();
+            $show_user = User::where('id_group' , auth()->user()->id_group)->get();
         }
 
         return view('user',[
@@ -30,7 +30,7 @@ class UserController extends Controller
             'title_menu' => 'USER',
             'title_submenu' => 'USER',
             'var_show' => $show_user,
-            'var_show_company' => $show_company,
+            'var_show_group' => $show_group,
             'var_show_privilege' => $show_privilege,
         ]);
     }
@@ -40,7 +40,7 @@ class UserController extends Controller
 //        $test = $post_create_user->validate([
 //            'txt_name' => 'required',
 //            'txt_email' => 'required|unique:table_logins,email|email:dns',
-//            'txt_company' => 'required',
+//            'txt_group' => 'required',
 //            'txt_privileged' => 'required',
 //            'txt_password' => 'required|confirmed',
 //            'txt_password_confirmation' => 'required',
@@ -56,7 +56,7 @@ class UserController extends Controller
         $var_data = Validator::make($post_create_user->all(), [
             'txt_name' => 'required',
             'txt_email' => 'required|unique:table_logins,email|email:dns',
-            'txt_company' => 'required',
+            'txt_group' => 'required',
             'txt_privileged' => 'required',
             'txt_status' => 'required',
             'txt_password' => 'required|confirmed',
@@ -73,7 +73,7 @@ class UserController extends Controller
             User::create([
                 'name' => $var_data_valid['txt_name'],
                 'email' => $var_data_valid['txt_email'],
-                'id_company' => $var_data_valid['txt_company'],
+                'id_group' => $var_data_valid['txt_group'],
                 'id_privilege' => $var_data_valid['txt_privileged'],
                 'status' => $var_data_valid['txt_status'],
                 'password' => bcrypt($var_data_valid['txt_password']),
@@ -88,9 +88,5 @@ class UserController extends Controller
             return redirect('/user')->with('success', 'Delete User Successfully');
     }
 
-    public function test()
-    {
 
-    return view('test');
-    }
 }

@@ -31,7 +31,7 @@
                     <tr>
                         <th>No</th>
                         <th>Privilege</th>
-                        <th>Company</th>
+                        <th>Group</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -40,7 +40,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name_privilege }}</td>
-                                <td>{{ $item->company->name_company }}</td>
+                                <td>{{ $item->group->name_group }}</td>
                                 <td>
                                     <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
                                     <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>

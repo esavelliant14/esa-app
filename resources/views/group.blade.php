@@ -23,14 +23,14 @@
 
                 <h4 class="card-title"></h4>
                 <div class="">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddCompany" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCompany-modal"><i class="mdi mdi-plus me-1"></i>New Company</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddGroup" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCompany-modal"><i class="mdi mdi-plus me-1"></i>New Group</button>
                 </div>
 
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Company</th>
+                        <th>Group</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -38,7 +38,7 @@
                         @foreach ( $var_show as $item )
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->name_company }}</td>
+                                <td>{{ $item->name_group }}</td>
                                 <td>
                                     <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>
                                 </td>
@@ -63,7 +63,7 @@
 @if ($errors->any())
         <script>
             window.onload = function() {
-            var myModal = new bootstrap.Modal(document.getElementById('ModalAddCompany'));
+            var myModal = new bootstrap.Modal(document.getElementById('ModalAddGroup'));
             myModal.show();
             }
         </script>

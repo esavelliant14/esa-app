@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Privilege extends Model
 {
@@ -19,14 +20,14 @@ class Privilege extends Model
         return $this->hasMany(User::class);
     }
 
-    public function company(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(Company::class , 'id_company');
+        return $this->belongsTo(Group::class , 'id_group');
     }
 
-    public function permission(): HasMany
+    public function permission(): BelongsToMany
     {
-        return $this->hasMany(User::class , 'id_privilege');
+        return $this->belongsToMany(Permission::class , 'table_privilege_permissions' , 'id_privilege' , 'id_permission');
     }
 
 

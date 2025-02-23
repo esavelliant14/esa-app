@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Company;
+use App\Models\Group;
 use App\Models\Privilege;
 use App\Models\Permission;
-use App\Models\UserPermission;
+use Illuminate\Support\Facades\DB;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('asdasdasd'),
-            'id_company' => 1,
+            'id_group' => 1,
             'id_privilege' => 1,
             'status' => 1,
         ]);
@@ -32,22 +32,34 @@ class DatabaseSeeder extends Seeder
             'name' => 'Putri Dwi',
             'email' => 'putri@gmail.com',
             'password' => bcrypt('asdasdasd'),
-            'id_company' => 1,
+            'id_group' => 1,
             'id_privilege' => 1,
             'status' => 1,
         ]);
 
-        Company::create([
-            'name_company' => 'GLOBAL ADMIN'
+        Group::create([
+            'name_group' => 'GLOBAL ADMIN'
         ]);
 
         Privilege::create([
             'name_privilege' => 'Administrator',
-            'id_company' => 1,
+            'id_group' => 1,
         ]);
 
         Permission::create([
+            'name_permission' => 'Administrator',
+        ]);
+        Permission::create([
             'name_permission' => 'Create User',
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 1, 
+            'id_privilege' => 1,
+        ]);
+        
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 2, 
             'id_privilege' => 1,
         ]);
 

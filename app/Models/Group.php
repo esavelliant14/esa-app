@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Company extends Model
+class Group extends Model
 {
     //
-    protected $table = 'table_companies';
+    protected $table = 'table_groups';
     protected $guarded = [
         'id',
     ];
