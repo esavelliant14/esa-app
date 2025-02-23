@@ -184,7 +184,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="group-input" class="form-label">Group</label>
-                            <select name="txt_group" id="id_group_priviledge" class="form-select @error('txt_group') is-invalid @enderror" required>
+                            <select name="txt_group" id="id_group_privilege" class="form-select @error('txt_group') is-invalid @enderror" required>
                                 <option value="">--- Choose Group ---</option>
                                 @if ($active === 'privilege')
                                     @foreach ( $var_show_group as $item_group )
@@ -202,15 +202,15 @@
                             <div class="my-3">
                                 <label for="email-input" class="form-label">Rule Permission</label><br>
                                 <input type="checkbox" id="filter_administrator" name="txt_permission[]" value="1" class="" /> Administrator Menu<br>
-                                <input type="checkbox" id="filter_view_user" name="txt_permission[]" value="2" class="" /> View User Menu<br>
-                                <input type="checkbox" id="filter_create_user" name="txt_permission[]" value="3" class="" /> Create User<br>
-                                <input type="checkbox" id="filter_delete_user" name="txt_permission[]" value="4" class="" /> Delete User<br>
-                                <input type="checkbox" id="filter_view_priviledge" name="txt_permission[]" value="5" class="" /> View Privilege Menu<br>
-                                <input type="checkbox" id="filter_create_priviledge" name="txt_permission[]" value="6" class="" /> Create Privilege<br>
-                                <input type="checkbox" id="filter_delete_priviledge" name="txt_permission[]" value="7" class="" /> Delete Privilege<br>
-                                <input type="checkbox" id="filter_view_group" name="txt_permission[]" value="8" class="" /> View Group Menu<br>
-                                <input type="checkbox" id="filter_create_group" name="txt_permission[]" value="9" class="" /> Create Group<br>
-                                <input type="checkbox" id="filter_delete_group" name="txt_permission[]" value="10" class="" /> Delete Group<br>
+                                <input type="checkbox" id="filter_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
+                                <input type="checkbox" id="filter_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
+                                <input type="checkbox" id="filter_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
+                                <input type="checkbox" id="filter_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
+                                <input type="checkbox" id="filter_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
+                                <input type="checkbox" id="filter_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
+                                <input type="checkbox" id="filter_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
+                                <input type="checkbox" id="filter_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
+                                <input type="checkbox" id="filter_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
                             </div>
 
                         </div>
@@ -256,7 +256,9 @@
 </div>
 <!-- END MODAL LOGOUT -->
 
+<script>
 
 
-
+    
+    </script>
 

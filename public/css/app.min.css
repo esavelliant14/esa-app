@@ -1,4 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap);#page-topbar{position:fixed;top:0;right:0;left:0;z-index:1002;background-color:var(--bs-header-bg);-webkit-box-shadow:0 .75rem 1.5rem rgba(18,38,63,.03);box-shadow:0 .75rem 1.5rem rgba(18,38,63,.03)}.navbar-header{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-pack:justify;-webkit-box-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:0 auto;height:70px;padding:0 calc(24px * .5) 0 0}.navbar-header .dropdown .show.header-item{background-color:var(--bs-tertiary-bg)}
+
+.profile-label {
+    display: inline-block;
+    width: 100px; /* Lebar tetap agar sejajar */
+    font-weight: bold;
+}
+
 .navbar-brand-box{
     padding:0 1.5rem;
     text-align:center;width:250px;

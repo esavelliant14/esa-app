@@ -22,9 +22,11 @@
             <div class="card-body">
 
                 <h4 class="card-title"></h4>
+                @can('access-permission' , '6')
                 <div class="">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddPrivilege" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addPrivilege-modal"><i class="mdi mdi-plus me-1"></i>New Privilege</button>
                 </div>
+                @endcan
 
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
@@ -43,7 +45,9 @@
                                 <td>{{ $item->group->name_group }}</td>
                                 <td>
                                     <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
+                                    @can('access-permission' , '7')
                                     <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

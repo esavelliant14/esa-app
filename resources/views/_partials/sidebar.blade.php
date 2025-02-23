@@ -90,9 +90,13 @@
                                         <span key="t-authentication">Management Users</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
+                                        @can('access-permission', '2')
                                         <li><a href="{{ url('user/') }}" key="t-account">Users</a></li>
+                                        @endcan
+                                        @can('access-permission', '5')
                                         <li><a href="{{ url('privilege/') }}" key="t-privileges">Privilege</a></li>
-                                        @can('group-menu')
+                                        @endcan
+                                        @can('access-permission', '8')
                                         <li><a href="{{ url('group/') }}" key="t-privileges">Group</a></li>
                                         @endcan
                                     </ul>

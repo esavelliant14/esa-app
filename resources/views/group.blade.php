@@ -22,9 +22,11 @@
             <div class="card-body">
 
                 <h4 class="card-title"></h4>
+                @can('access-permission' , '9')
                 <div class="">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddGroup" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCompany-modal"><i class="mdi mdi-plus me-1"></i>New Group</button>
                 </div>
+                @endcan
 
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
@@ -40,7 +42,9 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name_group }}</td>
                                 <td>
+                                    @can('access-permission', '10')
                                     <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

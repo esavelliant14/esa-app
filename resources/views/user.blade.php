@@ -26,7 +26,7 @@
             <div class="card-body">
                 
                 <h4 class="card-title"></h4>
-                @can('access-permission' , '2')   
+                @can('access-permission' , '3')   
                 <div class="">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddUser" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addCustomers-modal"><i class="mdi mdi-plus me-1"></i>New User</button>
                 </div>
@@ -62,7 +62,7 @@
                             <td>
                                 <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
                                 <a href="" class="btn btn-sm btn-light"><span class="mdi mdi-key"></span></a>
-                                @can('access-permission' , '3')   
+                                @can('access-permission' , '4')   
                                     <form class="delete-form d-inline"  action="/esa-app/user/delete/{{ $item->id }}" method="POST">
                                         @csrf
                                         @method('delete')

@@ -54,7 +54,7 @@
 -->
 
 <!-- CUSTOM JS -->
-<script src="{{ url('/public/js/pages/customize.js') }}"></script>
+<script src="{{ url('/public/js/pages/customize.js') }}?v={{ time() }}"></script>
 
 
 

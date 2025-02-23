@@ -107,6 +107,18 @@ class DatabaseSeeder extends Seeder
             'id_permission' => 7, 
             'id_privilege' => 1,
         ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 8, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 9, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 10, 
+            'id_privilege' => 1,
+        ]);
 
     }
 }
