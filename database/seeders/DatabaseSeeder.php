@@ -47,10 +47,34 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name_permission' => 'Administrator',
+            'name_permission' => 'Administrator Menu',
+        ]);
+        Permission::create([
+            'name_permission' => 'View User Menu',
         ]);
         Permission::create([
             'name_permission' => 'Create User',
+        ]);
+        Permission::create([
+            'name_permission' => 'Delete User',
+        ]);
+        Permission::create([
+            'name_permission' => 'View Privilege Menu',
+        ]);
+        Permission::create([
+            'name_permission' => 'Create Privilege',
+        ]);
+        Permission::create([
+            'name_permission' => 'Delete Privilege',
+        ]);
+        Permission::create([
+            'name_permission' => 'View Group Menu',
+        ]);
+        Permission::create([
+            'name_permission' => 'Create Group',
+        ]);
+        Permission::create([
+            'name_permission' => 'Delete Group',
         ]);
 
         DB::table('table_privilege_permissions')->insert([
@@ -60,6 +84,27 @@ class DatabaseSeeder extends Seeder
         
         DB::table('table_privilege_permissions')->insert([
             'id_permission' => 2, 
+            'id_privilege' => 1,
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 3, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 4, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 5, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 6, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 7, 
             'id_privilege' => 1,
         ]);
 

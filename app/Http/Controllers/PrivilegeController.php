@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Privilege;
 use App\Models\Group;
+use App\Models\PrivilegePermission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+
 
 
 class PrivilegeController extends Controller
@@ -35,6 +37,7 @@ class PrivilegeController extends Controller
 
     public function add(Request $post_create_privilege)
     {
+        //dd($post_create_privilege->all());
         $check_table_privilege = DB::table('table_privileges')
         ->where('name_privilege', $post_create_privilege->input('txt_name_privilege'))
         ->where('id_group', $post_create_privilege->input('txt_group'))
@@ -64,19 +67,27 @@ class PrivilegeController extends Controller
         }else{
             $var_data_valid = $var_data->validated();
 //            dd($var_data_valid);
-            Privilege::create([
+            $test = Privilege::create([
                 'name_privilege' => $var_data_valid['txt_name_privilege'],
                 'id_group' => $var_data_valid['txt_group'],
             ]);
+            if (!is_null($post_create_privilege->input('txt_permission'))){
+                foreach ($post_create_privilege->txt_permission as $a) {
+                    PrivilegePermission::create([
+                        'id_permission' => $a ,
+                        'id_privilege' => $test->id,
+                    ]);
+                }
+            }
             return redirect('/privilege')->with('success', 'Create Privilege Successfully');
         };
   }
 
   public function comboPrivilege($id, Request $request)
     {
-        //if (!$request->ajax()) {
-        //    return redirect('/main');
-        //}
+        if (!$request->ajax()) {
+            return redirect('/main');
+        }
         $privileges = Privilege::where('id_group', $id)->pluck('name_privilege', 'id'); 
         return response()->json($privileges);
     }

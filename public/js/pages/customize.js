@@ -26,3 +26,27 @@ $(document).ready(function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Ambil elemen select privilege dan administrator
+    const priviledgeSelect = document.getElementById('id_group_priviledge');
+    const createGroup = document.getElementById('filter_create_group');
+    const deleteGroup = document.getElementById('filter_delete_group');
+
+    // Fungsi untuk mengatur status enable/disable administrator select
+    priviledgeSelect.addEventListener('change', function() {
+        if (this.value === "1") {
+            createGroup.disabled = false;  // Enable jika admin dipilih
+            deleteGroup.disabled = false;  // Enable jika admin dipilih
+        } else {
+            createGroup.disabled = true;   // Disable jika user dipilih
+            deleteGroup.disabled = true;  // Enable jika admin dipilih
+        }
+    });
+    
+    // Set default (awal) keadaan disabled
+    if (priviledgeSelect.value !== '1') {
+        createGroup.disabled = true;
+        deleteGroup.disabled = true;  
+    }
+});

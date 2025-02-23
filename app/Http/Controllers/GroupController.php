@@ -30,7 +30,7 @@ class GroupController extends Controller
         $var_data = Validator::make($post_create_group->all(), [
             'txt_name_group' => 'required|unique:table_groups,name_group',
         ],[
-            'txt_name_group.required' => 'Name Group is Required',
+            'txt_name_group.required' => 'Name Group is required',
             'txt_name_group.unique' => 'Name Group already exist'
         ]);
         

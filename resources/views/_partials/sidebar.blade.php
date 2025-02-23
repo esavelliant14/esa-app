@@ -82,30 +82,33 @@
                                     <li><a href="#" key="t-dailytask">Planning Task</a></li>
                                 </ul>
                             </li>
-
-                            <li class="menu-title" key="t-administrator">ADMINISTRATOR</li>
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-user-circle"></i>
-                                    <span key="t-authentication">Management Users</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('user/') }}" key="t-account">Users</a></li>
-                                    <li><a href="{{ url('privilege/') }}" key="t-privileges">Privilege</a></li>
-                                    <li><a href="{{ url('group/') }}" key="t-privileges">Group</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="mdi mdi-menu"></i>
-                                    <span key="t-authentication">Management Menu</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('menu/') }}" key="t-login">Menu</a></li>
-                                    <li><a href="{{ url('sub-menu/') }}" key="t-login-2">Sub Menu</a></li>
-                                </ul>
-                            </li>
-
+                            @can('access-permission' , '1')
+                                <li class="menu-title" key="t-administrator">ADMINISTRATOR</li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="bx bx-user-circle"></i>
+                                        <span key="t-authentication">Management Users</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="{{ url('user/') }}" key="t-account">Users</a></li>
+                                        <li><a href="{{ url('privilege/') }}" key="t-privileges">Privilege</a></li>
+                                        @can('group-menu')
+                                        <li><a href="{{ url('group/') }}" key="t-privileges">Group</a></li>
+                                        @endcan
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="mdi mdi-menu"></i>
+                                        <span key="t-authentication">Management Menu</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="{{ url('menu/') }}" key="t-login">Menu</a></li>
+                                        <li><a href="{{ url('sub-menu/') }}" key="t-login-2">Sub Menu</a></li>
+                                    </ul>
+                                </li>
+                            @endcan
+                            
 
                         </ul>
                     </div>

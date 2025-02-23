@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->privilege->permission->contains('id', $idPermission);
             //return $user->privilege()->permission()->where('id', $idPermission)->exists();
         });
+
+        Gate::define('group-menu', function (User $user){
+            return $user->id_privilege === 1;
+        });
         
     }
 }

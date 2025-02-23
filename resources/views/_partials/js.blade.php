@@ -39,6 +39,20 @@
 <!-- Sweet alert init js-->
 <script src="{{ url('/public/js/pages/sweet-alerts.init.js') }}"></script>
 
+
+
+<!-- Form Advance JS -->
+
+
+<!-- Spectrum colorpicker2 
+<script src="{{ url('/public/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
+<script src="{{ url('/public/libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
+<script src="{{ url('/public/libs/@chenfengyuan/datepicker/datepicker.min.js') }}"></script>
+<script src="{{ url('/public/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ url('/public/libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ url('/public/js/pages/form-advanced.init.js') }}"></script>
+-->
+
 <!-- CUSTOM JS -->
 <script src="{{ url('/public/js/pages/customize.js') }}"></script>
 

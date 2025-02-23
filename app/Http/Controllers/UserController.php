@@ -61,6 +61,17 @@ class UserController extends Controller
             'txt_status' => 'required',
             'txt_password' => 'required|confirmed',
             'txt_password_confirmation' => 'required',
+        ],[
+            'txt_name.required' => 'Name is required',
+            'txt_email.required' => 'Email is required',
+            'txt_email.unique' => 'Email already exist',
+            'txt_email.email' => 'Wrong format email',
+            'txt_group' => 'Group is required',
+            'txt_privileged' => 'Privilege is required',
+            'txt_status' => 'Status is required',
+            'txt_password.required' => 'Password is required',
+            'txt_password.confirmed' => 'Password not match',
+            'txt_password_confirmation.required' => 'Repeat password is required',
         ]);
         
         if( $var_data->fails() ){
