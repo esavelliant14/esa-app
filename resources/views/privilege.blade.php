@@ -4,19 +4,33 @@
 <div class="row">
     <div class="col-12">
         @if(session()->has('success'))
-        <script>
-            Swal.fire({
-                title:"Success!",
-                text: "{{ session('success') }}",
-                icon:"success",
-                confirmButtonColor:"#34c38f",
-                customClass: {
-                    confirmButton: "rounded-pill",
-                    cancelButton: "rounded-pill"
-                }
-            })
-        
-    </script>
+            <script>
+                Swal.fire({
+                    title:"Success!",
+                    text: "{{ session('success') }}",
+                    icon:"success",
+                    confirmButtonColor:"#34c38f",
+                    customClass: {
+                        confirmButton: "rounded-pill",
+                        cancelButton: "rounded-pill"
+                    }
+                })
+            </script>
+        @endif
+        @if(session()->has('failed'))
+            <script>
+                    Swal.fire({
+                        title:"Failed!",
+                        text: "{{ session('failed') }}",
+                        icon:"error",
+                        confirmButtonColor:"#34c38f",
+                        customClass: {
+                            confirmButton: "rounded-pill",
+                            cancelButton: "rounded-pill"
+                        }
+                    })
+                    
+            </script>
         @endif
         <div class="card">
             <div class="card-body">
@@ -46,7 +60,13 @@
                                 <td>
                                     <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
                                     @can('access-permission' , '7')
-                                    <a href="" class="btn btn-sm btn-danger"><span class="mdi mdi-delete"></span></a>
+                                    <form class="delete-form d-inline"  action="/esa-app/privilege/delete/{{ $item->id }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="button" class="btn btn-sm btn-danger delete-button">
+                                            <span class="mdi mdi-delete" ></span>
+                                        </button>
+                                    </form>
                                     @endcan
                                 </td>
                             </tr>

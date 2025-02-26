@@ -30,12 +30,12 @@ Route::post('/logout' , [AuthController::class , 'logout']);
 // GROUP
 Route::get('/group', [GroupController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/group' , [GroupController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-//Route::post('/company' , [CompanyController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+Route::delete('/group/delete/{id}' , [GroupController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
 
 // PRIVILEGE
 Route::get('/privilege', [PrivilegeController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/privilege' , [PrivilegeController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-//Route::post('/privilege' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+Route::delete('/privilege/delete/{id}' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
 Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comboPrivilege'])->middleware(RedirectIfNotAuthenticated::class);
 
 

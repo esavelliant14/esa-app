@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Privilege;
 use App\Models\Group;
+use App\Models\User;
 use App\Models\PrivilegePermission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -86,6 +87,19 @@ class PrivilegeController extends Controller
             return redirect('/privilege')->with('success', 'Create Privilege Successfully');
         };
   }
+
+  public function delete($id)
+    {
+            $check_user = User::where('id_privilege' , $id)->count();
+            //dd($test);
+            if($check_user == "0"){
+                Privilege::destroy('id' , $id);      
+                return redirect('/privilege')->with('success', 'Delete Privilege Successfully');
+            }else {
+                return redirect('/privilege')->with('failed', 'Privilege still used by user');
+            }
+            
+    }
 
   public function comboPrivilege($id, Request $request)
     {

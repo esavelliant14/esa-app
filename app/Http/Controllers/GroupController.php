@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Group;
+use App\Models\Privilege;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 
@@ -51,4 +52,18 @@ class GroupController extends Controller
             return redirect('/group')->with('success', 'Create Group Successfully');
         };
   }
+
+  public function delete($id)
+  {
+          $check_privilege = Privilege::where('id_group' , $id)->count();
+          //dd($test);
+          if($check_privilege == "0"){
+              Group::destroy('id' , $id);      
+              return redirect('/group')->with('success', 'Delete Group Successfully');
+          }else {
+              return redirect('/group')->with('failed', 'Group still used by privilege');
+          }
+          
+  }
+
 }
