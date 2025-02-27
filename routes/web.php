@@ -43,7 +43,7 @@ Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comb
 Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class);
 
 //WEB KOSONG
-Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
+//Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
 
 //TEST
 //Route::get('/user/test/', [UserController::class , 'test']);

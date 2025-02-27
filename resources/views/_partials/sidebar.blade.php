@@ -23,14 +23,14 @@
                                     <span key="t-dashboards">NAS</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="calendar.html" key="t-tui-calendar">NAS Routers</a></li>
+                                    <li><a href="{{ url('nas/nas') }}" key="t-tui-calendar">NAS Routers</a></li>
                                     <li><a href="{{ url('nas/attribute') }}" key="t-full-calendar">Attributes</a></li>
-                                    <li><a href="calendar-full.html" key="t-full-calendar">User</a></li>
+                                    <li><a href="{{ url('nas/user') }}" key="t-full-calendar">User</a></li>
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow">Profiles</a>
                                         <ul class="sub-menu" aria-expanded="true">
-                                            <li><a href="javascript: void(0);">Profile Bandwidth</a></li>
-                                            <li><a href="javascript: void(0);">Profile PPP</a></li>
+                                            <li><a href="{{ url('profiles/bandwidth') }}">Profile Bandwidth</a></li>
+                                            <li><a href="{{ url('profiles/ppp') }}">Profile PPP</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -41,9 +41,9 @@
                                     <span key="t-devices">DEVICES</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="calendar.html" key="t-tui-calendar">List Devices</a></li>
-                                    <li><a href="calendar.html" key="t-tui-calendar">Category Devices</a></li>
-                                    <li><a href="calendar.html" key="t-tui-calendar">Type Devices</a></li>
+                                    <li><a href="{{ url('devices/list-devices') }}" key="t-list-devices">List Devices</a></li>
+                                    <li><a href="{{ url('devices/category-devices') }}" key="t-cat-devices">Category Devices</a></li>
+                                    <li><a href="{{ url('devices/type-devices') }}" key="t-type-devices">Type Devices</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -52,9 +52,9 @@
                                     <span key="t-backhaul">SERVICES</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="calendar.html" key="t-tui-calendar">List Services</a></li>
-                                    <li><a href="calendar.html" key="t-tui-calendar">Category Services</a></li>
-                                    <li><a href="calendar.html" key="t-tui-calendar">Provider Services</a></li>
+                                    <li><a href="{{ url('services/list-services') }}" key="t-list-services">List Services</a></li>
+                                    <li><a href="{{ url('services/category-services') }}" key="t-cat-services">Category Services</a></li>
+                                    <li><a href="{{ url('services/provider-services') }}" key="t-prov-service">Provider Services</a></li>
                                 </ul>
                             </li>
 
@@ -64,9 +64,9 @@
                                     <span key="t-ddns">DDNS</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="calendar.html" key="t-list-router">List Routers</a></li>
-                                    <li><a href="calendar.html" key="t-ddns">DDNS Users</a></li>
-                                    <li><a href="calendar.html" key="t-forwarding">Forwarding Ports</a></li>
+                                    <li><a href="{{ url('ddns/list-router') }}" key="t-list-router">List Routers</a></li>
+                                    <li><a href="{{ url('ddns/user') }}" key="t-ddns">DDNS Users</a></li>
+                                    <li><a href="{{ url('ddns/forwarding-port') }}" key="t-forwarding">Forwarding Ports</a></li>
                                 </ul>
                             </li>
 
@@ -77,9 +77,9 @@
                                     <span key="t-task">Task</span>
                                 </a>
                                 <ul class="sub-menu" arial-expended="false">
-                                    <li><a href="#" key="t-dailytask">Daily Task</a></li>
-                                    <li><a href="#" key="t-dailytask">Project Task</a></li>
-                                    <li><a href="#" key="t-dailytask">Planning Task</a></li>
+                                    <li><a href="{{ url('task/daily') }}" key="t-dailytask">Daily Task</a></li>
+                                    <li><a href="{{ url('task/project') }}" key="t-dailytask">Project Task</a></li>
+                                    <li><a href="{{ url('task/planning') }}" key="t-dailytask">Planning Task</a></li>
                                 </ul>
                             </li>
                             @can('access-permission' , '1')
