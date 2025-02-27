@@ -25,7 +25,7 @@
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ url('nas/list-nas') }}" key="t-tui-calendar">NAS Routers</a></li>
                                     <li><a href="{{ url('nas/attribute') }}" key="t-full-calendar">Attributes</a></li>
-                                    <li><a href="{{ url('nas/user') }}" key="t-full-calendar">User</a></li>
+                                    <li><a href="{{ url('nas/user') }}" key="t-full-calendar">Users</a></li>
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow">Profiles</a>
                                         <ul class="sub-menu" aria-expanded="true">
