@@ -245,7 +245,7 @@
                 Are you sure you want to logout?
             </div>
             <div class="modal-footer">
-                <form action="/esa-app/logout" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" id="logout-btn" class="btn btn-sm rounded-pill btn-danger">Logout</button>
                 </form>

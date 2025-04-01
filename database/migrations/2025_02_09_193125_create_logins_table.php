@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('two_factor_enabled')->default(false);
-            $table->string('two_factor_secret')->nullable();
-            $table->string('two_factor_recovery_codes')->nullable();
+            $table->text('two_factor_secret')->nullable();
+            $table->text('two_factor_recovery_codes')->nullable();
             $table->foreignId('id_group');
             $table->foreignId('id_privilege');
             $table->boolean('status');

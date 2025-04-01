@@ -22,9 +22,9 @@
                                         -->
                                         
                                     </div>
-                                    <div class="justify-content-center col-6 mb-4 p-4 align-self-end">
+                                    <div class="justify-content-center col-0 p-4 align-self-end">
                                         <!--<img src="{{ url('public/img/hypernet-logo.png') }}" alt="" class="img-fluid"> -->
-                                        <a class="text-dark text-center"><h1>INI LOGOKU YA</h1></a>
+                                        <a class="text-dark text-center"><h3>{{ __(!$recovery ? 'TWO FACTOR AUTHENTICATION' : 'TWO FACTOR RECOVERY') }}</h3></a>
                                     </div>
                                     @if ($errors->any())
                                         <script>
@@ -70,61 +70,22 @@
                                     -->
                                 </div>
                                 <div class="p-2">
-                                    <form class="form-horizontal" action="{{ route('login') }}" method="post">
+                                    <form class="form-horizontal" action="{{ route('two-factor.login') }}" method="post">
                                         @csrf
+                                        @if (!$recovery)
                                         <div class="mb-3">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control @error('txt_email') is-invalid @enderror" id="email" name="email" placeholder="Enter email" required>
-                                            <div class="invalid-feedback">
-                                                @error('email')
-                                                    {{ $message }}
-                                                @enderror
-                                            </div>
+                                            <label for="code" class="form-label">Use Authentication Code</label>
+                                            <input type="text" class="form-control" id="code" name="code" placeholder="Enter authentication code" required>
                                         </div>
-                
+                                        @else
                                         <div class="mb-3">
-                                            <label class="form-label">Password</label>
-                                            <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon" required>
-                                                <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
-                                            </div>
+                                            <label for="recovery_code" class="form-label">Use Recovery Code</label>
+                                            <input type="text" class="form-control" id="recover_code" name="recovery_code" placeholder="Enter recovery code" required>
                                         </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="remember-check">
-                                            <label class="form-check-label" for="remember-check">
-                                                Remember me
-                                            </label>
-                                        </div>
-                                        
-                                        <div class="mt-1 d-grid">
+                                        @endif
+                                        <div class="mt-1 ">
                                             <button class="btn waves-effect waves-light text-white" type="submit" style="background-color:#19daa0;">Login</button>
-                                        </div>
-                                        <!--
-                                        <div class="mt-4 text-center">
-                                            <h5 class="font-size-14 mb-3">Sign in with</h5>
-            
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">
-                                                    <a href="javascript::void()" class="social-list-item bg-primary text-white border-primary">
-                                                        <i class="mdi mdi-facebook"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript::void()" class="social-list-item bg-info text-white border-info">
-                                                        <i class="mdi mdi-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript::void()" class="social-list-item bg-danger text-white border-danger">
-                                                        <i class="mdi mdi-google"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        -->
-                                        <div class="mt-4 text-center">
-                                            <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
+                                            <a class="btn btn-primary" href="{{ $recovery ? route('two-factor.login') : route('two-factor.login', ['recovery' => true]) }}">{{ __(!$recovery ? 'Use Recovery Code' : 'Use Authentication Code') }}</a>
                                         </div>
                                     </form>
                                 </div>
