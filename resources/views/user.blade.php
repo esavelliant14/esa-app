@@ -1,5 +1,4 @@
 @extends('_templates.main')
-<!-- Sweet Alert-->
 
 @section('body')
 
@@ -20,7 +19,7 @@
                         }
                     })
                     
-                    </script>
+            </script>
         @endif
         <div class="card">
             <div class="card-body">
