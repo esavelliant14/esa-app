@@ -30,7 +30,7 @@
                             <p><span class="profile-label">Status</span>
                                 @if (auth()->user()->two_factor_secret)
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger rounded-pill">Disable</button></p>
+                                    <button class="btn btn-sm btn-success rounded-pill">Enable</button></p>
                                     {{-- QR CODE --}}
                                     <div class="mb-3">
                                         {!! auth()->user()->twoFactorQrCodeSvg() !!}
@@ -43,7 +43,7 @@
                                         @endforeach
                                     </p>
                                 @else
-                                    <button class="btn btn-sm btn-success rounded-pill">Enable</button></p>
+                                    <button class="btn btn-sm btn-danger rounded-pill">Disable</button></p>
                                 @endif
                             </p>
                         </form>
