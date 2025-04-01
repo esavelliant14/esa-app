@@ -55,5 +55,10 @@ class FortifyServiceProvider extends ServiceProvider
                 'title_url' => '2FA AUTH | ESA.NET',
             ], compact('recovery'));
         });
+
+        // Fortify::requestPasswordResetLinkView(function(){
+        //     return view('test');
+        // });
+        
     }
 }

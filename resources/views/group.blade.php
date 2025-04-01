@@ -57,7 +57,7 @@
                                 <td>{{ $item->name_group }}</td>
                                 <td>
                                     @can('access-permission', '10')
-                                    <form class="delete-form d-inline"  action="/esa-app/group/delete/{{ $item->id }}" method="POST">
+                                    <form class="delete-form d-inline"  action="{{ route('group.delete',$item->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="button" class="btn btn-sm btn-danger delete-button">

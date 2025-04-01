@@ -47,7 +47,36 @@ t("#sa-warning").click(function(){
                         if (form) {
                             form.submit();
                         } else {
-                            console.error("Form delete tidak ditemukan!");
+                            console.error("Form not found!");
+                        }
+                       
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll(".reset-password-button").forEach(button => {
+            button.addEventListener("click", function () {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You want reset password?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#34c38f",
+                    cancelButtonColor: "#f46a6a",
+                    confirmButtonText: "Reset",
+                    customClass: {
+                        confirmButton: "rounded-pill",
+                        cancelButton: "rounded-pill"
+                    }
+                }).then(function (result) {
+                    if (result.isConfirmed) {
+                        
+                        let form = button.closest(".reset-password-form");
+                        if (form) {
+                            form.submit();
+                        } else {
+                            console.error("Form not found!");
                         }
                        
                     }

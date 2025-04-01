@@ -18,7 +18,7 @@ $(document).ready(function () {
                     $('#id_privilege').html(options);
                 },
                 error: function () {
-                    alert('Gagal mengambil data.');
+                    alert('Failed get data.');
                 }
             });
         } else {
@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectViewPrivilege = document.getElementById('filter_view_privilege');
     const selectCreateUser = document.getElementById('filter_create_user');
     const selectDeleteUser = document.getElementById('filter_delete_user');
+    const selectEditUser = document.getElementById('filter_edit_user');
+    const selectResetUser = document.getElementById('filter_reset_user');
     const selectCreatePrivilege = document.getElementById('filter_create_privilege');
     const selectDeletePrivilege = document.getElementById('filter_delete_privilege');
 
@@ -59,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
     selectViewUser.addEventListener('change', function(){
         selectCreateUser.disabled = !selectViewUser.checked;
         selectDeleteUser.disabled = !selectViewUser.checked;
+        selectEditUser.disabled = !selectViewUser.checked;
+        selectResetUser.disabled = !selectViewUser.checked;
+
     });
     selectViewPrivilege.addEventListener('change', function(){
         selectCreatePrivilege.disabled = !selectViewPrivilege.checked;

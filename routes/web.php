@@ -11,14 +11,15 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
 //DASHBOARD
-Route::get('/main' , [MainController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/main' , [MainController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class)->name('main.index');
 
 
 // ADMINISTRATOR 
-Route::get('/user', [UserController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/user', [UserController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class)->name('user.index');
 //->middleware(RedirectIfNotAuthenticated::class);
-Route::post('/user' , [UserController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+Route::post('/user' , [UserController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class)->name('user.post');
+Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->middleware(RedirectIfNotAuthenticated::class)->name('user.delete');
+Route::post('/user/reset-password/{id}',[UserController::class, 'reset-password'])->middleware(RedirectIfNotAuthenticated::class)->name('password.reset');
 
 // AUTH
 // Route::get('/auth' , [AuthController::class , 'index'])->middleware(RedirectIfAuthenticated::class);
@@ -28,22 +29,27 @@ Route::get('/change-password' , [AuthController::class , 'change_password'])->mi
 // Route::post('/logout' , [AuthController::class , 'logout']);
 
 // GROUP
-Route::get('/group', [GroupController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
-Route::post('/group' , [GroupController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-Route::delete('/group/delete/{id}' , [GroupController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/group', [GroupController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class)->name('group.index');
+Route::post('/group' , [GroupController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class)->name('group.post');
+Route::delete('/group/delete/{id}' , [GroupController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class)->name('group.delete');
 
 // PRIVILEGE
-Route::get('/privilege', [PrivilegeController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class);
-Route::post('/privilege' , [PrivilegeController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class);
-Route::delete('/privilege/delete/{id}' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/privilege', [PrivilegeController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.index');
+Route::post('/privilege' , [PrivilegeController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.post');
+Route::delete('/privilege/delete/{id}' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.delete');
 Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comboPrivilege'])->middleware(RedirectIfNotAuthenticated::class);
 
 
 //NAS
-Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.attribute');
+
+// TESTING
+// Route::get('/test',function(){
+//     return view('test');
+// });
 
 //WEB KOSONG
-Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
+// Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
 
 //TEST
 //Route::get('/user/test/', [UserController::class , 'test']);

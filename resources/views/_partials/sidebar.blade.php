@@ -10,7 +10,7 @@
                             
                             <li class="menu-title" key="t-menu">MAIN</li>
                             <li>
-                                <a href="{{ url('/main') }}" class="waves-effect">
+                                <a href="{{ route('main.index') }}" class="waves-effect">
                                     <i class="bx bx-home-circle"></i>
                                     <span key="t-dashboards">Dashboards</span>
                                 </a>
@@ -24,7 +24,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ url('nas/list-nas') }}" key="t-tui-calendar">NAS Routers</a></li>
-                                    <li><a href="{{ url('nas/attribute') }}" key="t-full-calendar">Attributes</a></li>
+                                    <li><a href="{{ route('nas.attribute') }}" key="t-full-calendar">Attributes</a></li>
                                     <li><a href="{{ url('nas/user') }}" key="t-full-calendar">Users</a></li>
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow">Profiles</a>
@@ -91,13 +91,13 @@
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
                                         @can('access-permission', '2')
-                                        <li><a href="{{ url('user/') }}" key="t-account">Users</a></li>
+                                        <li><a href="{{ route('user.index') }}" key="t-account">Users</a></li>
                                         @endcan
                                         @can('access-permission', '5')
-                                        <li><a href="{{ url('privilege/') }}" key="t-privileges">Privilege</a></li>
+                                        <li><a href="{{ route('privilege.index') }}" key="t-privileges">Privilege</a></li>
                                         @endcan
                                         @can('access-permission', '8')
-                                        <li><a href="{{ url('group/') }}" key="t-privileges">Group</a></li>
+                                        <li><a href="{{ route('group.index') }}" key="t-privileges">Group</a></li>
                                         @endcan
                                     </ul>
                                 </li>

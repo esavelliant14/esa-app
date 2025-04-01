@@ -76,6 +76,13 @@ class DatabaseSeeder extends Seeder
         Permission::create([
             'name_permission' => 'Delete Group',
         ]);
+        Permission::create([
+            'name_permission' => 'Edit User',
+        ]);
+        Permission::create([
+            'name_permission' => 'Reset User',
+        ]);
+
 
         DB::table('table_privilege_permissions')->insert([
             'id_permission' => 1, 
@@ -117,6 +124,14 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('table_privilege_permissions')->insert([
             'id_permission' => 10, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 11, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 12, 
             'id_privilege' => 1,
         ]);
 

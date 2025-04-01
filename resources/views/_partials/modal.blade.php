@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/esa-app/user">
+                <form method="post" action="{{ route('user.post') }}">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
@@ -126,7 +126,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/esa-app/group">
+                <form method="post" action="{{ route('group.post') }}">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
@@ -168,7 +168,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/esa-app/privilege">
+                <form method="post" action="{{ route('privilege.post') }}">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
@@ -205,6 +205,8 @@
                                 <input type="checkbox" id="filter_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
                                 <input type="checkbox" id="filter_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
                                 <input type="checkbox" id="filter_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
+                                <input type="checkbox" id="filter_edit_user" name="txt_permission[]" value="11" class="" disabled/> Edit User<br>
+                                <input type="checkbox" id="filter_reset_user" name="txt_permission[]" value="12" class="" disabled/> Reset User<br>
                                 <input type="checkbox" id="filter_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
                                 <input type="checkbox" id="filter_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
                                 <input type="checkbox" id="filter_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>

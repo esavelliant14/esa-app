@@ -60,9 +60,16 @@
                             </td>
                             <td>
                                 <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
-                                <a href="" class="btn btn-sm btn-light"><span class="mdi mdi-key"></span></a>
+                                @can('access-permission' , '12') 
+                                    <form class="d-inline reset-password-form" action="{{ route('password.reset',$item->id) }}" method="POST">
+                                        @csrf
+                                        <button type="button" class="btn btn-sm btn-light reset-password-button">
+                                            <span class="mdi mdi-key"></span>
+                                        </button>
+                                    </form>
+                                @endcan
                                 @can('access-permission' , '4')   
-                                    <form class="delete-form d-inline"  action="/esa-app/user/delete/{{ $item->id }}" method="POST">
+                                    <form class="delete-form d-inline" action="{{ route('user.delete',$item->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="button" class="btn btn-sm btn-danger delete-button">
@@ -73,10 +80,9 @@
                             </td>
                         </tr>
                         @endforeach
-
+                        
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div> <!-- end col -->

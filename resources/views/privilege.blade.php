@@ -60,7 +60,7 @@
                                 <td>
                                     <a href="" class="btn btn-sm btn-info"><span class="mdi mdi-square-edit-outline"></span></a>
                                     @can('access-permission' , '7')
-                                    <form class="delete-form d-inline"  action="/esa-app/privilege/delete/{{ $item->id }}" method="POST">
+                                    <form class="delete-form d-inline"  action="{{ route('privilege.delete',$item->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="button" class="btn btn-sm btn-danger delete-button">
