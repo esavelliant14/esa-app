@@ -20,7 +20,6 @@
     <a href=""></a>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title mb-4">Change Password</h4>
 
             <form method="POST" action="{{ route('user-password.update') }}">
             @csrf
