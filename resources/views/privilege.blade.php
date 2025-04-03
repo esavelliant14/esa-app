@@ -58,7 +58,9 @@
                                 <td>{{ $item->name_privilege }}</td>
                                 <td>{{ $item->group->name_group }}</td>
                                 <td>
-                                    <button class="d-inline btn btn-sm btn-info edit-privilege" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button>
+                                    @can('access-permission' , '13')
+                                        <button class="d-inline btn btn-sm btn-info edit-privilege" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button>
+                                    @endcan
                                     @can('access-permission' , '7')
                                     <form class="delete-form d-inline"  action="{{ route('privilege.delete',$item->id) }}" method="POST">
                                         @csrf

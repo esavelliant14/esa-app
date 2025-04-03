@@ -82,6 +82,9 @@ class DatabaseSeeder extends Seeder
         Permission::create([
             'name_permission' => 'Reset User',
         ]);
+        Permission::create([
+            'name_permission' => 'Edit Privilege',
+        ]);
 
 
         DB::table('table_privilege_permissions')->insert([
@@ -132,6 +135,10 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('table_privilege_permissions')->insert([
             'id_permission' => 12, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 13, 
             'id_privilege' => 1,
         ]);
 

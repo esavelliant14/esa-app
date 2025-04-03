@@ -63,7 +63,7 @@
                                     @if (auth()->user()->id == $item->id)
                                         
                                     @else 
-                                        <button class="d-inline btn btn-sm btn-info edit-user" data-groupid ="{{ $item->id_group }}"data-email="{{ $item->email }}" data-name="{{ $item->name }}" data-id="{{ $item->id }}" data-group="{{ $item->group->name_group }}" data-privilege="{{ $item->id_privilege }}" data-status="{{ $item->status }}" data-bs-toggle="modal" data-bs-target="#ModalEditUser"><span class="mdi mdi-square-edit-outline"></span></button>
+                                        <button class="d-inline btn btn-sm btn-info edit-user" data-groupid ="{{ $item->id_group }}" data-email="{{ $item->email }}" data-name="{{ $item->name }}" data-id="{{ $item->id }}" data-group="{{ $item->group->name_group }}" data-privilege="{{ $item->id_privilege }}" data-status="{{ $item->status }}" data-bs-toggle="modal" data-bs-target="#ModalEditUser"><span class="mdi mdi-square-edit-outline"></span></button>
                                     @endif
                                 @endcan
 
@@ -80,13 +80,17 @@
                                     @endif
                                 @endcan
                                 @can('access-permission' , '4')
-                                    <form class="delete-form d-inline" action="{{ route('user.delete',$item->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="button" class="btn btn-sm btn-danger delete-button">
-                                            <span class="mdi mdi-delete" ></span>
-                                        </button>
-                                    </form>
+                                    @if (auth()->user()->id == $item->id)
+                                        
+                                    @else 
+                                        <form class="delete-form d-inline" action="{{ route('user.delete',$item->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="button" class="btn btn-sm btn-danger delete-button">
+                                                <span class="mdi mdi-delete" ></span>
+                                            </button>
+                                        </form>
+                                    @endif
                                 @endcan
                             </td>
                         </tr>

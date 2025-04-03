@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\group;
 use App\Models\Privilege;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Logging;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Models\TitleMenu;
@@ -91,9 +92,15 @@ class UserController extends Controller
                 'name' => $var_data_valid['txt_name'],
                 'email' => $var_data_valid['txt_email'],
                 'id_group' => $var_data_valid['txt_group'],
-                'id_privilege' => $var_data_valid['txt_privileged'],
+                'id_privilege' => $var_data_valid['txt_privilege'],
                 'status' => $var_data_valid['txt_status'],
                 'password' => bcrypt($var_data_valid['txt_password']),
+            ]);
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Create User',
+                'details' => 'Creating user ' . $var_data_valid['txt_email'],
+
             ]);
             return redirect('/user')->with('success', 'Create User Successfully');
         };
@@ -101,9 +108,21 @@ class UserController extends Controller
 
     public function update(Request $post_edit_user)
     {
+        $existing_data = User::where('id' , $post_edit_user->txt_id)->first();
+        
+        $existing_privilege = Privilege::where('id', $existing_data->id_privilege)->pluck('name_privilege')->first();
+        $existing_status = User::where('id' , $post_edit_user->txt_id)->pluck('status')->first();
+        $new_privilege = Privilege::where('id', $post_edit_user->txt_privilege)->pluck('name_privilege')->first();
+        $new_status = $post_edit_user->txt_status;
         User::where('id', $post_edit_user->txt_id)->update([
         'id_privilege' => $post_edit_user->txt_privilege,
         'status' => $post_edit_user->txt_status,
+        ]);
+        Logging::create([
+            'action_by' => auth()->user()->email,
+            'category_action' => 'Update User',
+            'details' => 'Update user ' . $post_edit_user->txt_email . ' from PRIVILEGE=' . $existing_privilege . ' and STATUS=' . $existing_status . ' CHANGES TO PRIVILEGE=' .$new_privilege. ' and STATUS='. $new_status,
+            
         ]);
         return redirect('/user')->with('success', 'Update User Successfully');
         
@@ -117,13 +136,25 @@ class UserController extends Controller
                 'two_factor_secret' => null,
                 'two_factor_recovery_codes' => null,
             ]);
+        Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Reset Password',
+                'details' => 'Reset password user ' . $id->email,
+
+            ]); 
         return redirect('/user')->with('success', 'Reset User Successfully');
         
     }
 
     public function delete(User $id)
     {
-            User::destroy($id->id);      
+            User::destroy($id->id);
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Delete User',
+                'details' => 'Deleting user ' . $id->email,
+
+            ]);   
             return redirect('/user')->with('success', 'Delete User Successfully');
     }
 

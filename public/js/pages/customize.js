@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const group = this.dataset.group
             const privilege = this.dataset.privilege
 
-            document.getElementById('varId').value = id;
+            document.getElementById('varPrivilegeId').value = id;
             document.getElementById('varPrivilegeGroup').value = group;
             document.getElementById('varPrivilegeName').value = privilege;
             
@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectResetUser = document.getElementById('filter_edit_reset_user');
     const selectCreatePrivilege = document.getElementById('filter_edit_create_privilege');
     const selectDeletePrivilege = document.getElementById('filter_edit_delete_privilege');
+    const selectEditPrivilege = document.getElementById('filter_edit_privilege');
 
     selectGroupPrivilege.addEventListener('change', function(){
         if (this.value === "1") {
@@ -194,6 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
     selectViewPrivilege.addEventListener('change', function(){
         selectCreatePrivilege.disabled = !selectViewPrivilege.checked;
         selectDeletePrivilege.disabled = !selectViewPrivilege.checked;
+        selectEditPrivilege.disabled = !selectViewPrivilege.checked;
+        
     });
 });
 
