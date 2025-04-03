@@ -20,6 +20,7 @@ Route::get('/user', [UserController::class , 'index'])->middleware(RedirectIfNot
 Route::post('/user' , [UserController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class)->name('user.post');
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->middleware(RedirectIfNotAuthenticated::class)->name('user.delete');
 Route::post('/user/reset-password/{id}',[UserController::class, 'reset_password'])->middleware(RedirectIfNotAuthenticated::class)->name('password.reset');
+Route::post('/user/update/',[UserController::class, 'update'])->middleware(RedirectIfNotAuthenticated::class)->name('user.update');
 
 // AUTH
 // Route::get('/auth' , [AuthController::class , 'index'])->middleware(RedirectIfAuthenticated::class);
@@ -38,6 +39,7 @@ Route::get('/privilege', [PrivilegeController::class , 'index'])->middleware(Red
 Route::post('/privilege' , [PrivilegeController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.post');
 Route::delete('/privilege/delete/{id}' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.delete');
 Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comboPrivilege'])->middleware(RedirectIfNotAuthenticated::class);
+Route::post('/privilege/update/',[PrivilegeController::class, 'update'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.update');
 
 
 //NAS

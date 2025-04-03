@@ -63,7 +63,7 @@ class UserController extends Controller
             'txt_name' => 'required',
             'txt_email' => 'required|unique:table_logins,email|email:dns',
             'txt_group' => 'required',
-            'txt_privileged' => 'required',
+            'txt_privilege' => 'required',
             'txt_status' => 'required',
             'txt_password' => 'required|confirmed',
             'txt_password_confirmation' => 'required',
@@ -73,7 +73,7 @@ class UserController extends Controller
             'txt_email.unique' => 'Email already exist',
             'txt_email.email' => 'Wrong format email',
             'txt_group' => 'Group is required',
-            'txt_privileged' => 'Privilege is required',
+            'txt_privilege' => 'Privilege is required',
             'txt_status' => 'Status is required',
             'txt_password.required' => 'Password is required',
             'txt_password.confirmed' => 'Password not match',
@@ -97,6 +97,16 @@ class UserController extends Controller
             ]);
             return redirect('/user')->with('success', 'Create User Successfully');
         };
+    }
+
+    public function update(Request $post_edit_user)
+    {
+        User::where('id', $post_edit_user->txt_id)->update([
+        'id_privilege' => $post_edit_user->txt_privilege,
+        'status' => $post_edit_user->txt_status,
+        ]);
+        return redirect('/user')->with('success', 'Update User Successfully');
+        
     }
     
     public function reset_password(User $id)

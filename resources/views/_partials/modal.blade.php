@@ -13,7 +13,7 @@
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label for="name-input" class="form-label">Name</label>
-                                <input type="text" name="txt_name" id="name-input" class="form-control @error('txt_name') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name') }}"required />
+                                <input type="text" name="txt_name" id="name_add_user" class="form-control @error('txt_name') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name') }}"required />
                                 <div class="invalid-feedback">
                                     @error('txt_name')
                                         {{ $message }}
@@ -22,7 +22,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="email-input" class="form-label">Email</label>
-                                <input type="email" name="txt_email" id="email-input" class="form-control @error('txt_email') is-invalid @enderror" placeholder="Enter email" {{ old('txt_email') }} required />
+                                <input type="email" name="txt_email" id="email-input-add-user" class="form-control @error('txt_email') is-invalid @enderror" placeholder="Enter email" value="{{ old('txt_email') }}" required />
                                 <div class="invalid-feedback">
                                     @error('txt_email')
                                         {{ $message }}
@@ -31,7 +31,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="group-input" class="form-label">Group</label>
-                                <select name="txt_group" id="id_group" class="form-select @error('txt_group') is-invalid @enderror" required>
+                                <select name="txt_group" id="id_group_add_user" class="form-select @error('txt_group') is-invalid @enderror" required>
                                     <option value="">--- Choose Group ---</option>
                                     @if ($active === 'user')
                                         @foreach ( $var_show_group as $item_group )
@@ -49,8 +49,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="privilege-input" class="form-label">Privilege</label>
-                                <select name="txt_privileged" id="id_privilege" class="form-select @error('txt_privileged') is-invalid @enderror" required>
-                                    <option value="">--- Choose Privileged ---</option>
+                                <select name="txt_privilege" id="id_privilege_add_user" class="form-select @error('txt_privileged') is-invalid @enderror" required>
+                                    <option value="">--- Choose Privilege ---</option>
                                    @if ($active === 'user')
                                         @foreach ( $var_show_privilege as $item_privilege)
                                             <option value="{{ $item_privilege->id }}">{{ $item_privilege->name_privilege }}</option>
@@ -68,10 +68,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="privilege-input" class="form-label">Status</label>
-                                <select name="txt_status" id="" class="form-select @error('txt_status') is-invalid @enderror" required>
+                                <select name="txt_status"  class="form-select @error('txt_status') is-invalid @enderror" required>
                                     <option value="">--- Choose Status ---</option>
                                     <option value="1">Active</option>
-                                    <option value="2">Inactive</option>
+                                    <option value="0">Inactive</option>
                                     <div class="invalid-feedback">
                                         @error('txt_status')
                                             {{ $message }}
@@ -81,7 +81,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password-1-input" class="form-label">Password</label>
-                                <input type="password" name="txt_password" id="email-input" class="form-control @error('txt_password') is-invalid @enderror" placeholder="Enter password" required />
+                                <input type="password" name="txt_password"  class="form-control @error('txt_password') is-invalid @enderror" placeholder="Enter password" required />
                                 <div class="invalid-feedback">
                                     @error('txt_password')
                                         {{ $message }}
@@ -90,7 +90,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password-2-input" class="form-label">Repeat Password</label>
-                                <input type="password" name="txt_password_confirmation" id="email-input" class="form-control @error('txt_password_confirmation') is-invalid @enderror" placeholder="Enter password" required />
+                                <input type="password" name="txt_password_confirmation"  class="form-control @error('txt_password_confirmation') is-invalid @enderror" placeholder="Enter password" required />
                                 <div class="invalid-feedback">
                                     @error('txt_password_confirmation')
                                         {{ $message }}
@@ -132,7 +132,7 @@
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label for="name-input" class="form-label">Name Group</label>
-                                <input type="text" name="txt_name_group" id="name-input" class="form-control @error('txt_name_group') is-invalid @enderror" placeholder="Enter Group Name" value="{{ old('txt_name_group') }}"required />
+                                <input type="text" name="txt_name_group" id="name_input_add_user" class="form-control @error('txt_name_group') is-invalid @enderror" placeholder="Enter Group Name" value="{{ old('txt_name_group') }}"required />
                                 <div class="invalid-feedback">
                                     @error('txt_name_group')
                                         {{ $message }}
@@ -170,11 +170,12 @@
             <div class="modal-body">
                 <form method="post" action="{{ route('privilege.post') }}">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="name-input" class="form-label">Name Privilege</label>
-                                <input type="text" name="txt_name_privilege" id="name-input" class="form-control @error('txt_name_privilege') is-invalid @enderror" placeholder="Enter name" value="{{ old('txt_name_privilege') }}"required />
+                                <label for="privilege-add-input" class="form-label">Name Privilege</label>
+                                <input type="text" name="txt_name_privilege" id="name_input_add_privilege" class="form-control @error('txt_name_privilege') is-invalid @enderror" placeholder="Enter privilege name" value="{{ old('txt_name_privilege') }}"required />
                                 <div class="invalid-feedback">
                                     @error('txt_name_privilege')
                                         {{ $message }}
@@ -183,7 +184,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="group-input" class="form-label">Group</label>
+                            <label for="group-add-input" class="form-label">Group</label>
                             <select name="txt_group" id="id_group_privilege" class="form-select @error('txt_group') is-invalid @enderror" required>
                                 <option value="">--- Choose Group ---</option>
                                 @if ($active === 'privilege')
@@ -200,7 +201,7 @@
                                 @enderror
                             </div>
                             <div class="my-3">
-                                <label for="email-input" class="form-label">Rule Permission</label><br>
+                                <label for="" class="form-label">Rule Permission</label><br>
                                 <input type="checkbox" id="filter_administrator" name="txt_permission[]" value="1" class="" /> Administrator Menu<br>
                                 <input type="checkbox" id="filter_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
                                 <input type="checkbox" id="filter_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
@@ -218,7 +219,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="text-end">
-                                <button type="submit" id="addGroup-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                                <button type="submit" id="addPrivilege-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
                                 <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -232,6 +233,63 @@
     <!-- end modal-dialog -->
 </div>
 <!-- END MODAL ADD PRIVILEGE -->
+
+
+<!-- START MODAL EDIT PRIVILEGE -->
+<div class="modal fade" id="ModalEditPrivilege" tabindex="-1" aria-labelledby="newPrivilegeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPrivilegeModalLabel">Edit Privilege</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('privilege.update') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="privilege-add-input" class="form-label">Name Privilege</label>
+                                <input type="text" name="txt_name_privilege" id="varPrivilegeName" class="form-control @error('txt_name_privilege') is-invalid @enderror" placeholder="Enter privilege name" value="{{ old('txt_name_privilege') }}"required readonly />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="group-edit-input" class="form-label">Group</label>
+                            <input class="form-control" type="text" name="txt_group" id="varPrivilegeGroup" required readonly>
+                            <div class="my-3">
+                                <label for="" class="form-label">Rule Permission</label><br>
+                                <input type="checkbox" id="filter_edit_administrator" name="txt_permission[]" value="1" class="" /> Administrator Menu<br>
+                                <input type="checkbox" id="filter_edit_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
+                                <input type="checkbox" id="filter_edit_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
+                                <input type="checkbox" id="filter_edit_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
+                                <input type="checkbox" id="filter_edit_edit_user" name="txt_permission[]" value="11" class="" disabled/> Edit User<br>
+                                <input type="checkbox" id="filter_edit_reset_user" name="txt_permission[]" value="12" class="" disabled/> Reset User<br>
+                                <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
+                                <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
+                                <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
+                                <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
+                                <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
+                                <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
+                            </div>
+
+                        </div>
+                        <input type="text" id="varId" name="txt_id" readonly required hidden>
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="submit" id="editPrivilege-btn" class="btn btn-sm rounded-pill btn-success">Update</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+<!-- END MODAL EDIT PRIVILEGE -->
 
 
 
@@ -257,6 +315,100 @@
     </div>
 </div>
 <!-- END MODAL LOGOUT -->
+
+
+<!-- START MODAL EDIT USER -->
+<div class="modal fade" id="ModalEditUser" tabindex="-1" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCustomerModalLabel">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('user.update') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="name-input" class="form-label">Name</label>
+                                <input type="text" name="txt_name" id="varName" class="form-control @error('txt_name') is-invalid @enderror" placeholder="Enter name" required readonly />
+                                <div class="invalid-feedback">
+                                    @error('txt_name')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email-input" class="form-label">Email</label>
+                                <input type="email" name="txt_email" id="varEmail" class="form-control @error('txt_email') is-invalid @enderror" placeholder="Enter email" readonly required />
+                                <div class="invalid-feedback">
+                                    @error('txt_email')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="group-input-edit-user" class="form-label">Group</label>
+                                <input type="text" name="txt_group" id="varGroup" class="form-control @error('txt_group') is-invalid @enderror" placeholder="Enter group" readonly required />
+                                <div class="invalid-feedback">
+                                    @error('txt_group')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="privilege-input" class="form-label">Privilege</label>
+                                <select name="txt_privilege" id="varPrivilege" class="form-select @error('txt_privileged') is-invalid @enderror" required>
+                                    <option value="" >--- Choose Privilege ---</option>
+                                   @if ($active === 'user')
+                                        @foreach ( $var_show_privilege as $item_privilege)
+                                            <option value="{{ $item_privilege->id }}">{{ $item_privilege->name_privilege }}</option>
+                                        @endforeach
+                                    @else
+                                        ''
+                                   @endif
+                                    <div class="invalid-feedback">
+                                        @error('txt_privileged')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="privilege-input" class="form-label">Status</label>
+                                <select name="txt_status" id="varStatus" class="form-select @error('txt_status') is-invalid @enderror" required>
+                                    <option value="">--- Choose Status ---</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                    <div class="invalid-feedback">
+                                        @error('txt_status')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="text" id="varGroupId" hidden>
+                        <input type="text" name="txt_id" id="varId" hidden>
+                        
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="submit" id="editCustomer-btn" class="btn btn-sm rounded-pill btn-success">Update</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+<!-- END MODAL EDIT USER -->
 
 <script>
 

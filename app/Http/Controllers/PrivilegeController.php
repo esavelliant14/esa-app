@@ -72,23 +72,23 @@ class PrivilegeController extends Controller
         }else{
             $var_data_valid = $var_data->validated();
 //            dd($var_data_valid);
-            $test = Privilege::create([
+            $privilege = Privilege::create([
                 'name_privilege' => $var_data_valid['txt_name_privilege'],
                 'id_group' => $var_data_valid['txt_group'],
             ]);
             if (!is_null($post_create_privilege->input('txt_permission'))){
-                foreach ($post_create_privilege->txt_permission as $a) {
+                foreach ($post_create_privilege->txt_permission as $permission) {
                     PrivilegePermission::create([
-                        'id_permission' => $a ,
-                        'id_privilege' => $test->id,
+                        'id_permission' => $permission ,
+                        'id_privilege' => $privilege->id,
                     ]);
                 }
             }
             return redirect('/privilege')->with('success', 'Create Privilege Successfully');
         };
-  }
+    }
 
-  public function delete($id)
+    public function delete($id)
     {
             $check_user = User::where('id_privilege' , $id)->count();
             //dd($test);
@@ -101,7 +101,20 @@ class PrivilegeController extends Controller
             
     }
 
-  public function comboPrivilege($id, Request $request)
+    public function update(Request $post_edit_privilege)
+    {
+        PrivilegePermission::destroy('id_privilege' , $post_edit_privilege->txt_id);
+        foreach ($post_edit_privilege->txt_permission as $permission) {
+            PrivilegePermission::create([
+                'id_permission' => $permission ,
+                'id_privilege' => $post_edit_privilege->txt_id,
+            ]);
+        }
+        return redirect('/privilege')->with('success', 'Update Privilege Successfully');
+        
+    }
+
+    public function comboPrivilege($id, Request $request)
     {
         if (!$request->ajax()) {
             return redirect('/main');
