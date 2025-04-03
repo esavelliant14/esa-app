@@ -19,7 +19,7 @@ Route::get('/user', [UserController::class , 'index'])->middleware(RedirectIfNot
 //->middleware(RedirectIfNotAuthenticated::class);
 Route::post('/user' , [UserController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class)->name('user.post');
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->middleware(RedirectIfNotAuthenticated::class)->name('user.delete');
-Route::post('/user/reset-password/{id}',[UserController::class, 'reset-password'])->middleware(RedirectIfNotAuthenticated::class)->name('password.reset');
+Route::post('/user/reset-password/{id}',[UserController::class, 'reset_password'])->middleware(RedirectIfNotAuthenticated::class)->name('password.reset');
 
 // AUTH
 // Route::get('/auth' , [AuthController::class , 'index'])->middleware(RedirectIfAuthenticated::class);

@@ -98,6 +98,18 @@ class UserController extends Controller
             return redirect('/user')->with('success', 'Create User Successfully');
         };
     }
+    
+    public function reset_password(User $id)
+    {
+        User::where('id' , $id->id)->update(
+            [
+                'password' => bcrypt('qweqweqwe'),
+                'two_factor_secret' => null,
+                'two_factor_recovery_codes' => null,
+            ]);
+        return redirect('/user')->with('success', 'Reset User Successfully');
+        
+    }
 
     public function delete(User $id)
     {
