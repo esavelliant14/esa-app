@@ -103,7 +103,7 @@ class PrivilegeController extends Controller
 
     public function update(Request $post_edit_privilege)
     {
-        PrivilegePermission::destroy('id_privilege' , $post_edit_privilege->txt_id);
+        PrivilegePermission::where('id_privilege', $post_edit_privilege->txt_id)->delete(); 
         foreach ($post_edit_privilege->txt_permission as $permission) {
             PrivilegePermission::create([
                 'id_permission' => $permission ,
