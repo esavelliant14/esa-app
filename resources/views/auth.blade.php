@@ -26,7 +26,8 @@
                                         <!--<img src="{{ url('public/img/hypernet-logo.png') }}" alt="" class="img-fluid"> -->
                                         <a class="text-dark text-center"><h1>INI LOGOKU YA</h1></a>
                                     </div>
-                                    @if ($errors->any())
+                                    {{-- @if ($errors->any()) --}}
+                                    @if(session()->has('error'))
                                         <script>
                                             Swal.fire({
                                                 title:"Login Failed!",
