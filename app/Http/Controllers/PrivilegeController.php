@@ -123,7 +123,6 @@ class PrivilegeController extends Controller
 
     public function update(Request $post_edit_privilege)
     {
-        dd($post_edit_privilege);
         PrivilegePermission::where('id_privilege', $post_edit_privilege->txt_id)->delete(); 
         foreach ($post_edit_privilege->txt_permission as $permission) {
             PrivilegePermission::create([
