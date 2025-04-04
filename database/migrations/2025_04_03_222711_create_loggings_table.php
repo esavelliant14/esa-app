@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('action_by');
             $table->string('category_action');
+            $table->string('status');
             $table->text('details');
             $table->timestamps();
         });

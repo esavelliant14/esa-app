@@ -17,6 +17,7 @@ use App\Actions\Fortify\UpdateUserPassword;
 use Illuminate\Support\Facades\RateLimiter;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\Logging;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -47,9 +48,23 @@ class FortifyServiceProvider extends ServiceProvider
             if($user->status == 1){
                 return $user;
             }else{
+                Logging::create([
+                    'action_by' => $post_login->email,
+                    'category_action' => 'Login',
+                    'status' => 'Failed',
+                    'details' => 'Failed login user=' . $post_login->email . ' because user is inactive',
+    
+                ]);
                 Session::flash('error');
             }
         }else{
+            Logging::create([
+                'action_by' => $post_login->email,
+                'category_action' => 'Login',
+                'status' => 'Failed',
+                'details' => 'Failed login user=' . $post_login->email . ' because wrong credentials',
+
+            ]);
             Session::flash('error');
         }
     });

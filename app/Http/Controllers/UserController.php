@@ -121,7 +121,8 @@ class UserController extends Controller
         Logging::create([
             'action_by' => auth()->user()->email,
             'category_action' => 'Update User',
-            'details' => 'Update user ' . $post_edit_user->txt_email . ' from PRIVILEGE=' . $existing_privilege . ' and STATUS=' . $existing_status . ' CHANGES TO PRIVILEGE=' .$new_privilege. ' and STATUS='. $new_status,
+            'status' => 'Success',
+            'details' => 'Success update user=' . $post_edit_user->txt_email . ' from PRIVILEGE=' . $existing_privilege . ' and STATUS=' . $existing_status . ' CHANGES TO PRIVILEGE=' .$new_privilege. ' and STATUS='. $new_status,
             
         ]);
         return redirect('/user')->with('success', 'Update User Successfully');
@@ -139,7 +140,8 @@ class UserController extends Controller
         Logging::create([
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Reset Password',
-                'details' => 'Reset password user ' . $id->email,
+                'status' => 'Success',
+                'details' => 'Success reset password user=' . $id->email,
 
             ]); 
         return redirect('/user')->with('success', 'Reset User Successfully');
@@ -152,7 +154,8 @@ class UserController extends Controller
             Logging::create([
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Delete User',
-                'details' => 'Deleting user ' . $id->email,
+                'status' => 'Success',
+                'details' => 'Success delete user=' . $id->email,
 
             ]);   
             return redirect('/user')->with('success', 'Delete User Successfully');

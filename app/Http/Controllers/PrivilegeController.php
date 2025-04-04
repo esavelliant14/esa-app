@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-
+use App\Models\Logging;
 
 
 class PrivilegeController extends Controller
@@ -84,25 +84,46 @@ class PrivilegeController extends Controller
                     ]);
                 }
             }
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Add Privilege',
+                'status' => 'Success',
+                'details' => 'Success add new privilege=' . $var_data_valid['txt_name_privilege'],
+
+            ]); 
             return redirect('/privilege')->with('success', 'Create Privilege Successfully');
         };
     }
 
     public function delete($id)
     {
-            $check_user = User::where('id_privilege' , $id)->count();
-            //dd($test);
-            if($check_user == "0"){
-                Privilege::destroy('id' , $id);      
-                return redirect('/privilege')->with('success', 'Delete Privilege Successfully');
-            }else {
-                return redirect('/privilege')->with('failed', 'Privilege still used by user');
-            }
+        $name_privilege = Privilege::where('id', $id)->pluck('name_privilege')->first();
+        $check_user = User::where('id_privilege' , $id)->count();
+        //dd($test);
+        if($check_user == "0"){
+            Privilege::destroy('id' , $id);    
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Delete Privilege',
+                'status' => 'Success',
+                'details' => 'Success delete privilege=' . $name_privilege,
+            ]);  
+            return redirect('/privilege')->with('success', 'Delete Privilege Successfully');
+        }else {
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Delete Privilege',
+                'status' => 'Failed',
+                'details' => 'Failed delete privilege=' . $name_privilege . ' because group still used by user',
+            ]);
+            return redirect('/privilege')->with('failed', 'Privilege still used by user');
+        }
             
     }
 
     public function update(Request $post_edit_privilege)
     {
+        dd($post_edit_privilege);
         PrivilegePermission::where('id_privilege', $post_edit_privilege->txt_id)->delete(); 
         foreach ($post_edit_privilege->txt_permission as $permission) {
             PrivilegePermission::create([
@@ -110,6 +131,12 @@ class PrivilegeController extends Controller
                 'id_privilege' => $post_edit_privilege->txt_id,
             ]);
         }
+        Logging::create([
+            'action_by' => auth()->user()->email,
+            'category_action' => 'Update Privilege',
+            'status' => 'Success',
+            'details' => 'Success update privilege=' . $post_edit_privilege->txt_name_privilege,
+        ]);
         return redirect('/privilege')->with('success', 'Update Privilege Successfully');
         
     }

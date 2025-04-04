@@ -156,7 +156,8 @@
                     <a class="dropdown-item" href="/esa-app/profile/"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
                     <a class="dropdown-item d-block" href="/esa-app/change-password/"><i class="bx bx-key font-size-16 align-middle me-1"></i> <span key="t-settings">Change Password</span></a>
                     <div class="dropdown-divider"></div>
-                    <form id="logout-form" action="/esa-app/logout" method="POST">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        <input type="text" name="txt_email" value="{{ auth()->user()->email }}" hidden required readonly>
                         @csrf
                     </form>
                     <button class="dropdown-item text-danger" id="logout-button" type="buttom"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></button>

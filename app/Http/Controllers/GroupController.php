@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\Privilege;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Logging;
 
 class GroupController extends Controller
 {
@@ -49,20 +50,40 @@ class GroupController extends Controller
             Group::create([
                 'name_group' => $var_data_valid['txt_name_group'],
             ]);
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Add Group',
+                'status' => 'Success',
+                'details' => 'Success add new group=' . $var_data_valid['txt_name_group'],
+
+            ]); 
             return redirect('/group')->with('success', 'Create Group Successfully');
         };
   }
 
   public function delete($id)
   {
-          $check_privilege = Privilege::where('id_group' , $id)->count();
-          //dd($test);
-          if($check_privilege == "0"){
-              Group::destroy('id' , $id);      
-              return redirect('/group')->with('success', 'Delete Group Successfully');
-          }else {
-              return redirect('/group')->with('failed', 'Group still used by privilege');
-          }
+        $name_group = Group::where('id', $id)->pluck('name_group')->first();
+        $check_privilege = Privilege::where('id_group' , $id)->count();
+        //dd($test);
+        if($check_privilege == "0"){
+            Group::destroy('id' , $id);      
+            Logging::create([
+              'action_by' => auth()->user()->email,
+              'category_action' => 'Delete Group',
+              'status' => 'Success',
+              'details' => 'Success delete group=' . $name_group,
+            ]);
+            return redirect('/group')->with('success', 'Delete Group Successfully');
+        }else {
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Delete Group',
+                'status' => 'Failed',
+                'details' => 'Failed delete group=' . $name_group . ' because group still used by privilege',
+            ]);
+            return redirect('/group')->with('failed', 'Group still used by privilege');
+        }
           
   }
 
