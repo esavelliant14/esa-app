@@ -236,7 +236,7 @@
 
 
 <!-- START MODAL EDIT PRIVILEGE -->
-<div class="modal fade" id="ModalEditPrivilege" tabindex="-1" aria-labelledby="newPrivilegeModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalEditPrivilege" tabindex="-1" aria-labelledby="editPrivilegeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -291,6 +291,58 @@
 </div>
 <!-- END MODAL EDIT PRIVILEGE -->
 
+{{-- MODAL VIEW PERMISSION PRIVILEGE --}}
+<div class="modal fade" id="ModalViewPermissionPrivilege" tabindex="-1" aria-labelledby="viewPermissionPrivilegeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPrivilegeModalLabel">View Privilege</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Name Privilege</label>
+                                <input type="text" name="txt_name_privilege" id="varPermissionPrivilegeName" class="form-control @error('txt_name_privilege') is-invalid @enderror" placeholder="Enter privilege name" value="{{ old('txt_name_privilege') }}"required readonly />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Group</label>
+                            <input class="form-control" type="text" name="txt_group" id="varPermissionPrivilegeGroup" required readonly>
+                            <div class="my-3">
+                                <label class="form-label">Rule Permission</label><br>
+                                <input type="checkbox" id="filter_edit_administrator" name="txt_permission[]" value="1" class="" disabled/> Administrator Menu<br>
+                                <input type="checkbox" id="filter_edit_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
+                                <input type="checkbox" id="filter_edit_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
+                                <input type="checkbox" id="filter_edit_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
+                                <input type="checkbox" id="filter_edit_edit_user" name="txt_permission[]" value="11" class="" disabled/> Edit User<br>
+                                <input type="checkbox" id="filter_edit_reset_user" name="txt_permission[]" value="12" class="" disabled/> Reset User<br>
+                                <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
+                                <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
+                                <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
+                                <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
+                                <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
+                                <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
+                            </div>
+
+                        </div>
+                        <input type="text" id="varPermissionPrivilegeId" name="txt_id" readonly required hidden>
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+{{-- END MODAL VIEW PERMISSION PRIVILEGE --}}
 
 
 <!-- START MODAL LOGOUT -->

@@ -1,5 +1,6 @@
 @extends('_templates.main')
 @section('body')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <script src="{{ url('/public/js/pages/sweet-alert.js') }}"></script>
 <div class="row">
     <div class="col-12">
@@ -58,6 +59,10 @@
                                 <td>{{ $item->name_privilege }}</td>
                                 <td>{{ $item->group->name_group }}</td>
                                 <td>
+                                    @can('access-permission', '5')
+                                        <button type="button" class="btn btn-sm btn-light view-permission-privilege" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-id="{{ $item->id }}" data-bs-toggle="modal" data-bs-target="#ModalViewPermissionPrivilege"><span class="mdi mdi-eye" ></span>
+                                        </button>
+                                    @endcan
                                     @can('access-permission' , '13')
                                         <button class="d-inline btn btn-sm btn-info edit-privilege" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button>
                                     @endcan

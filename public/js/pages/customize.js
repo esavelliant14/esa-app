@@ -43,7 +43,63 @@ $(document).ready(function () {
         }
     });
 });
+// END FOR ADD USER
 
+// FOR VIEW PERMISSION
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener untuk tombol view dengan class 'view-permission-privilege'
+    document.querySelectorAll('.view-permission-privilege').forEach(button => {
+        button.addEventListener('click', function() {
+            // Ambil ID privilege yang ingin ditampilkan dari data-id
+            const idPrivilege = this.getAttribute('data-id');
+            const nameGroup = this.getAttribute('data-group');
+            const namePrivilege = this.getAttribute('data-privilege');
+            
+            // Lakukan AJAX request ke controller untuk mendapatkan data permission
+            fetch(`/esa-app/privilege/view-permission-privilege/${idPrivilege}`, {
+                method: 'GET',  // Pastikan menggunakan metode yang sesuai (GET, POST, dsb.)
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',  // Menambahkan header untuk mendeteksi permintaan sebagai AJAX
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')  // CSRF token untuk keamanan
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Ambil data permissions dari response
+                    const permissions = data.permissions;
+                    // Set group data (jika perlu, ganti dengan data grup yang sesuai)
+                    document.getElementById('varPrivilegeGroup').value = "Group Name";  // Ganti dengan nama grup yang sesuai
+                    document.getElementById('varPermissionPrivilegeId').value = idPrivilege;
+                    document.getElementById('varPermissionPrivilegeGroup').value = nameGroup;
+                    document.getElementById('varPermissionPrivilegeName').value = namePrivilege;
+                    // Update checkbox berdasarkan data permission yang diterima
+                    document.querySelectorAll('input[name="txt_permission[]"]').forEach(input => {
+                        // Cek apakah id_permission ada dalam data yang diterima
+                        if (permissions.includes(parseInt(input.value))) {
+                            input.checked = true;
+                        } else {
+                            input.checked = false;
+                        }
+                    });
+
+                    // Tampilkan modal menggunakan Bootstrap
+                    const modal = new bootstrap.Modal(document.getElementById('ModalViewPermissionPrivilege'));
+                    modal.show();
+                    document.getElementById('ModalViewPermissionPrivilege').addEventListener('hidden.bs.modal', function () {
+                        const modalBackdrop = document.querySelector('.modal-backdrop');
+                        if (modalBackdrop) {
+                            modalBackdrop.remove();  // Menghapus backdrop setelah modal tertutup
+                        }
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+});
+
+
+//END FOR VIEW PERMISSION
 
 // FOR EDIT USER
 $(document).ready(function () {

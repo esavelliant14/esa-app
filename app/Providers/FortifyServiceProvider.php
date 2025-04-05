@@ -52,6 +52,8 @@ class FortifyServiceProvider extends ServiceProvider
                     'action_by' => $post_login->email,
                     'category_action' => 'Login',
                     'status' => 'Failed',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
                     'details' => 'Failed login user=' . $post_login->email . ' because user is inactive',
     
                 ]);
@@ -62,6 +64,8 @@ class FortifyServiceProvider extends ServiceProvider
                 'action_by' => $post_login->email,
                 'category_action' => 'Login',
                 'status' => 'Failed',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Failed login user=' . $post_login->email . ' because wrong credentials',
 
             ]);

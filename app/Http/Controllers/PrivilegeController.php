@@ -88,6 +88,8 @@ class PrivilegeController extends Controller
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Add Privilege',
                 'status' => 'Success',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Success add new privilege=' . $var_data_valid['txt_name_privilege'],
 
             ]); 
@@ -106,6 +108,8 @@ class PrivilegeController extends Controller
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Delete Privilege',
                 'status' => 'Success',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Success delete privilege=' . $name_privilege,
             ]);  
             return redirect('/privilege')->with('success', 'Delete Privilege Successfully');
@@ -114,6 +118,8 @@ class PrivilegeController extends Controller
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Delete Privilege',
                 'status' => 'Failed',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Failed delete privilege=' . $name_privilege . ' because group still used by user',
             ]);
             return redirect('/privilege')->with('failed', 'Privilege still used by user');
@@ -134,6 +140,8 @@ class PrivilegeController extends Controller
             'action_by' => auth()->user()->email,
             'category_action' => 'Update Privilege',
             'status' => 'Success',
+            'ip_address' => request()->ip(),
+            'agent' => request()->header('User-Agent'),
             'details' => 'Success update privilege=' . $post_edit_privilege->txt_name_privilege,
         ]);
         return redirect('/privilege')->with('success', 'Update Privilege Successfully');
@@ -147,6 +155,17 @@ class PrivilegeController extends Controller
         }
         $privileges = Privilege::where('id_group', $id)->pluck('name_privilege', 'id'); 
         return response()->json($privileges);
+    }
+
+    public function viewPermissionPrivilege($id, Request $request)
+    {
+        if (!$request->ajax()) {
+            return redirect('/privilege');
+        }
+        $permission_privilege = PrivilegePermission::where('id_privilege', $id)->pluck('id_permission')->toArray();
+        return response()->json([
+            'permissions' => $permission_privilege
+        ]);
     }
 
 }

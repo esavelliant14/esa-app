@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('action_by');
             $table->string('category_action');
             $table->string('status');
+            $table->text('ip_address');
+            $table->text('agent');
             $table->text('details');
             $table->timestamps();
         });

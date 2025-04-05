@@ -39,6 +39,7 @@ Route::get('/privilege', [PrivilegeController::class , 'index'])->middleware(Red
 Route::post('/privilege' , [PrivilegeController::class , 'add'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.post');
 Route::delete('/privilege/delete/{id}' , [PrivilegeController::class , 'delete'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.delete');
 Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comboPrivilege'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/privilege/view-permission-privilege/{id}', [PrivilegeController::class, 'viewPermissionPrivilege'])->middleware(RedirectIfNotAuthenticated::class)->name('PermissionPrivilege.view');
 Route::post('/privilege/update/',[PrivilegeController::class, 'update'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.update');
 
 
@@ -46,9 +47,9 @@ Route::post('/privilege/update/',[PrivilegeController::class, 'update'])->middle
 Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.attribute');
 
 // TESTING
-// Route::get('/test',function(){
-//     return view('test');
-// });
+Route::get('/test', function(){
+    dd(request()->header('User-Agent'));
+});
 
 //WEB KOSONG
 // Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);

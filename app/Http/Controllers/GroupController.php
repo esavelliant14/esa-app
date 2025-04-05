@@ -54,6 +54,8 @@ class GroupController extends Controller
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Add Group',
                 'status' => 'Success',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Success add new group=' . $var_data_valid['txt_name_group'],
 
             ]); 
@@ -69,10 +71,12 @@ class GroupController extends Controller
         if($check_privilege == "0"){
             Group::destroy('id' , $id);      
             Logging::create([
-              'action_by' => auth()->user()->email,
-              'category_action' => 'Delete Group',
-              'status' => 'Success',
-              'details' => 'Success delete group=' . $name_group,
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Delete Group',
+                'status' => 'Success',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
+                'details' => 'Success delete group=' . $name_group,
             ]);
             return redirect('/group')->with('success', 'Delete Group Successfully');
         }else {
@@ -80,6 +84,8 @@ class GroupController extends Controller
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Delete Group',
                 'status' => 'Failed',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Failed delete group=' . $name_group . ' because group still used by privilege',
             ]);
             return redirect('/group')->with('failed', 'Group still used by privilege');

@@ -99,6 +99,8 @@ class UserController extends Controller
             Logging::create([
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Create User',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Creating user ' . $var_data_valid['txt_email'],
 
             ]);
@@ -122,6 +124,8 @@ class UserController extends Controller
             'action_by' => auth()->user()->email,
             'category_action' => 'Update User',
             'status' => 'Success',
+            'ip_address' => request()->ip(),
+            'agent' => request()->header('User-Agent'),
             'details' => 'Success update user=' . $post_edit_user->txt_email . ' from PRIVILEGE=' . $existing_privilege . ' and STATUS=' . $existing_status . ' CHANGES TO PRIVILEGE=' .$new_privilege. ' and STATUS='. $new_status,
             
         ]);
@@ -141,6 +145,8 @@ class UserController extends Controller
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Reset Password',
                 'status' => 'Success',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Success reset password user=' . $id->email,
 
             ]); 
@@ -155,6 +161,8 @@ class UserController extends Controller
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Delete User',
                 'status' => 'Success',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
                 'details' => 'Success delete user=' . $id->email,
 
             ]);   
