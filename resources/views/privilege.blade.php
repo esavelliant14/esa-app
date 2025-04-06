@@ -65,19 +65,23 @@
                                     @endcan
                                     @can('access-permission' , '13')
                                         @if($item->id == auth()->user()->id_privilege)
-                                       @elseif ($item->id == 1)
+                                        @elseif ($item->id == 1)
                                         @else
                                             <button class="d-inline btn btn-sm btn-info edit-privilege" id="edit-privilege-{{ $item->id_group }}" data-groupid ="{{ $item->id_group }}" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button>
                                         @endif
                                     @endcan
                                     @can('access-permission' , '7')
-                                    <form class="delete-form d-inline"  action="{{ route('privilege.delete',$item->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="button" class="btn btn-sm btn-danger delete-button">
-                                            <span class="mdi mdi-delete" ></span>
-                                        </button>
-                                    </form>
+                                        @if($item->id == auth()->user()->id_privilege)
+                                        @elseif ($item->id == 1)
+                                        @else
+                                            <form class="delete-form d-inline"  action="{{ route('privilege.delete',$item->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="button" class="btn btn-sm btn-danger delete-button">
+                                                    <span class="mdi mdi-delete" ></span>
+                                                </button>
+                                            </form>
+                                        @endif
                                     @endcan
                                 </td>
                             </tr>

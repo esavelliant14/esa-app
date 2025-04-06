@@ -72,7 +72,6 @@ class PrivilegeController extends Controller
             ->withInput();
         }else{
             $var_data_valid = $var_data->validated();
-//            dd($var_data_valid);
             $privilege = Privilege::create([
                 'name_privilege' => $var_data_valid['txt_name_privilege'],
                 'id_group' => $var_data_valid['txt_group'],
@@ -83,17 +82,34 @@ class PrivilegeController extends Controller
                         'id_permission' => $permission ,
                         'id_privilege' => $privilege->id,
                     ]);
+                $new_data = Permission::whereIn('id', $post_create_privilege->txt_permission)->get();
+                $result_new_data = [];
+                foreach ($new_data as $var_new_data) {
+                    $result_new_data[] =  $var_new_data->name_permission;
                 }
+                $final_new_data = implode(', ', $result_new_data);
+                }
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add Privilege',
+                    'status' => 'Success',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Success add new privilege=' . $var_data_valid['txt_name_privilege'] . ' with privilege=' . $final_new_data,
+    
+                ]); 
+            }else{
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add Privilege',
+                    'status' => 'Success',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Success add new privilege=' . $var_data_valid['txt_name_privilege'] . ' without privilege',
+    
+                ]); 
             }
-            Logging::create([
-                'action_by' => auth()->user()->email,
-                'category_action' => 'Add Privilege',
-                'status' => 'Success',
-                'ip_address' => request()->ip(),
-                'agent' => request()->header('User-Agent'),
-                'details' => 'Success add new privilege=' . $var_data_valid['txt_name_privilege'],
-
-            ]); 
+            
             return redirect('/privilege')->with('success', 'Create Privilege Successfully');
         };
     }
