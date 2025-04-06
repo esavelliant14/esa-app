@@ -372,7 +372,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
 });
-
 //END EDIT PRIVILEGE
+
+//START VIEW LOG
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.view-log');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const logactionby = this.dataset.logactionby;
+            const logcategory = this.dataset.logcategory;
+            const logipaddress = this.dataset.logipaddress;
+            const logstatus = this.dataset.logstatus;
+            const logagent = this.dataset.logagent;
+            const logdetails = this.dataset.logdetails;
+            const logcreatedat = this.dataset.logcreatedat;
+
+            document.getElementById('varLogActionBy').value = logactionby;
+            document.getElementById('varLogCategory').value = logcategory;
+            document.getElementById('varLogIpAddress').value = logipaddress;
+            document.getElementById('varLogStatus').value = logstatus;
+            document.getElementById('varLogAgent').value = logagent;
+            document.getElementById('varLogDetails').value = logdetails;
+            document.getElementById('varLogCreatedAt').value = logcreatedat;
+            
+        });
+    });
+});
+//END VIEW LOG
 
 

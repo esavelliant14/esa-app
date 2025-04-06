@@ -95,7 +95,7 @@ class PrivilegeController extends Controller
                     'status' => 'Success',
                     'ip_address' => request()->ip(),
                     'agent' => request()->header('User-Agent'),
-                    'details' => 'Success add new privilege=' . $var_data_valid['txt_name_privilege'] . ' with privilege=' . $final_new_data,
+                    'details' => 'Success add new privilege=' . $var_data_valid['txt_name_privilege'] . ' with permission=' . $final_new_data,
     
                 ]); 
             }else{
@@ -179,7 +179,7 @@ class PrivilegeController extends Controller
             'status' => 'Success',
             'ip_address' => request()->ip(),
             'agent' => request()->header('User-Agent'),
-            'details' => 'Success update privilege=' . $post_edit_privilege->txt_name_privilege . " from privilege before=" . $final_past_data . " CHANGE TO=" . $final_new_data,
+            'details' => 'Success update privilege=' . $post_edit_privilege->txt_name_privilege . " from permission before=" . $final_past_data . " CHANGE TO=" . $final_new_data,
         ]);
         return redirect('/privilege')->with('success', 'Update Privilege Successfully');
         

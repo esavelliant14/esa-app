@@ -32,9 +32,8 @@
                             <th>Category</th>
                             <th>IP Address</th>
                             <th>Status</th>
-                            <th>Agent</th>
-                            <th>Details</th>
                             <th>Created At</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     
@@ -48,9 +47,12 @@
                             <td>{{ $item->category_action }}</td>
                             <td>{{ $item->ip_address }}</td>
                             <td>{{ $item->status }}</td>
-                            <td>{{ $item->agent }}</td>
-                            <td>{{ $item->details }}</td>
                             <td>{{ $item->created_at }}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-light view-log" data-logcreatedat="{{ $item->created_at }}" data-logdetails="{{ $item->details }}" data-logagent="{{ $item->agent }}" data-logstatus="{{ $item->status }}" data-logipaddress="{{ $item->ip_address }}" data-logcategory="{{ $item->category_action }}" data-logactionby="{{ $item->action_by }}" data-bs-toggle="modal" data-bs-target="#ModalViewLog">
+                                    <span class="mdi mdi-eye" ></span>
+                                </button>
+                            </td>
                         </tr>
                         @endforeach
                         

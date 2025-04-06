@@ -301,7 +301,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editPrivilegeModalLabel">View Privilege</h5>
+                <h5 class="modal-title" id="viewPermissionPrivilegeModalLabel">View Privilege</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -469,9 +469,76 @@
 </div>
 <!-- END MODAL EDIT USER -->
 
+{{-- START MODAL VIEW LOG --}}
+<div class="modal fade" id="ModalViewLog" tabindex="-1" aria-labelledby="viewLogModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewLogModalLabel">View Log</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Action By</label>
+                                <input type="text" id="varLogActionBy" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <input type="text" id="varLogCategory" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">IP Address</label>
+                                <input type="text" id="varLogIpAddress" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <input type="text" id="varLogStatus" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Agent</label>
+                                <input type="text" id="varLogAgent" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Details</label>
+                                <textarea id="varLogDetails" class="form-control" required readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Created at</label>
+                                <input type="text" id="varLogCreatedAt" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+{{-- END MODAL VIEW LOG --}}
 <script>
 
 
     
-    </script>
+</script>
 
