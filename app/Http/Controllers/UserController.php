@@ -18,7 +18,7 @@ class UserController extends Controller
    
     public function index(){
 
-        if (!Gate::allows('access-permission' , '1')) {
+        if (!Gate::allows('access-permission' , '2')) {
             return redirect('/main');
         }
         if ( auth()->user()->id_group == 1 ){
@@ -99,6 +99,7 @@ class UserController extends Controller
             Logging::create([
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Create User',
+                'status' => 'Success',
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Creating user ' . $var_data_valid['txt_email'],

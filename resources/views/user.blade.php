@@ -40,6 +40,7 @@
                             <th>Email</th>
                             <th>Group</th>
                             <th>Privilege</th>
+                            <th>2FA Status</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -55,6 +56,9 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->group->name_group }}</td>
                             <td>{{ $item->privilege->name_privilege }}</td>
+                            <td>
+                                {{ ($item->two_factor_secret === null) ? 'Inactive' : 'Active' }}
+                            </td>
                             <td>
                                 {{ ($item->status === 1) ? 'Active' : 'Inactive'  }} 
                             </td>

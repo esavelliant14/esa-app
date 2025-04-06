@@ -111,8 +111,16 @@
                                         <li><a href="{{ url('sub-menu/') }}" key="t-login-2">Sub Menu</a></li>
                                     </ul>
                                 </li>
-                            @endcan
                             
+                                @can('access-permission' , '14')
+                                    <li>
+                                        <a href="{{ route('log.index') }}" class="waves-effect">
+                                            <i class="bx bx-archive"></i>
+                                            <span key="t-dashboards">Log</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            @endcan
 
                         </ul>
                     </div>

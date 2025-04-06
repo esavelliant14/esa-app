@@ -60,11 +60,15 @@
                                 <td>{{ $item->group->name_group }}</td>
                                 <td>
                                     @can('access-permission', '5')
-                                        <button type="button" class="btn btn-sm btn-light view-permission-privilege" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-id="{{ $item->id }}" data-bs-toggle="modal" data-bs-target="#ModalViewPermissionPrivilege"><span class="mdi mdi-eye" ></span>
+                                        <button type="button" class="btn btn-sm btn-light view-permission-privilege" data-groupid ="{{ $item->id_group }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-id="{{ $item->id }}" data-bs-toggle="modal" data-bs-target="#ModalViewPermissionPrivilege"><span class="mdi mdi-eye" ></span>
                                         </button>
                                     @endcan
                                     @can('access-permission' , '13')
-                                        <button class="d-inline btn btn-sm btn-info edit-privilege" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button>
+                                        @if($item->id == auth()->user()->id_privilege)
+                                       @elseif ($item->id == 1)
+                                        @else
+                                            <button class="d-inline btn btn-sm btn-info edit-privilege" id="edit-privilege-{{ $item->id_group }}" data-groupid ="{{ $item->id_group }}" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button>
+                                        @endif
                                     @endcan
                                     @can('access-permission' , '7')
                                     <form class="delete-form d-inline"  action="{{ route('privilege.delete',$item->id) }}" method="POST">

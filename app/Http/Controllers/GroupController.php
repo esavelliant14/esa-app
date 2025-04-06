@@ -13,7 +13,7 @@ class GroupController extends Controller
 {
     public function index(){
         
-        if (!Gate::allows('access-permission' , '1')) {
+        if (!Gate::allows('access-permission' , '8')) {
             return redirect('/main');
         }
         if ( auth()->user()->id_group == 1 ){

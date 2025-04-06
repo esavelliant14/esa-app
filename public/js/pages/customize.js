@@ -1,6 +1,5 @@
 
-//FOR ADD USER
-
+//START ADD USER
 $(document).ready(function () {
     function loadPrivilege(id) {
         $('#id_privilege_add_user').html('<option value="">Loading...</option>');
@@ -43,10 +42,9 @@ $(document).ready(function () {
         }
     });
 });
-// END FOR ADD USER
+//END ADD USER
 
-// FOR VIEW PERMISSION
-
+//START VIEW PERMISSION
 document.addEventListener('DOMContentLoaded', function() {
     // Event listener untuk tombol view dengan class 'view-permission-privilege'
     document.querySelectorAll('.view-permission-privilege').forEach(button => {
@@ -97,11 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+//END VIEW PERMISSION
 
 
-//END FOR VIEW PERMISSION
-
-// FOR EDIT USER
+//START EDIT USER
 $(document).ready(function () {
     // Fungsi untuk memproses perubahan pada #varGroupId
     function loadPrivileges(id) {
@@ -145,120 +142,6 @@ $(document).ready(function () {
     });
 });
 
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const selectGroupPrivilege = document.getElementById('id_group_privilege');
-    const selectCreateGroup = document.getElementById('filter_create_group');
-    const selectDeleteGroup = document.getElementById('filter_delete_group');
-    const selectViewGroup = document.getElementById('filter_view_group');
-    const selectAdministrator = document.getElementById('filter_administrator');
-    const selectViewUser = document.getElementById('filter_view_user');
-    const selectViewPrivilege = document.getElementById('filter_view_privilege');
-    const selectCreateUser = document.getElementById('filter_create_user');
-    const selectDeleteUser = document.getElementById('filter_delete_user');
-    const selectEditUser = document.getElementById('filter_edit_user');
-    const selectResetUser = document.getElementById('filter_reset_user');
-    const selectCreatePrivilege = document.getElementById('filter_create_privilege');
-    const selectDeletePrivilege = document.getElementById('filter_delete_privilege');
-
-    selectGroupPrivilege.addEventListener('change', function(){
-        if (this.value === "1") {
-            selectCreateGroup.disabled = false;  
-            selectDeleteGroup.disabled = false;  
-            selectViewGroup.disabled = false;
-        } else {
-            selectCreateGroup.disabled = true;  
-            selectDeleteGroup.disabled = true;  
-            selectViewGroup.disabled = true;
-        }
-    });
-    selectAdministrator.addEventListener('change', function() {
-        selectViewUser.disabled = !selectAdministrator.checked;
-        selectViewPrivilege.disabled = !selectAdministrator.checked;
-    });
-    selectViewUser.addEventListener('change', function(){
-        selectCreateUser.disabled = !selectViewUser.checked;
-        selectDeleteUser.disabled = !selectViewUser.checked;
-        selectEditUser.disabled = !selectViewUser.checked;
-        selectResetUser.disabled = !selectViewUser.checked;
-
-    });
-    selectViewPrivilege.addEventListener('change', function(){
-        selectCreatePrivilege.disabled = !selectViewPrivilege.checked;
-        selectDeletePrivilege.disabled = !selectViewPrivilege.checked;
-    });
-});
-
-
-
-//JS FOR EDIT PRIVILEGE
-document.addEventListener('DOMContentLoaded', function() {
-    const editButton = document.querySelectorAll('.edit-privilege');
-    editButton.forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.dataset.id;
-            const group = this.dataset.group
-            const privilege = this.dataset.privilege
-
-            document.getElementById('varPrivilegeId').value = id;
-            document.getElementById('varPrivilegeGroup').value = group;
-            document.getElementById('varPrivilegeName').value = privilege;
-            
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const selectGroupPrivilege = document.getElementById('id_group_privilege');
-    const selectCreateGroup = document.getElementById('filter_edit_create_group');
-    const selectDeleteGroup = document.getElementById('filter_edit_delete_group');
-    const selectViewGroup = document.getElementById('filter_edit_view_group');
-    const selectAdministrator = document.getElementById('filter_edit_administrator');
-    const selectViewUser = document.getElementById('filter_edit_view_user');
-    const selectViewPrivilege = document.getElementById('filter_edit_view_privilege');
-    const selectCreateUser = document.getElementById('filter_edit_create_user');
-    const selectDeleteUser = document.getElementById('filter_edit_delete_user');
-    const selectEditUser = document.getElementById('filter_edit_edit_user');
-    const selectResetUser = document.getElementById('filter_edit_reset_user');
-    const selectCreatePrivilege = document.getElementById('filter_edit_create_privilege');
-    const selectDeletePrivilege = document.getElementById('filter_edit_delete_privilege');
-    const selectEditPrivilege = document.getElementById('filter_edit_privilege');
-
-    selectGroupPrivilege.addEventListener('change', function(){
-        if (this.value === "1") {
-            selectCreateGroup.disabled = false;  
-            selectDeleteGroup.disabled = false;  
-            selectViewGroup.disabled = false;
-        } else {
-            selectCreateGroup.disabled = true;  
-            selectDeleteGroup.disabled = true;  
-            selectViewGroup.disabled = true;
-        }
-    });
-    selectAdministrator.addEventListener('change', function() {
-        selectViewUser.disabled = !selectAdministrator.checked;
-        selectViewPrivilege.disabled = !selectAdministrator.checked;
-    });
-    selectViewUser.addEventListener('change', function(){
-        selectCreateUser.disabled = !selectViewUser.checked;
-        selectDeleteUser.disabled = !selectViewUser.checked;
-        selectEditUser.disabled = !selectViewUser.checked;
-        selectResetUser.disabled = !selectViewUser.checked;
-
-    });
-    selectViewPrivilege.addEventListener('change', function(){
-        selectCreatePrivilege.disabled = !selectViewPrivilege.checked;
-        selectDeletePrivilege.disabled = !selectViewPrivilege.checked;
-        selectEditPrivilege.disabled = !selectViewPrivilege.checked;
-        
-    });
-});
-
-//END JS EDIT PRIVILEGE
-
-// JS FOR EDIT USER
 document.addEventListener('DOMContentLoaded', function() {
     const editButtons = document.querySelectorAll('.edit-user');
     editButtons.forEach(button => {
@@ -282,3 +165,214 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+//END EDIT USER
+
+
+
+//START COMBOBOX ADD PRIVILEGE
+document.addEventListener('DOMContentLoaded', function() {
+    const selectGroupPrivilege = document.getElementById('id_group_privilege');
+    const selectCreateGroup = document.getElementById('filter_create_group');
+    const selectDeleteGroup = document.getElementById('filter_delete_group');
+    const selectViewGroup = document.getElementById('filter_view_group');
+    const selectAdministrator = document.getElementById('filter_administrator');
+    const selectViewUser = document.getElementById('filter_view_user');
+    const selectViewPrivilege = document.getElementById('filter_view_privilege');
+    const selectCreateUser = document.getElementById('filter_create_user');
+    const selectDeleteUser = document.getElementById('filter_delete_user');
+    const selectEditUser = document.getElementById('filter_edit_user');
+    const selectResetUser = document.getElementById('filter_reset_user');
+    const selectCreatePrivilege = document.getElementById('filter_create_privilege');
+    const selectDeletePrivilege = document.getElementById('filter_delete_privilege');
+    const selectEditPrivilege = document.getElementById('filter_edit_privilege');
+    const selectViewLog = document.getElementById('filter_view_log');
+
+    
+    
+    
+    // Function to apply the state of enabled/disabled for various elements
+    function applyPrivileges() {
+        
+        if (selectGroupPrivilege.value === "1") { 
+
+            selectAdministrator.disabled = false;
+            selectViewLog.disabled = false;
+            selectViewUser.disabled = !selectAdministrator.checked;
+            selectViewPrivilege.disabled = !selectAdministrator.checked;
+            selectViewLog.disabled = !selectAdministrator.checked;
+            selectViewGroup.disabled = !selectAdministrator.checked;
+            
+        }else if(selectGroupPrivilege.value === "") {
+            selectAdministrator.disabled = true;
+            selectViewUser.disabled = true;
+            selectCreateUser.disabled = true;
+            selectDeleteUser.disabled = true;
+            selectEditUser.disabled = true;
+            selectResetUser.disabled = true;
+            selectViewPrivilege.disabled = true;
+            selectCreatePrivilege.disabled = true;
+            selectDeletePrivilege.disabled = true;
+            selectEditPrivilege.disabled = true;
+            selectViewGroup.disabled = true;
+            selectCreateGroup.disabled = true; 
+            selectDeleteGroup.disabled = true;
+            selectViewLog.disabled = true;
+        }else {
+            selectAdministrator.disabled = false;
+            selectViewUser.disabled = !selectAdministrator.checked;
+            selectViewPrivilege.disabled = !selectAdministrator.checked;
+            selectViewGroup.disabled = true;
+            selectCreateGroup.disabled = true; 
+            selectDeleteGroup.disabled = true;
+            selectViewLog.disabled = true;
+            
+        }
+    }
+
+    // Run the function when the page loads
+    applyPrivileges();
+
+    // Add event listeners for real-time updates
+    selectGroupPrivilege.addEventListener('change', applyPrivileges);
+    selectAdministrator.addEventListener('change', applyPrivileges);
+    
+    selectViewUser.addEventListener('change', function(){
+        selectCreateUser.disabled = !selectViewUser.checked;
+        selectDeleteUser.disabled = !selectViewUser.checked;
+        selectEditUser.disabled = !selectViewUser.checked;
+        selectResetUser.disabled = !selectViewUser.checked;
+
+    });
+    selectViewPrivilege.addEventListener('change', function(){
+        selectCreatePrivilege.disabled = !selectViewPrivilege.checked;
+        selectDeletePrivilege.disabled = !selectViewPrivilege.checked;
+        selectEditPrivilege.disabled = !selectViewPrivilege.checked;
+    });
+    selectViewGroup.addEventListener('change',function(){
+        selectCreateGroup.disabled = !selectViewGroup.checked;  
+        selectDeleteGroup.disabled = !selectViewGroup.checked;
+    });
+});
+//END COMBOBOX ADD PRIVILEGE
+
+
+
+//START EDIT PRIVILEGE
+document.addEventListener('DOMContentLoaded', function() {
+    const editButton = document.querySelectorAll('.edit-privilege');
+    editButton.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.dataset.id;
+            const group = this.dataset.group
+            const privilege = this.dataset.privilege
+            const selectGroupPrivilege = this.dataset.groupid;
+            document.getElementById('varPrivilegeId').value = id;
+            document.getElementById('varPrivilegeGroup').value = group;
+            document.getElementById('varPrivilegeName').value = privilege;
+            
+            if (selectGroupPrivilege == 1) { 
+                const selectCreateGroup = document.getElementById('filter_edit_create_group');
+                const selectDeleteGroup = document.getElementById('filter_edit_delete_group');
+                const selectViewGroup = document.getElementById('filter_edit_view_group');
+                const selectViewLog = document.getElementById('filter_edit_view_log');
+                const selectAdministrator = document.getElementById('filter_edit_administrator');
+                const selectViewUser = document.getElementById('filter_edit_view_user');
+                const selectViewPrivilege = document.getElementById('filter_edit_view_privilege');
+                const selectCreateUser = document.getElementById('filter_edit_create_user');
+                const selectDeleteUser = document.getElementById('filter_edit_delete_user');
+                const selectEditUser = document.getElementById('filter_edit_edit_user');
+                const selectResetUser = document.getElementById('filter_edit_reset_user');
+                const selectCreatePrivilege = document.getElementById('filter_edit_create_privilege');
+                const selectDeletePrivilege = document.getElementById('filter_edit_delete_privilege');
+                const selectEditPrivilege = document.getElementById('filter_edit_edit_privilege');
+                
+                //default value select on user
+                selectAdministrator.checked = false;
+                selectViewUser.checked = false;
+                selectCreateUser.checked = false
+                selectDeleteUser.checked = false
+                selectEditUser.checked = false
+                selectResetUser.checked = false
+
+                //default value select on privilege
+                selectViewPrivilege.checked = false
+                selectCreatePrivilege.checked = false
+                selectDeletePrivilege.checked = false
+                selectEditPrivilege.checked = false
+
+                //default value select on group and admin
+                selectCreateGroup.checked = false
+                selectDeleteGroup.checked = false
+                selectViewLog.checked = false
+                selectViewGroup.checked = false
+
+                selectAdministrator.addEventListener('change', function() {
+                    selectViewUser.disabled = !selectAdministrator.checked;
+                    selectViewPrivilege.disabled = !selectAdministrator.checked;
+                    selectViewLog.disabled = !selectAdministrator.checked;
+                    selectViewGroup.disabled= !selectAdministrator.checked;
+                });
+                selectViewUser.addEventListener('change', function(){
+                    selectCreateUser.disabled = !selectViewUser.checked;
+                    selectDeleteUser.disabled = !selectViewUser.checked;
+                    selectEditUser.disabled = !selectViewUser.checked;
+                    selectResetUser.disabled = !selectViewUser.checked;
+                });
+                selectViewPrivilege.addEventListener('change', function(){
+                    selectCreatePrivilege.disabled = !selectViewPrivilege.checked;
+                    selectDeletePrivilege.disabled = !selectViewPrivilege.checked;
+                    selectEditPrivilege.disabled = !selectViewPrivilege.checked;
+                });
+                selectViewGroup.addEventListener('change',function(){
+                    selectCreateGroup.disabled = !selectViewGroup.checked;  
+                    selectDeleteGroup.disabled = !selectViewGroup.checked;
+                });
+            }else if (selectGroupPrivilege != 1){
+                const selectCreateGroup = document.getElementById('filter_edit_create_group');
+                const selectDeleteGroup = document.getElementById('filter_edit_delete_group');
+                const selectViewGroup = document.getElementById('filter_edit_view_group');
+                const selectViewLog = document.getElementById('filter_edit_view_log');
+                const selectAdministrator = document.getElementById('filter_edit_administrator');
+                const selectViewUser = document.getElementById('filter_edit_view_user');
+                const selectViewPrivilege = document.getElementById('filter_edit_view_privilege');
+                const selectCreateUser = document.getElementById('filter_edit_create_user');
+                const selectDeleteUser = document.getElementById('filter_edit_delete_user');
+                const selectEditUser = document.getElementById('filter_edit_edit_user');
+                const selectResetUser = document.getElementById('filter_edit_reset_user');
+                const selectCreatePrivilege = document.getElementById('filter_edit_create_privilege');
+                const selectDeletePrivilege = document.getElementById('filter_edit_delete_privilege');
+                const selectEditPrivilege = document.getElementById('filter_edit_edit_privilege');
+                
+                selectAdministrator.addEventListener('change', function() {
+                    selectViewUser.disabled = !selectAdministrator.checked;
+                    selectViewPrivilege.disabled = !selectAdministrator.checked;
+                    selectViewGroup.disabled = true;
+                    selectCreateGroup.disabled = true; 
+                    selectDeleteGroup.disabled = true;
+                    selectViewLog.disabled = true;
+                });
+                selectViewUser.addEventListener('change', function(){
+                    selectCreateUser.disabled = !selectViewUser.checked;
+                    selectDeleteUser.disabled = !selectViewUser.checked;
+                    selectEditUser.disabled = !selectViewUser.checked;
+                    selectResetUser.disabled = !selectViewUser.checked;
+                });
+                selectViewPrivilege.addEventListener('change', function(){
+                    selectCreatePrivilege.disabled = !selectViewPrivilege.checked;
+                    selectDeletePrivilege.disabled = !selectViewPrivilege.checked;
+                    selectEditPrivilege.disabled = !selectViewPrivilege.checked;
+                    
+                });
+            }
+            
+
+            
+            
+        });
+    });
+    
+});
+
+//END EDIT PRIVILEGE
+
+

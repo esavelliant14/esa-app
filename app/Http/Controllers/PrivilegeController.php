@@ -8,6 +8,7 @@ use App\Models\Privilege;
 use App\Models\Group;
 use App\Models\User;
 use App\Models\PrivilegePermission;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class PrivilegeController extends Controller
 {
     public function index(){
         
-        if (!Gate::allows('access-permission' , '1')) {
+        if (!Gate::allows('access-permission' , '5')) {
             return redirect('/main');
         }
         if ( auth()->user()->id_group == 1 ){
@@ -103,7 +104,8 @@ class PrivilegeController extends Controller
         $check_user = User::where('id_privilege' , $id)->count();
         //dd($test);
         if($check_user == "0"){
-            Privilege::destroy('id' , $id);    
+            Privilege::destroy('id' , $id);  
+            PrivilegePermission::where('id_privilege', $id)->delete();   
             Logging::create([
                 'action_by' => auth()->user()->email,
                 'category_action' => 'Delete Privilege',
@@ -129,12 +131,31 @@ class PrivilegeController extends Controller
 
     public function update(Request $post_edit_privilege)
     {
+        //get past data
+        $past_data = PrivilegePermission::where('id_privilege', $post_edit_privilege->txt_id)
+        ->with('permission') // Memuat relasi permission
+        ->get();
+        $result_past_data = [];
+        
+        foreach ($past_data as $var_past_data){
+            $result_past_data[] =  $var_past_data->permission->name_permission;
+        }
+        $final_past_data = implode(', ', $result_past_data);
+
+        //get new data
+        $new_data = Permission::whereIn('id', $post_edit_privilege->txt_permission)->get();
+        $result_new_data = [];
+        foreach ($new_data as $var_new_data) {
+            $result_new_data[] =  $var_new_data->name_permission;
+        }
+        $final_new_data = implode(', ', $result_new_data);
+        
         PrivilegePermission::where('id_privilege', $post_edit_privilege->txt_id)->delete(); 
         foreach ($post_edit_privilege->txt_permission as $permission) {
             PrivilegePermission::create([
                 'id_permission' => $permission ,
                 'id_privilege' => $post_edit_privilege->txt_id,
-            ]);
+            ]);  
         }
         Logging::create([
             'action_by' => auth()->user()->email,
@@ -142,7 +163,7 @@ class PrivilegeController extends Controller
             'status' => 'Success',
             'ip_address' => request()->ip(),
             'agent' => request()->header('User-Agent'),
-            'details' => 'Success update privilege=' . $post_edit_privilege->txt_name_privilege,
+            'details' => 'Success update privilege=' . $post_edit_privilege->txt_name_privilege . " from privilege before=" . $final_past_data . " CHANGE TO=" . $final_new_data,
         ]);
         return redirect('/privilege')->with('success', 'Update Privilege Successfully');
         

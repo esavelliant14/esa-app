@@ -210,10 +210,11 @@
                                 <input type="checkbox" id="filter_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
                                 <input type="checkbox" id="filter_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
                                 <input type="checkbox" id="filter_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
-                                <input type="checkbox" id="filter_edit_privilege" name="txt_permission[]" value="13" class="" disabled/> Delete Privilege<br>
+                                <input type="checkbox" id="filter_edit_privilege" name="txt_permission[]" value="13" class="" disabled/> Edit Privilege<br>
                                 <input type="checkbox" id="filter_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
                                 <input type="checkbox" id="filter_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
                                 <input type="checkbox" id="filter_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
+                                <input type="checkbox" id="filter_view_log" name="txt_permission[]" value="14" class="" disabled/> View Log<br>
                             </div>
 
                         </div>
@@ -235,7 +236,7 @@
 <!-- END MODAL ADD PRIVILEGE -->
 
 
-<!-- START MODAL EDIT PRIVILEGE -->
+<!-- START MODAL EDIT PRIVILEGE GROUP ADMIN-->
 <div class="modal fade" id="ModalEditPrivilege" tabindex="-1" aria-labelledby="editPrivilegeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -255,7 +256,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Group</label>
-                            <input class="form-control" type="text" name="txt_group" id="varPrivilegeGroup" required readonly>
+                            <input class="form-control" type="text" name="txt_group" id="varPrivilegeGroup" required>
                             <div class="my-3">
                                 <label class="form-label">Rule Permission</label><br>
                                 <input type="checkbox" id="filter_edit_administrator" name="txt_permission[]" value="1" class="" /> Administrator Menu<br>
@@ -267,9 +268,11 @@
                                 <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
                                 <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
                                 <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
+                                <input type="checkbox" id="filter_edit_edit_privilege" name="txt_permission[]" value="13" class="" disabled/> Edit Privilege<br>
                                 <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
                                 <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
                                 <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
+                                <input type="checkbox" id="filter_edit_view_log" name="txt_permission[]" value="14" class="" disabled/> View Log<br>
                             </div>
 
                         </div>
@@ -289,7 +292,9 @@
     </div>
     <!-- end modal-dialog -->
 </div>
-<!-- END MODAL EDIT PRIVILEGE -->
+<!-- END MODAL EDIT PRIVILEGE GROUP ADMIN -->
+
+
 
 {{-- MODAL VIEW PERMISSION PRIVILEGE --}}
 <div class="modal fade" id="ModalViewPermissionPrivilege" tabindex="-1" aria-labelledby="viewPermissionPrivilegeModalLabel" aria-hidden="true">
@@ -322,9 +327,11 @@
                                 <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
                                 <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
                                 <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
+                                <input type="checkbox" id="filter_edit_edit_privilege" name="txt_permission[]" value="7" class="" disabled/> Edit Privilege<br>
                                 <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
                                 <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
                                 <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
+                                <input type="checkbox" id="filter_view_log" name="txt_permission[]" value="14" class="" disabled/> View Log<br>
                             </div>
 
                         </div>

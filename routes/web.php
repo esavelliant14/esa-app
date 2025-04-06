@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LoggingController;
 use App\Http\Controllers\PrivilegeController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
@@ -42,14 +43,15 @@ Route::get('/privilege/combo-privilege/{id}', [PrivilegeController::class, 'comb
 Route::get('/privilege/view-permission-privilege/{id}', [PrivilegeController::class, 'viewPermissionPrivilege'])->middleware(RedirectIfNotAuthenticated::class)->name('PermissionPrivilege.view');
 Route::post('/privilege/update/',[PrivilegeController::class, 'update'])->middleware(RedirectIfNotAuthenticated::class)->name('privilege.update');
 
-
+//LOG
+Route::get('/log', [LoggingController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class)->name('log.index');
 //NAS
 Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.attribute');
 
 // TESTING
-Route::get('/test', function(){
-    dd(request()->header('User-Agent'));
-});
+// Route::get('/test', function(){
+//     dd(auth()->user());
+// });
 
 //WEB KOSONG
 // Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
