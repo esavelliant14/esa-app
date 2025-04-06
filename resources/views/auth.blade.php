@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
     <script src="{{ url('/public/js/pages/sweet-alert.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     @include('_partials.head')
 
     <body>
@@ -71,7 +72,7 @@
                                     -->
                                 </div>
                                 <div class="p-2">
-                                    <form class="form-horizontal" action="{{ route('login') }}" method="post">
+                                    <form class="form-horizontal" action="{{ route('login') }}" method="post" id="login-form">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
@@ -90,16 +91,12 @@
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="remember-check">
-                                            <label class="form-check-label" for="remember-check">
-                                                Remember me
-                                            </label>
-                                        </div>
                                         
                                         <div class="mt-1 d-grid">
-                                            <button class="btn waves-effect waves-light text-white" type="submit" style="background-color:#19daa0;">Login</button>
+                                            <button class="btn waves-effect waves-light text-white g-recaptcha" 
+                                                data-sitekey="{{ $g_key }}" data-callback='onSubmit' data-action='submit' 
+                                                type="submit" style="background-color:#19daa0;">Login
+                                            </button>
                                         </div>
                                         <!--
                                         <div class="mt-4 text-center">
@@ -151,5 +148,10 @@
         
         <!-- App js -->
         <script src="public/js/app.js"></script>
+        <script>
+            function onSubmit(token) {
+              document.getElementById("login-form").submit();
+            }
+          </script>
     </body>
 </html>

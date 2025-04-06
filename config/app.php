@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'gkey' => env('GOOGLE_RECAPTCHA_KEY'),
+
 ];

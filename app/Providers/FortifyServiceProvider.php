@@ -85,7 +85,8 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::loginView(function(){
             return view('auth',[
-                'title_url' => 'LOGIN | ESA.NET'
+                'title_url' => 'LOGIN | ESA.NET',
+                'g_key' => config('app.gkey'),
             ]);
         });
 
