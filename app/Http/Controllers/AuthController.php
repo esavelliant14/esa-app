@@ -10,46 +10,46 @@ use Illuminate\Http\RedirectResponse;
 class AuthController extends Controller
 {
 
-    public function authenticate(Request $post_login) {
+    // public function authenticate(Request $post_login) {
         
-        $post_login->validate([
-            'txt_email' => 'required|email:dns',
-            'txt_password' => 'required',
-        ],[
-            'txt_email.email' => 'Wrong format email',
-        ]);
+    //     $post_login->validate([
+    //         'txt_email' => 'required|email:dns',
+    //         'txt_password' => 'required',
+    //     ],[
+    //         'txt_email.email' => 'Wrong format email',
+    //     ]);
 
         
-        $var_data = [
-            'email' => $post_login->txt_email,
-            'password' => $post_login->txt_password,
-        ];
+    //     $var_data = [
+    //         'email' => $post_login->txt_email,
+    //         'password' => $post_login->txt_password,
+    //     ];
 
-        if(Auth::attempt($var_data)) {
-            $user = Auth::user();
+    //     if(Auth::attempt($var_data)) {
+    //         $user = Auth::user();
 
-            if($user->status == 1) {
-                $post_login->session()->regenerate();
-                return redirect()->intended('main/');
-            }else{
-                Auth::logout();
-                return back()->with('failed','Wrong Username/Password');
-            }
-        }
-        return back()->with('failed','Wrong Username/Password');
+    //         if($user->status == 1) {
+    //             $post_login->session()->regenerate();
+    //             return redirect()->intended('main/');
+    //         }else{
+    //             Auth::logout();
+    //             return back()->with('failed','Wrong Username/Password');
+    //         }
+    //     }
+    //     return back()->with('failed','Wrong Username/Password');
         
-    }
+    // }
 
-    public function logout(Request $post_logout): RedirectResponse
-    {
-        Auth::logout();
+    // public function logout(Request $post_logout): RedirectResponse
+    // {
+    //     Auth::logout();
     
-        $post_logout->session()->invalidate();
+    //     $post_logout->session()->invalidate();
     
-        $post_logout->session()->regenerateToken();
+    //     $post_logout->session()->regenerateToken();
     
-        return redirect('main');
-    }
+    //     return redirect('main');
+    // }
 
     public function profile(){
         return view('profile',[

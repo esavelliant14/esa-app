@@ -32,7 +32,27 @@
                                         <script>
                                             Swal.fire({
                                                 title:"Login Failed!",
-                                                html:"{{ session('failed') }}",
+                                                html:"",
+                                                icon: "error",
+                                                timer:2e3,
+                                                confirmButtonColor:"#34c38f",
+                                                customClass: {
+                                                    confirmButton: "rounded-pill",
+                                                },
+                                                onBeforeOpen:function(){
+                                                    Swal.showLoading(),t=setInterval(function(){
+                                                        Swal.getContent().querySelector("strong").textContent=Swal.getTimerLeft()
+                                                    },
+                                                    100)
+                                                },
+                                                onClose:function(){clearInterval(t)}
+                                            })
+                                        </script>
+                                    @elseif ($errors->first('g-recaptcha-response') == 'Gagal')
+                                        <script>
+                                            Swal.fire({
+                                                title:"Login Failed!",
+                                                html:"",
                                                 icon: "error",
                                                 timer:2e3,
                                                 confirmButtonColor:"#34c38f",
@@ -72,25 +92,24 @@
                                     -->
                                 </div>
                                 <div class="p-2">
+                                    
                                     <form class="form-horizontal" action="{{ route('login') }}" method="post" id="login-form">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control @error('txt_email') is-invalid @enderror" id="email" name="email" placeholder="Enter email" required>
-                                            <div class="invalid-feedback">
-                                                @error('email')
-                                                    {{ $message }}
-                                                @enderror
-                                            </div>
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter email" required>
+                                            
                                         </div>
                 
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon" required>
+                                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon" required>
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                                
                                             </div>
                                         </div>
+                                       
                                         
                                         <div class="mt-1 d-grid">
                                             <button class="btn waves-effect waves-light text-white g-recaptcha" 

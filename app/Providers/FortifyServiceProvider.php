@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Models\Logging;
+use App\Rules\ReCaptcha;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -39,39 +40,6 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
-
-       
-       Fortify::authenticateUsing(function (Request $post_login) {
-        $user = User::where('email', $post_login->email)->first();
-        
-        if ($user && Hash::check($post_login->password, $user->password)) {
-            if($user->status == 1){
-                return $user;
-            }else{
-                Logging::create([
-                    'action_by' => $post_login->email,
-                    'category_action' => 'Login',
-                    'status' => 'Failed',
-                    'ip_address' => request()->ip(),
-                    'agent' => request()->header('User-Agent'),
-                    'details' => 'Failed login user=' . $post_login->email . ' because user is inactive',
-    
-                ]);
-                Session::flash('error');
-            }
-        }else{
-            Logging::create([
-                'action_by' => $post_login->email,
-                'category_action' => 'Login',
-                'status' => 'Failed',
-                'ip_address' => request()->ip(),
-                'agent' => request()->header('User-Agent'),
-                'details' => 'Failed login user=' . $post_login->email . ' because wrong credentials',
-
-            ]);
-            Session::flash('error');
-        }
-    });
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
@@ -100,6 +68,46 @@ class FortifyServiceProvider extends ServiceProvider
         // Fortify::requestPasswordResetLinkView(function(){
         //     return view('test');
         // });
+        
+       
+       Fortify::authenticateUsing(function (Request $post_login) {
+        $user = User::where('email', $post_login->email)->first();
+        
+        // $post_login->validate([
+        //     // 'email' => 'required|email:dns',
+        //     // 'password' => 'required',
+        //     'g-recaptcha-response' => [new ReCaptcha()],
+        // ]);
+        if ($user && Hash::check($post_login->password, $user->password)) {
+            if($user->status == 1){
+                return $user;
+            }else{
+                Logging::create([
+                    'action_by' => $post_login->email,
+                    'category_action' => 'Login',
+                    'status' => 'Failed',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Failed login user=' . $post_login->email . ' because user is inactive',
+    
+                ]);
+                Session::flash('error');
+            }
+        
+        }else{
+            Logging::create([
+                'action_by' => $post_login->email,
+                'category_action' => 'Login',
+                'status' => 'Failed',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
+                'details' => 'Failed login user=' . $post_login->email . ' because wrong credentials',
+
+            ]);
+            Session::flash('error');
+        }
+    });
+
         
     }
 }

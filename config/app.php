@@ -124,5 +124,6 @@ return [
     ],
 
     'gkey' => env('GOOGLE_RECAPTCHA_KEY'),
+    'gsec' => env('GOOGLE_RECAPTCHA_SECRET'),
 
 ];
