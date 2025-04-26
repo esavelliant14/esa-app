@@ -23,52 +23,39 @@
                                     <span key="t-dashboards">NAS</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('nas/list-nas') }}" key="t-tui-calendar">NAS Routers</a></li>
-                                    <li><a href="{{ route('nas.attribute') }}" key="t-full-calendar">Attributes</a></li>
-                                    <li><a href="{{ url('nas/user') }}" key="t-full-calendar">Users</a></li>
+                                    <li><a href="{{ route('nas.lists') }}" key="t-tui-calendar">NAS Routers</a></li>
+                                    <li><a href="{{ route('nas.attributes') }}" key="t-full-calendar">Attributes</a></li>
+                                    <li><a href="{{ route('nas.users') }}" key="t-full-calendar">Users</a></li>
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow">Profiles</a>
                                         <ul class="sub-menu" aria-expanded="true">
-                                            <li><a href="{{ url('profiles/bandwidth') }}">Profile Bandwidth</a></li>
-                                            <li><a href="{{ url('profiles/ppp') }}">Profile PPP</a></li>
+                                            <li><a href="{{ route('nas.bw') }}">Profile Bandwidth</a></li>
+                                            <li><a href="{{ route('nas.ppp') }}">Profile PPP</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="mdi mdi-router"></i>
-                                    <span key="t-devices">DEVICES</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('devices/list-devices') }}" key="t-list-devices">List Devices</a></li>
-                                    <li><a href="{{ url('devices/category-devices') }}" key="t-cat-devices">Category Devices</a></li>
-                                    <li><a href="{{ url('devices/type-devices') }}" key="t-type-devices">Type Devices</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="fas fa-route"></i>
+                                    <i class="bx bx-globe"></i>
                                     <span key="t-backhaul">SERVICES</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('services/list-services') }}" key="t-list-services">List Services</a></li>
-                                    <li><a href="{{ url('services/category-services') }}" key="t-cat-services">Category Services</a></li>
-                                    <li><a href="{{ url('services/provider-services') }}" key="t-prov-service">Provider Services</a></li>
+                                    <li><a href="{{ route('dns.lists') }}" key="t-list-services">DNS Management</a></li>
+                                    <li>
+                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                            <span key="t-ddns">DDNS</span>
+                                        </a>
+                                        <ul class="sub-menu" aria-expanded="false">
+                                            <li><a href="{{ route('ddns.lists') }}" key="t-list-router">List Routers</a></li>
+                                            <li><a href="{{ route('ddns.users') }}" key="t-ddns">DDNS Users</a></li>
+                                            <li><a href="{{ route('ddns.forwarding') }}" key="t-forwarding">Forwarding Ports</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
 
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-globe"></i>
-                                    <span key="t-ddns">DDNS</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ url('ddns/list-router') }}" key="t-list-router">List Routers</a></li>
-                                    <li><a href="{{ url('ddns/user') }}" key="t-ddns">DDNS Users</a></li>
-                                    <li><a href="{{ url('ddns/forwarding-port') }}" key="t-forwarding">Forwarding Ports</a></li>
-                                </ul>
-                            </li>
+                            
 
                             <li class="menu-title" key="t-task">TASK</li>
                             <li>

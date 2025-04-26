@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DnsController;
 use App\Http\Controllers\NasController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DdnsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
@@ -46,7 +48,20 @@ Route::post('/privilege/update/',[PrivilegeController::class, 'update'])->middle
 //LOG
 Route::get('/log', [LoggingController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class)->name('log.index');
 //NAS
-Route::get('/nas/attribute', [NasController::class , 'attribute'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.attribute');
+Route::get('/nas/attributes', [NasController::class , 'attributes'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.attributes');
+Route::get('/nas/lists', [NasController::class , 'lists'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.lists');
+Route::get('/nas/users', [NasController::class , 'users'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.users');
+Route::get('/nas/profile-bandwidth', [NasController::class , 'profile_bandwidth'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.bw');
+Route::get('/nas/profile-ppp', [NasController::class , 'profile_ppp'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.ppp');
+
+//SERVICE DNS
+Route::get('/services/dns-management', [DnsController::class , 'lists'])->middleware(RedirectIfNotAuthenticated::class)->name('dns.lists');
+
+//SERVICE DDNS
+Route::get('/services/ddns-lists', [DdnsController::class , 'lists'])->middleware(RedirectIfNotAuthenticated::class)->name('ddns.lists');
+Route::get('/services/ddns-users', [DdnsController::class , 'users'])->middleware(RedirectIfNotAuthenticated::class)->name('ddns.users');
+Route::get('/services/ddns-forwarding', [DdnsController::class , 'forwarding'])->middleware(RedirectIfNotAuthenticated::class)->name('ddns.forwarding');
+
 
 // TESTING
 // Route::get('/test', function(){
