@@ -14,7 +14,7 @@ class GroupController extends Controller
     public function index(){
         
         if (!Gate::allows('access-permission' , '8')) {
-            return redirect('/main');
+            return redirect('/main')->with('access_denied', true);
         }
         if ( auth()->user()->id_group == 1 ){
             $show_group = Group::all();

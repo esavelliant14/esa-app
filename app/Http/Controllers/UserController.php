@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index(){
 
         if (!Gate::allows('access-permission' , '2')) {
-            return redirect('/main');
+            return redirect('/main')->with('access_denied', true);
         }
         if ( auth()->user()->id_group == 1 ){
             $show_privilege = Privilege::all();

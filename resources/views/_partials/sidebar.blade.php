@@ -17,24 +17,34 @@
                             </li>
 
                             <li class="menu-title" key="t-radius">MENU</li>
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-data"></i>
-                                    <span key="t-dashboards">NAS</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('nas.lists') }}" key="t-tui-calendar">NAS Routers</a></li>
-                                    <li><a href="{{ route('nas.attributes') }}" key="t-full-calendar">Attributes</a></li>
-                                    <li><a href="{{ route('nas.users') }}" key="t-full-calendar">Users</a></li>
-                                    <li>
-                                        <a href="javascript: void(0);" class="has-arrow">Profiles</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                            <li><a href="{{ route('nas.bw') }}">Profile Bandwidth</a></li>
-                                            <li><a href="{{ route('nas.ppp') }}">Profile PPP</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                            @can('access-permission' , '1')
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="bx bx-data"></i>
+                                        <span key="t-dashboards">NAS</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        @can('access-permission' , '51')
+                                            <li><a href="{{ route('nas.lists') }}" key="t-tui-calendar">NAS Routers</a></li>
+                                        @endcan
+                                        @can('access-permission' , '53')
+                                            <li><a href="{{ route('nas.attributes') }}" key="t-full-calendar">Attributes</a></li>
+                                        @endcan
+                                        @can('access-permission' , '55')
+                                            <li><a href="{{ route('nas.users') }}" key="t-full-calendar">Users</a></li>
+                                        @endcan
+                                        @can('access-permission' , '58')
+                                            <li>
+                                                <a href="javascript: void(0);" class="has-arrow">Profiles</a>
+                                                <ul class="sub-menu" aria-expanded="true">
+                                                    <li><a href="{{ route('nas.bw') }}">Profile Bandwidth</a></li>
+                                                    <li><a href="{{ route('nas.ppp') }}">Profile PPP</a></li>
+                                                </ul>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </li>
+                            @endcan
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="bx bx-globe"></i>

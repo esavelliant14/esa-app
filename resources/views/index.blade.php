@@ -3,6 +3,23 @@
 
     <div class="row">
         <div class="col-xl-4">
+            @if(session('access_denied'))
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Access Denied',
+                            text: 'You do not have permission to access this page.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor:"#34c38f",
+                            customClass: {
+                                confirmButton: "rounded-pill",
+                            }
+                            
+                        });
+                    });
+                </script>
+            @endif
             <div class="card overflow-hidden">
                 <div class="bg-primary-subtle">
                     <div class="row">
