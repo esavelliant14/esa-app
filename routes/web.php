@@ -47,6 +47,7 @@ Route::post('/privilege/update/',[PrivilegeController::class, 'update'])->middle
 
 //LOG
 Route::get('/log', [LoggingController::class , 'index'])->middleware(RedirectIfNotAuthenticated::class)->name('log.index');
+
 //NAS
 Route::get('/nas/attributes', [NasController::class , 'attributes'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.attributes');
 Route::get('/nas/lists', [NasController::class , 'lists'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.lists');

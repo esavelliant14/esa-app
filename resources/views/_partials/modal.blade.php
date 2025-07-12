@@ -204,7 +204,7 @@
                             <!-- Rule Permission Section (Left Column) -->
                             <div class="col-md-6">
                                 <div class="my-3">
-                                    <label class="form-label">Rule Permission</label><br>
+                                    <label class="form-label">User Permission</label><br>
                                     <input type="checkbox" id="filter_administrator" name="txt_permission[]" value="1" class="" /> Administrator Menu<br>
                                     <input type="checkbox" id="filter_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
                                     <input type="checkbox" id="filter_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
@@ -226,12 +226,16 @@
                             <div class="col-md-6">
                                 <div class="my-3">
                                     <label class="form-label">Menu Permission</label><br>
-                                    <input type="checkbox" id="filter_menu_viewnas" name="txt_menu_permission[]" value="50" class="" /> View Nas Menu<br>
-                                    <input type="checkbox" id="filter_menu_nasrouter" name="txt_menu_permission[]" value="51" class="" /> Nas Router<br>
-                                    <input type="checkbox" id="filter_menu_nasattribute" name="txt_menu_permission[]" value="52" class="" /> Attribute<br>
-                                    <input type="checkbox" id="filter_menu_nasusers" name="txt_menu_permission[]" value="53" class="" /> Users<br>
-                                    <input type="checkbox" id="filter_menu_nasprofiles" name="txt_menu_permission[]" value="54" class="" /> Profiles<br>
-                                    <input type="checkbox" id="filter_menu_listdevice" name="txt_menu_permission[]" value="54" class="" /> Devices<br>
+                                    <input type="checkbox" id="filter_menu_viewnas" name="txt_permission[]" value="50" class="" disabled/> View Nas Menu<br>
+                                    <input type="checkbox" id="filter_menu_nasrouter" name="txt_permission[]" value="51" class="" disabled/> View Nas Router<br>
+                                    <input type="checkbox" id="filter_menu_full_nasrouter" name="txt_permission[]" value="52" class="" disabled/> Full Access Nas Router<br>
+                                    <input type="checkbox" id="filter_menu_nasattribute" name="txt_permission[]" value="53" class="" disabled/> View Nas Attribute<br>
+                                    <input type="checkbox" id="filter_menu_full_nasattribute" name="txt_permission[]" value="54" class="" disabled/> Full Access Nas Attribute<br>
+                                    <input type="checkbox" id="filter_menu_nasusers" name="txt_permission[]" value="55" class="" disabled/> View Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_full_nasusers" name="txt_permission[]" value="56" class="" disabled/> Full Access Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_enabledisable_nasusers" name="txt_permission[]" value="57" class="" disabled/> Disable Enable Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_nasprofiles" name="txt_permission[]" value="58" class="" disabled/> View Nas Profiles<br>
+                                    <input type="checkbox" id="filter_menu_full_nasprofiles" name="txt_permission[]" value="59" class="" disabled/> Full Access Nas Profiles<br>
                                 </div>
                             </div>
                         </div>
@@ -274,23 +278,42 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Group</label>
-                            <input class="form-control" type="text" name="txt_group" id="varPrivilegeGroup" required>
-                            <div class="my-3">
-                                <label class="form-label">Rule Permission</label><br>
-                                <input type="checkbox" id="filter_edit_administrator" name="txt_permission[]" value="1" class="" /> Administrator Menu<br>
-                                <input type="checkbox" id="filter_edit_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
-                                <input type="checkbox" id="filter_edit_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
-                                <input type="checkbox" id="filter_edit_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
-                                <input type="checkbox" id="filter_edit_edit_user" name="txt_permission[]" value="11" class="" disabled/> Edit User<br>
-                                <input type="checkbox" id="filter_edit_reset_user" name="txt_permission[]" value="12" class="" disabled/> Reset User<br>
-                                <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
-                                <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
-                                <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
-                                <input type="checkbox" id="filter_edit_edit_privilege" name="txt_permission[]" value="13" class="" disabled/> Edit Privilege<br>
-                                <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
-                                <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
-                                <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
-                                <input type="checkbox" id="filter_edit_view_log" name="txt_permission[]" value="14" class="" disabled/> View Log<br>
+                            <input class="form-control" type="text" name="txt_group" id="varPrivilegeGroup" required readonly>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">   
+                                <div class="my-3">
+                                    <label class="form-label">User Permission</label><br>
+                                    <input type="checkbox" id="filter_edit_administrator" name="txt_permission[]" value="1" class="" /> Administrator Menu<br>
+                                    <input type="checkbox" id="filter_edit_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
+                                    <input type="checkbox" id="filter_edit_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
+                                    <input type="checkbox" id="filter_edit_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
+                                    <input type="checkbox" id="filter_edit_edit_user" name="txt_permission[]" value="11" class="" disabled/> Edit User<br>
+                                    <input type="checkbox" id="filter_edit_reset_user" name="txt_permission[]" value="12" class="" disabled/> Reset User<br>
+                                    <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
+                                    <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
+                                    <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
+                                    <input type="checkbox" id="filter_edit_edit_privilege" name="txt_permission[]" value="13" class="" disabled/> Edit Privilege<br>
+                                    <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
+                                    <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
+                                    <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
+                                    <input type="checkbox" id="filter_edit_view_log" name="txt_permission[]" value="14" class="" disabled/> View Log<br>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-3">
+                                    <label class="form-label">Menu Permission</label><br>
+                                    <input type="checkbox" id="filter_menu_viewnas" name="txt_permission[]" value="50" class="" disabled/> View Nas Menu<br>
+                                    <input type="checkbox" id="filter_menu_nasrouter" name="txt_permission[]" value="51" class="" disabled/> View Nas Router<br>
+                                    <input type="checkbox" id="filter_menu_full_nasrouter" name="txt_permission[]" value="52" class="" disabled/> Full Access Nas Router<br>
+                                    <input type="checkbox" id="filter_menu_nasattribute" name="txt_permission[]" value="53" class="" disabled/> View Nas Attribute<br>
+                                    <input type="checkbox" id="filter_menu_full_nasattribute" name="txt_permission[]" value="54" class="" disabled/> Full Access Nas Attribute<br>
+                                    <input type="checkbox" id="filter_menu_nasusers" name="txt_permission[]" value="55" class="" disabled/> View Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_full_nasusers" name="txt_permission[]" value="56" class="" disabled/> Full Access Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_enabledisable_nasusers" name="txt_permission[]" value="57" class="" disabled/> Disable Enable Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_nasprofiles" name="txt_permission[]" value="58" class="" disabled/> View Nas Profiles<br>
+                                    <input type="checkbox" id="filter_menu_full_nasprofiles" name="txt_permission[]" value="59" class="" disabled/> Full Access Nas Profiles<br>
+                                </div>
                             </div>
 
                         </div>
@@ -334,22 +357,41 @@
                         <div class="mb-3">
                             <label class="form-label">Group</label>
                             <input class="form-control" type="text" name="txt_group" id="varPermissionPrivilegeGroup" required readonly>
-                            <div class="my-3">
-                                <label class="form-label">Rule Permission</label><br>
-                                <input type="checkbox" id="filter_edit_administrator" name="txt_permission[]" value="1" class="" disabled/> Administrator Menu<br>
-                                <input type="checkbox" id="filter_edit_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
-                                <input type="checkbox" id="filter_edit_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
-                                <input type="checkbox" id="filter_edit_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
-                                <input type="checkbox" id="filter_edit_edit_user" name="txt_permission[]" value="11" class="" disabled/> Edit User<br>
-                                <input type="checkbox" id="filter_edit_reset_user" name="txt_permission[]" value="12" class="" disabled/> Reset User<br>
-                                <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
-                                <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
-                                <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
-                                <input type="checkbox" id="filter_edit_edit_privilege" name="txt_permission[]" value="7" class="" disabled/> Edit Privilege<br>
-                                <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
-                                <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
-                                <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
-                                <input type="checkbox" id="filter_view_log" name="txt_permission[]" value="14" class="" disabled/> View Log<br>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="my-3">
+                                    <label class="form-label">User Permission</label><br>
+                                    <input type="checkbox" id="filter_edit_administrator" name="txt_permission[]" value="1" class="" disabled/> Administrator Menu<br>
+                                    <input type="checkbox" id="filter_edit_view_user" name="txt_permission[]" value="2" class="" disabled/> View User Menu<br>
+                                    <input type="checkbox" id="filter_edit_create_user" name="txt_permission[]" value="3" class="" disabled/> Create User<br>
+                                    <input type="checkbox" id="filter_edit_delete_user" name="txt_permission[]" value="4" class="" disabled/> Delete User<br>
+                                    <input type="checkbox" id="filter_edit_edit_user" name="txt_permission[]" value="11" class="" disabled/> Edit User<br>
+                                    <input type="checkbox" id="filter_edit_reset_user" name="txt_permission[]" value="12" class="" disabled/> Reset User<br>
+                                    <input type="checkbox" id="filter_edit_view_privilege" name="txt_permission[]" value="5" class="" disabled/> View Privilege Menu<br>
+                                    <input type="checkbox" id="filter_edit_create_privilege" name="txt_permission[]" value="6" class="" disabled/> Create Privilege<br>
+                                    <input type="checkbox" id="filter_edit_delete_privilege" name="txt_permission[]" value="7" class="" disabled/> Delete Privilege<br>
+                                    <input type="checkbox" id="filter_edit_edit_privilege" name="txt_permission[]" value="7" class="" disabled/> Edit Privilege<br>
+                                    <input type="checkbox" id="filter_edit_view_group" name="txt_permission[]" value="8" class="" disabled/> View Group Menu<br>
+                                    <input type="checkbox" id="filter_edit_create_group" name="txt_permission[]" value="9" class="" disabled/> Create Group<br>
+                                    <input type="checkbox" id="filter_edit_delete_group" name="txt_permission[]" value="10" class="" disabled/> Delete Group<br>
+                                    <input type="checkbox" id="filter_view_log" name="txt_permission[]" value="14" class="" disabled/> View Log<br>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="my-3">
+                                    <label class="form-label">Menu Permission</label><br>
+                                    <input type="checkbox" id="filter_menu_viewnas" name="txt_permission[]" value="50" class="" disabled/> View Nas Menu<br>
+                                    <input type="checkbox" id="filter_menu_nasrouter" name="txt_permission[]" value="51" class="" disabled/> View Nas Router<br>
+                                    <input type="checkbox" id="filter_menu_full_nasrouter" name="txt_permission[]" value="52" class="" disabled/> Full Access Nas Router<br>
+                                    <input type="checkbox" id="filter_menu_nasattribute" name="txt_permission[]" value="53" class="" disabled/> View Nas Attribute<br>
+                                    <input type="checkbox" id="filter_menu_full_nasattribute" name="txt_permission[]" value="54" class="" disabled/> Full Access Nas Attribute<br>
+                                    <input type="checkbox" id="filter_menu_nasusers" name="txt_permission[]" value="55" class="" disabled/> View Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_full_nasusers" name="txt_permission[]" value="56" class="" disabled/> Full Access Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_enabledisable_nasusers" name="txt_permission[]" value="57" class="" disabled/> Disable Enable Nas Users<br>
+                                    <input type="checkbox" id="filter_menu_nasprofiles" name="txt_permission[]" value="58" class="" disabled/> View Nas Profiles<br>
+                                    <input type="checkbox" id="filter_menu_full_nasprofiles" name="txt_permission[]" value="59" class="" disabled/> Full Access Nas Profiles<br>
+                                </div>
                             </div>
 
                         </div>

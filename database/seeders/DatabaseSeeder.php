@@ -6,9 +6,9 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\Privilege;
 use App\Models\Permission;
-use Illuminate\Support\Facades\DB;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -88,6 +88,48 @@ class DatabaseSeeder extends Seeder
         Permission::create([
             'name_permission' => 'View Log',
         ]);
+        Permission::create([
+            'id' => '50',
+            'name_permission' => 'View Nas Menu',
+        ]);
+        Permission::create([
+            'id' => '51',
+            'name_permission' => 'View Nas Routers',
+        ]);
+        Permission::create([
+            'id' => '52',
+            'name_permission' => 'Full Access Nas Routers',
+        ]);
+        Permission::create([
+            'id' => '53',
+            'name_permission' => 'View Nas Attributes',
+        ]);
+        Permission::create([
+            'id' => '54',
+            'name_permission' => 'Full Access Nas Attributes',
+        ]);
+        Permission::create([
+            'id' => '55',
+            'name_permission' => 'View Nas Users',
+        ]);
+        Permission::create([
+            'id' => '56',
+            'name_permission' => 'Full Access Nas Users',
+        ]);
+        Permission::create([
+            'id' => '57',
+            'name_permission' => 'Disable Enable Nas Users',
+        ]);
+        Permission::create([
+            'id' => '58',
+            'name_permission' => 'View Nas Profiles',
+        ]);
+        Permission::create([
+            'id' => '59',
+            'name_permission' => 'Full Access Nas Profiles',
+        ]);
+
+        
 
 
         DB::table('table_privilege_permissions')->insert([
@@ -148,6 +190,46 @@ class DatabaseSeeder extends Seeder
             'id_permission' => 14, 
             'id_privilege' => 1,
         ]);
-
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 50, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 51, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 52, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 53, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 54, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 55, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 56, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 57, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 58, 
+            'id_privilege' => 1,
+        ]);
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 59, 
+            'id_privilege' => 1,
+        ]);
+        
     }
 }

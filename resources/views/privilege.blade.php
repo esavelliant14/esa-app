@@ -67,7 +67,7 @@
                                         @if($item->id == auth()->user()->id_privilege)
                                         @elseif ($item->id == 1)
                                         @else
-                                            <button class="d-inline btn btn-sm btn-info edit-privilege" id="edit-privilege-{{ $item->id_group }}" data-groupid ="{{ $item->id_group }}" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button>
+                                            {{-- <button hidden class="d-inline btn btn-sm btn-info edit-privilege" id="edit-privilege-{{ $item->id_group }}" data-groupid ="{{ $item->id_group }}" data-id="{{ $item->id }}" data-privilege="{{ $item->name_privilege }}" data-group="{{ $item->group->name_group }}" data-bs-toggle="modal" data-bs-target="#ModalEditPrivilege"><span class="mdi mdi-square-edit-outline"></span></button> --}}
                                         @endif
                                     @endcan
                                     @can('access-permission' , '7')

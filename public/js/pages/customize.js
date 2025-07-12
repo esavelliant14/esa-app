@@ -186,6 +186,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectDeletePrivilege = document.getElementById('filter_delete_privilege');
     const selectEditPrivilege = document.getElementById('filter_edit_privilege');
     const selectViewLog = document.getElementById('filter_view_log');
+    const selectViewNasMenu = document.getElementById('filter_menu_viewnas');
+    const selectViewNasRouters = document.getElementById('filter_menu_nasrouter');
+    const selectFullNasRouters = document.getElementById('filter_menu_full_nasrouter');
+    const selectViewNasAttribute = document.getElementById('filter_menu_nasattribute');
+    const selectFullNasAttribute = document.getElementById('filter_menu_full_nasattribute');
+    const selectViewNasUsers = document.getElementById('filter_menu_nasusers');
+    const selectFullNasUsers = document.getElementById('filter_menu_full_nasusers');
+    const selectEnaDisNasUsers = document.getElementById('filter_menu_enabledisable_nasusers');
+    const selectViewNasProfiles = document.getElementById('filter_menu_nasprofiles');
+    const selectFullNasProfiles = document.getElementById('filter_menu_full_nasprofiles');
 
     
     
@@ -201,7 +211,12 @@ document.addEventListener('DOMContentLoaded', function() {
             selectViewPrivilege.disabled = !selectAdministrator.checked;
             selectViewLog.disabled = !selectAdministrator.checked;
             selectViewGroup.disabled = !selectAdministrator.checked;
-            
+            selectViewNasMenu.disabled = false;
+            selectViewNasRouters.disabled = !selectViewNasMenu.checked;
+            selectViewNasAttribute.disabled = !selectViewNasMenu.checked;
+            selectViewNasUsers.disabled = !selectViewNasMenu.checked;
+            selectViewNasProfiles.disabled = !selectViewNasMenu.checked;
+
         }else if(selectGroupPrivilege.value === "") {
             selectAdministrator.disabled = true;
             selectViewUser.disabled = true;
@@ -217,6 +232,11 @@ document.addEventListener('DOMContentLoaded', function() {
             selectCreateGroup.disabled = true; 
             selectDeleteGroup.disabled = true;
             selectViewLog.disabled = true;
+            selectViewNasMenu.disabled = true;
+            selectViewNasRouters.disabled = true;
+            selectViewNasAttribute.disabled = true;
+            selectViewNasUsers.disabled = true;
+            selectViewNasProfiles.disabled = true;
         }else {
             selectAdministrator.disabled = false;
             selectViewUser.disabled = !selectAdministrator.checked;
@@ -225,6 +245,11 @@ document.addEventListener('DOMContentLoaded', function() {
             selectCreateGroup.disabled = true; 
             selectDeleteGroup.disabled = true;
             selectViewLog.disabled = true;
+            selectViewNasMenu.disabled = false;
+            selectViewNasRouters.disabled = !selectViewNasMenu.checked;
+            selectViewNasAttribute.disabled = !selectViewNasMenu.checked;
+            selectViewNasUsers.disabled = !selectViewNasMenu.checked;
+            selectViewNasProfiles.disabled = !selectViewNasMenu.checked;
             
         }
     }
@@ -235,6 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners for real-time updates
     selectGroupPrivilege.addEventListener('change', applyPrivileges);
     selectAdministrator.addEventListener('change', applyPrivileges);
+    selectViewNasMenu.addEventListener('change', applyPrivileges);
     
     selectViewUser.addEventListener('change', function(){
         selectCreateUser.disabled = !selectViewUser.checked;
@@ -252,6 +278,20 @@ document.addEventListener('DOMContentLoaded', function() {
         selectCreateGroup.disabled = !selectViewGroup.checked;  
         selectDeleteGroup.disabled = !selectViewGroup.checked;
     });
+    selectViewNasRouters.addEventListener('change', function(){
+        selectFullNasRouters.disabled = !selectViewNasRouters.checked;
+    });
+    selectViewNasAttribute.addEventListener('change', function(){
+        selectFullNasAttribute.disabled = !selectViewNasAttribute.checked;
+    });
+    selectViewNasUsers.addEventListener('change', function(){
+        selectFullNasUsers.disabled = !selectViewNasUsers.checked;
+        selectEnaDisNasUsers.disabled = !selectViewNasUsers.checked;
+    });
+    selectViewNasProfiles.addEventListener('change', function(){
+        selectFullNasProfiles.disabled = !selectViewNasProfiles.checked;
+    });
+
 });
 //END COMBOBOX ADD PRIVILEGE
 
@@ -364,10 +404,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                 });
             }
-            
-
-            
-            
         });
     });
     
