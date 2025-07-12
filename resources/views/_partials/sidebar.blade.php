@@ -98,16 +98,6 @@
                                         @endcan
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="mdi mdi-menu"></i>
-                                        <span key="t-authentication">Management Menu</span>
-                                    </a>
-                                    <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{ url('menu/') }}" key="t-login">Menu</a></li>
-                                        <li><a href="{{ url('sub-menu/') }}" key="t-login-2">Sub Menu</a></li>
-                                    </ul>
-                                </li>
                             
                                 @can('access-permission' , '14')
                                     <li>
