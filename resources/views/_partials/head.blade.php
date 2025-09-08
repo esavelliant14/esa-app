@@ -13,7 +13,12 @@
     <!-- App Css-->
     <link href="{{ url('/public/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <!-- App js -->
+    <script>
+        window.baseUrl = "{{ asset('public/') }}";
+
+    </script>
     <script src="{{ url('/public/js/plugin.js') }}"></script>
+    
 
     <!-- Sweet Alert-->
     <link href="{{ url('/public/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
