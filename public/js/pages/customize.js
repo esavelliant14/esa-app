@@ -436,4 +436,37 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 //END VIEW LOG
 
+//START SEARCH HOSTNAME
+// di file JS eksternal
+$(document).ready(function () {
+    const userGroupId = window.userGroupId;
 
+    function loadHostname() {
+        $('#id_search_hostname').html('<option value="">Loading...</option>');
+
+        $.ajax({
+            url: '/esa-app/services/bwm/search-hostname/' + userGroupId,
+            type: 'GET',
+            success: function (data) {
+                var options = '<option value="">--- Choose Hostname ---</option>';
+                $.each(data, function (key, value) {
+                    options += '<option value="' + value + '">' + value + '</option>';
+                });
+                $('#id_search_hostname').html(options);
+            },
+            error: function () {
+                alert('Failed to get data.');
+            }
+        });
+    }
+
+    // Setiap kali modal dibuka langsung load dengan userGroupId
+    $('#ModalAddBwmBw').on('shown.bs.modal', function () {
+        loadHostname();
+    });
+
+    // Atau kalau mau load langsung di awal halaman:
+    // loadHostname();
+});
+
+//END SEARCH HOSTNAME

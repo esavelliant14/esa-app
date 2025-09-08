@@ -54,15 +54,16 @@
                                     <li><a href="{{ route('dns.lists') }}" key="t-list-services">DNS Management</a></li>
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                            <span key="t-ddns">DDNS</span>
+                                            <span key="t-ddns">BW Management</span>
                                         </a>
                                         <ul class="sub-menu" aria-expanded="false">
-                                            <li><a href="{{ route('ddns.lists') }}" key="t-list-router">List Routers</a></li>
-                                            <li><a href="{{ route('ddns.users') }}" key="t-ddns">DDNS Users</a></li>
-                                            <li><a href="{{ route('ddns.forwarding') }}" key="t-forwarding">Forwarding Ports</a></li>
+                                            <li><a href="{{ route('bwmrtr.lists') }}" key="t-list-router">List Routers POP</a></li>
+                                            <li><a href="{{ route('bwmbw.lists') }}" key="t-ddns">List Bandwidth</a></li>
+                                            <li><a href="{{ route('bwmclient.lists') }}" key="t-forwarding">List Clients</a></li>
                                         </ul>
                                     </li>
                                 </ul>
+                                
                             </li>
 
                             

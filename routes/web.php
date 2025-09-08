@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BwmController;
 use App\Http\Controllers\DnsController;
 use App\Http\Controllers\NasController;
 use App\Http\Controllers\AuthController;
@@ -63,7 +64,15 @@ Route::get('/services/ddns-lists', [DdnsController::class , 'lists'])->middlewar
 Route::get('/services/ddns-users', [DdnsController::class , 'users'])->middleware(RedirectIfNotAuthenticated::class)->name('ddns.users');
 Route::get('/services/ddns-forwarding', [DdnsController::class , 'forwarding'])->middleware(RedirectIfNotAuthenticated::class)->name('ddns.forwarding');
 
-
+//SERVICE BW MANAGEMENT
+Route::get('/services/bwm/rtr-lists', [BwmController::class , 'rtr'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmrtr.lists');
+Route::post('/services/bwm/rtr-lists' , [BwmController::class , 'addrtr'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmrtr.post');
+Route::delete('/services/bwm/rtr-lists/{id}' , [BwmController::class , 'deletertr'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmrtr.delete');
+Route::get('/services/bwm/search-hostname/{groupId}', [BwmController::class, 'comboHostname'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/services/bwm/bw-lists', [BwmController::class , 'bw'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbw.lists');
+Route::post('/services/bwm/bw-lists' , [BwmController::class , 'addbw'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbw.post');
+Route::delete('/services/bwm/bw-lists/{id}' , [BwmController::class , 'deletebw'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbw.delete');
+Route::get('/services/bwm/client-lists', [BwmController::class , 'client'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmclient.lists');
 // TESTING
 // Route::get('/test', function(){
 //     dd(auth()->user());

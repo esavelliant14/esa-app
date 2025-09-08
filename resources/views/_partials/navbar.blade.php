@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="main/" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ url('public/img/logo.svg') }}" alt="" height="22">
+                        <img src="{{ url('public/img/hypernet-mini.png') }}" alt="" height="40">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ url('public/img/logo-dark.png') }}" alt="" height="17">
+                        <img src="{{ url('public/img/hypernet-big.png') }}" alt="" height="70">
                     </span>
                 </a>
 
                 <a href="main/" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ url('public/img/logo-light.svg') }}" alt="" height="22">
+                        <img src="{{ url('public/img/hypernet-mini.png') }}" alt="" height="40">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ url('public/img/logo-light.png') }}" alt="" height="19">
+                        <img src="{{ url('public/img/hypernet-big.png') }}" alt="" height="70">
                     </span>
                 </a>
             </div>
@@ -146,7 +146,7 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{ url('public/img/users/avatar-1.jpg') }}"
+                    <img class="rounded-circle header-profile-user" src="{{ url('/public/img/default.png') }}"
                         alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ auth()->user()->name }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>

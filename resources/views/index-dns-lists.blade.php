@@ -21,15 +21,13 @@
             <div class="card-body">
                 
                 <h4 class="card-title"></h4>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddPrivilege" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addPrivilege-modal"><i class="mdi mdi-plus me-1"></i>New Privilege</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddDomain" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addPrivilege-modal"><i class="mdi mdi-plus me-1"></i>New Domain</button>
                 
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NAS Hostname</th>
-                            <th>IP Address</th>
-                            <th>Secret</th>
+                            <th>Domain</th>
                             <th>Created At</th>
                             <th>Action</th>
                         </tr>
@@ -40,8 +38,6 @@
                         
                         {{-- @foreach ( $var_show as $item ) --}}
                         <tr>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

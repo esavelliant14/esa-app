@@ -20,4 +20,16 @@ class Group extends Model
     {
         return $this->hasMany(Privilege::class);
     }
+    public function bwmbw(): HasMany
+    {
+        return $this->hasMany(bwm::class);
+    }
+    public function bwmrtr(): HasMany
+    {
+        return $this->hasMany(bwmrtr::class);
+    }
+    public function bwmclient(): HasMany
+    {
+        return $this->hasMany(bwmclient::class);
+    }
 }

@@ -37,13 +37,33 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
         ]);
 
+        User::create([
+            'name' => 'Esa V',
+            'email' => 'esa@gmail.com',
+            'password' => bcrypt('asdasdasd'),
+            'id_group' => 2,
+            'id_privilege' => 2,
+            'status' => 1,
+        ]);
+
         Group::create([
-            'name_group' => 'GLOBAL ADMIN'
+            'name_group' => 'GLOBAL ADMIN',
+            'id' => 1
+        ]);
+
+        Group::create([
+            'name_group' => 'PT HIPERNET INDODATA',
+            'id' => 2
         ]);
 
         Privilege::create([
             'name_privilege' => 'Administrator',
             'id_group' => 1,
+        ]);
+
+        Privilege::create([
+            'name_privilege' => 'Full Access',
+            'id_group' => 2,
         ]);
 
         Permission::create([

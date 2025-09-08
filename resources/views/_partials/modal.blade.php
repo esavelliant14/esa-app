@@ -596,8 +596,202 @@
     <!-- end modal-dialog -->
 </div>
 {{-- END MODAL VIEW LOG --}}
-<script>
 
+<!-- START MODAL ADD BWM ROUTER -->
+<div class="modal fade" id="ModalAddBwmRouter" tabindex="-1" aria-labelledby="newBwmRouterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newCustomerModalLabel">Add BWM Router</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('bwmrtr.post') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Router Hostname</label>
+                                <input type="text" name="txt_hostname" id="name_input_hostname" class="form-control @error('txt_hostname') is-invalid @enderror" placeholder="Enter Router Hostname" value="{{ old('txt_hostname') }}"required />
+                                <div class="invalid-feedback">
+                                    @error('txt_hostname')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">IP Address</label>
+                                <input type="text" name="txt_ip_address" id="name_input_ip_address" class="form-control @error('txt_ip_address') is-invalid @enderror" placeholder="Enter IP Address" value="{{ old('txt_ip_address') }}"required />
+                                <div class="invalid-feedback">
+                                    @error('txt_ip_address')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Interface</label>
+                                <input type="text" name="txt_interface" id="name_input_interface" class="form-control @error('txt_interface') is-invalid @enderror" placeholder="Enter Interface" value="{{ old('txt_interface') }}"required />
+                                <div class="invalid-feedback">
+                                    @error('txt_interface')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Brand</label>
+                                <select name="txt_brand" class="form-select" required>
+                                    <option value="">--- Choose Brand ---</option>
+                                    <option value="Juniper">Juniper</option>
+                                    <option value="Mikrotik">MikroTik</option>
+                                    <option value="H3C">H3C</option>
+                                    <option value="Cisco">Cisco</option>
+                                    <option value="Huawei">Huawei</option>
+                                </select>
+                            </div>
+                            <input type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}" readonly hidden>
+                            <input type="text" name="txt_id_user" value="{{ auth()->user()->id }}" readonly hidden>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="submit" id="addBwmRtr-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+<!-- END MODAL ADD BWM ROUTER -->
+
+
+<!-- START MODAL ADD BWM BW -->
+<div class="modal fade" id="ModalAddBwmBw" tabindex="-1" aria-labelledby="newBwmRouterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newCustomerModalLabel">Add BWM Bw</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('bwmbw.post') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Router Hostname</label>
+                                <select name="txt_hostname" class="form-select" id="id_search_hostname" required>
+                                    <option value="">--- Choose Hostname ---</option>
+                                    {{-- @foreach ( $hostnames as $hostname ) --}}
+                                        {{-- <option value="{{ $hostname }}">{{ $hostname }}</option> --}}
+                                    {{-- @endforeach --}}
+                                </select>
+                                <div class="invalid-feedback">
+                                    @error('txt_hostname')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Policer Name</label>
+                                <input type="text" name="txt_policer_name" id="name_input_policer_name" class="form-control @error('txt_policer_name') is-invalid @enderror" placeholder="Enter Policer Name" value="{{ old('txt_policer_name') }}"required />
+                                <div class="invalid-feedback">
+                                    @error('txt_policer_name')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Bandwidth</label>
+                                    <input type="text" 
+                                        name="txt_bandwidth" 
+                                        id="name_input_bandwidth" 
+                                        class="form-control @error('txt_bandwidth') is-invalid @enderror" 
+                                        placeholder="Enter Bandwidth" 
+                                        value="{{ old('txt_bandwidth') }}" required>
+                                    <div class="invalid-feedback">
+                                        @error('txt_bandwidth')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Unit</label>
+                                    <select name="txt_bandwidth_unit" class="form-select @error('txt_bandwidth_unit') is-invalid @enderror" required>
+                                        <option value="">--- Select Unit ---</option>
+                                        <option value="k">kbps</option>
+                                        <option value="m">Mbps</option>
+                                        <option value="g">Gbps</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        @error('txt_bandwidth_unit')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Burst Limit</label>
+                                    <input type="text" 
+                                        name="txt_burst_limit" 
+                                        id="name_input_bandwidth" 
+                                        class="form-control @error('txt_burst_limit') is-invalid @enderror" 
+                                        placeholder="Enter Burst Limit" 
+                                        value="{{ old('txt_burst_limit') }}" required>
+                                    <div class="invalid-feedback">
+                                        @error('txt_burst_limit')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Unit</label>
+                                    <select name="txt_burst_limit_unit" class="form-select @error('txt_burst_limit_unit') is-invalid @enderror" required>
+                                        <option value="">--- Select Unit ---</option>
+                                        <option value="k">kbps</option>
+                                        <option value="m">Mbps</option>
+                                        <option value="g">Gbps</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        @error('txt_burst_limit_unit')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}" readonly hidden>
+                            <input type="text" name="txt_id_user" value="{{ auth()->user()->id }}" readonly hidden>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="submit" id="addBwmRtr-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+<!-- END MODAL ADD BWM BW -->
+
+
+<script>
+window.userGroupId = "{{ auth()->user()->id_group }}";
 
     
 </script>
