@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateBwmRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Bwmrtr;
 use App\Models\User;
-use App\Models\group;
+use App\Models\Group;
 use App\Models\Privilege;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
