@@ -53,7 +53,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::loginView(function(){
             return view('auth',[
-                'title_url' => 'LOGIN | ESA.NET',
+                'title_url' => 'LOGIN | SUPERAPPS',
                 'g_key' => config('app.gkey'),
             ]);
         });
@@ -61,7 +61,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::twoFactorChallengeView(function(request $request){
             $recovery = $request->get('recovery', false);
             return view('auth-2fa',[
-                'title_url' => '2FA AUTH | ESA.NET',
+                'title_url' => '2FA AUTH | SUPERAPPS',
             ], compact('recovery'));
         });
 

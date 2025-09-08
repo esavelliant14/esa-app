@@ -11,21 +11,10 @@
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card overflow-hidden">
                             <div class="bg-white">
-                                <div class="row">
-                                    <div class="col-3">
-
-
-                                        <!--
-                                        <div class="text-black p-4">
-                                             <h5 class="text-black">Welcome Back !</h5> 
-                                            <p>Sign in to SUPERAPPS.</p>
-                                        </div>
-                                        -->
-                                        
-                                    </div>
-                                    <div class="justify-content-center col-6 mb-4 p-4 align-self-end">
-                                        <!--<img src="{{ url('public/img/hypernet-logo.png') }}" alt="" class="img-fluid"> -->
-                                        <a class="text-dark text-center"><h1>INI LOGOKU YA</h1></a>
+                                <div class="row justify-content-center">
+                                    <div class="col-12 text-center p-4 mb-2">
+                                        <img src="{{ url('public/img/hypernet-big.png') }}" alt="" class="img-fluid mx-auto" style="width: 400px; max-width:100%;">
+                                        {{-- <a class="text-dark text-center"><h1>INI LOGOKU YA</h1></a> --}}
                                     </div>
                                     {{-- @if ($errors->any()) --}}
                                     @if(session()->has('error'))
