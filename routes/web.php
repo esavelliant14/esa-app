@@ -29,8 +29,8 @@ Route::post('/user/update/',[UserController::class, 'update'])->middleware(Redir
 // AUTH
 // Route::get('/auth' , [AuthController::class , 'index'])->middleware(RedirectIfAuthenticated::class);
 // Route::post('/auth' , [AuthController::class , 'authenticate'])->middleware(RedirectIfAuthenticated::class);
-Route::get('/profile' , [AuthController::class , 'profile'])->middleware(RedirectIfNotAuthenticated::class);
-Route::get('/change-password' , [AuthController::class , 'change_password'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/profile' , [AuthController::class , 'profile'])->middleware(RedirectIfNotAuthenticated::class)->name('profile.index');
+Route::get('/change-password' , [AuthController::class , 'change_password'])->middleware(RedirectIfNotAuthenticated::class)->name('changepassword.index');
 // Route::post('/logout' , [AuthController::class , 'logout']);
 
 // GROUP
