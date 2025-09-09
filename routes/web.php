@@ -69,10 +69,13 @@ Route::get('/services/bwm/rtr-lists', [BwmController::class , 'rtr'])->middlewar
 Route::post('/services/bwm/rtr-lists' , [BwmController::class , 'addrtr'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmrtr.post');
 Route::delete('/services/bwm/rtr-lists/{id}' , [BwmController::class , 'deletertr'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmrtr.delete');
 Route::get('/services/bwm/search-hostname/{groupId}', [BwmController::class, 'comboHostname'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/services/bwm/get-hostname/', [BwmController::class, 'getHostnames'])->middleware(RedirectIfNotAuthenticated::class);
+Route::get('/services/bwm/get-interface/{hostname}/{groupId}', [BwmController::class, 'getInterfaces'])->middleware(RedirectIfNotAuthenticated::class);
 Route::get('/services/bwm/bw-lists', [BwmController::class , 'bw'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbw.lists');
 Route::post('/services/bwm/bw-lists' , [BwmController::class , 'addbw'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbw.post');
 Route::delete('/services/bwm/bw-lists/{id}' , [BwmController::class , 'deletebw'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbw.delete');
 Route::get('/services/bwm/client-lists', [BwmController::class , 'client'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmclient.lists');
+Route::post('/services/bwm/client-lists', [BwmController::class , 'addclient'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmclient.post');
 // TESTING
 // Route::get('/test', function(){
 //     dd(auth()->user());

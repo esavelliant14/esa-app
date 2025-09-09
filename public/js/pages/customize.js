@@ -439,20 +439,22 @@ document.addEventListener('DOMContentLoaded', function() {
 //START SEARCH HOSTNAME
 // di file JS eksternal
 $(document).ready(function () {
-    const userGroupId = window.userGroupId;
+    const userGroupId = window.userGroupId; // ambil id_group user
+    const baseUrl = window.APP_URL;         // base URL Laravel
 
-    function loadHostname() {
-        $('#id_search_hostname').html('<option value="">Loading...</option>');
+    // Fungsi load hostname, selector adalah id selectnya
+    function loadHostname(selector) {
+        $(selector).html('<option value="">Loading...</option>');
 
         $.ajax({
-            url: window.APP_URL + '/services/bwm/search-hostname/' + userGroupId,
+            url: baseUrl + '/services/bwm/search-hostname/' + userGroupId,
             type: 'GET',
             success: function (data) {
                 var options = '<option value="">--- Choose Hostname ---</option>';
                 $.each(data, function (key, value) {
                     options += '<option value="' + value + '">' + value + '</option>';
                 });
-                $('#id_search_hostname').html(options);
+                $(selector).html(options);
             },
             error: function () {
                 alert('Failed to get data.');
@@ -460,13 +462,73 @@ $(document).ready(function () {
         });
     }
 
-    // Setiap kali modal dibuka langsung load dengan userGroupId
+    // Saat modal 1 dibuka, load hostname untuk select modal 1
     $('#ModalAddBwmBw').on('shown.bs.modal', function () {
-        loadHostname();
+        loadHostname('#id_search_hostname_bwmbw');
     });
 
-    // Atau kalau mau load langsung di awal halaman:
-    // loadHostname();
+    // Saat modal 2 dibuka, load hostname untuk select modal 2
+    // $('#ModalAddBwmClient').on('shown.bs.modal', function () {
+    //     loadHostname('#id_search_hostname_bwmclient');
+    // });
+
+    // Kalau mau load langsung ketika halaman ready:
+    // loadHostname('#id_search_hostname_bwmBw');
+    // loadHostname('#id_search_hostname_bwmClient');
+});
+//END SEARCH HOSTNAME
+
+//START SEARCH INTERFACE
+$(document).ready(function () {
+    // load hostnames saat page ready
+    $.ajax({
+        url: '/esa-app/services/bwm/get-hostname',
+        type: 'GET',
+        success: function (data) {
+            var options = '<option value="">--- Choose Hostname ---</option>';
+            $.each(data, function (index, value) {
+                // sesuaikan dengan key JSON yang dikirim controller
+                // misal controller kirim: [{hostname:"R1",group_id:1}, ...]
+                options += '<option value="' + value.hostname + '">' + value.hostname + '</option>';
+            });
+            $('#hostname_select').html(options);
+        },
+        error: function () {
+            alert('Gagal load hostname');
+        }
+    });
+
+    // ketika hostname dipilih
+    $('#hostname_select').on('change', function () {
+        var hostname = $(this).val();
+        var groupId = $('#id_groupid').val(); 
+
+        // simpan group_id di hidden input agar ikut ke form submit
+        $('#group_id_selected').val(groupId);
+
+        $('#interface_select').html('<option value="">Loading...</option>');
+
+        if (hostname && groupId) {
+            $.ajax({
+                url: '/esa-app/services/bwm/get-interface/' + hostname + '/' + groupId,
+                type: 'GET',
+                success: function (data) {
+                    var options = '<option value="">--- Choose Interface ---</option>';
+                    $.each(data, function (index, val) {
+                        options += '<option value="' + val + '">' + val + '</option>';
+                    });
+                    $('#interface_select').html(options);
+                },
+                error: function () {
+                    $('#interface_select').html('<option value="">Gagal load interface</option>');
+                }
+            });
+        } else {
+            $('#interface_select').html('<option value="">--- NOT FOUND ---</option>');
+        }
+    });
 });
 
-//END SEARCH HOSTNAME
+
+
+//END SEARCH INTERFACE

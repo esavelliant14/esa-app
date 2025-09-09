@@ -176,6 +176,16 @@ class BwmController extends Controller
         return response()->json($hostnamertr);
     }
 
+    public function comboInterface($hostname, Request $request)
+    {
+        if (!$request->ajax()) {
+            return redirect('/main');
+        }
+        $groupid = auth()->user()->id_group;
+        $hostnamertr = Bwmrtr::where('hostname', $hostname)->where('id_group', $groupid)->pluck('interface'); 
+        return response()->json($hostnamertr);
+    }
+
     public function bw(){
         if ( auth()->user()->id_group == 1 ){
             $show_group = Group::all();
@@ -207,6 +217,7 @@ class BwmController extends Controller
             'txt_id_user' => 'required',
         ],[
             'txt_hostname.required' => 'Router hostname is required',
+            'txt_policer_name' => 'Policer name is required',
             'txt_bandwidth.required' => 'Bandwidth is required',
             'txt_bandwidth.integer' => 'Bandwidth value must be an integer',
             'txt_bandwidth_unit.required' => 'Bandwidth unit is required',
@@ -315,6 +326,86 @@ class BwmController extends Controller
             'var_show_group' => $show_group,
         ]);
     } 
+
+    public function addclient(Request $post_create_bwmclient){
+        $var_data = Validator::make($post_create_bwmclient->all(), [
+            'txt_hostname' => 'required',
+            'txt_interface' => 'required',
+            'txt_unit_interface' => 'required|integer',
+            'txt_id_group' => 'required',
+            'txt_id_user' => 'required',
+        ],[
+            'txt_hostname.required' => 'Router hostname is required',
+            'txt_interface.required' => 'Bandwidth is required',
+            'txt_unit_inteface.required' => 'Unit interface is required',
+            'txt_unit_inteface.integer' => 'Unit interface value must be an integer',
+        ]);
+        $var_data->after(function($var_data) use ($post_create_bwmclient) {
+            $hostname = $post_create_bwmclient->txt_hostname;
+            $interface = $post_create_bwmclient->txt_interface;
+            $unit = $post_create_bwmclient->txt_unit_interface;
+            
+
+            $existAll = DB::table('table_bwm_client')
+                ->where('hostname', $hostname)
+                ->where('interface', $interface)
+                ->where('unit_interface', $unit)
+                ->exists();
+            if($existAll) {
+                $var_data->errors()->add('txt_hostname', 'Data already exist');
+            }
+        });
+        if( $var_data->fails() ){
+            return redirect(route('bwmclient.lists'))
+            ->withErrors($var_data)
+            ->withInput();
+        }else{
+            $var_data_valid = $var_data->validated();
+            // Bwm::create([
+            //     'hostname' => $var_data_valid['txt_hostname'],
+            //     'policer_name' => $var_data_valid['txt_policer_name'],
+            //     'id_group' => $var_data_valid['txt_id_group'],
+            //     'id_user' => $var_data_valid['txt_id_user'],
+                
+            // ]);
+            Logging::create([
+                'action_by' => auth()->user()->email,
+                'category_action' => 'Add BWM Client',
+                'status' => 'Success',
+                'ip_address' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
+                'details' => 'Success add new bandwidth at pop=' . $var_data_valid['txt_hostname'] . ' , Interface=' . $var_data_valid['txt_interface'] . ' , unit='. $var_data_valid['txt_unit_interface'] ,
+
+            ]); 
+            return redirect(route('bwmclient.lists'))->with('success', 'Create BWM Client Successfully');
+        };
+
+    }
+
+
+    public function getHostnames(Request $request)
+    {
+        if (!$request->ajax()) {
+            return redirect('/main');
+        }
+        $idgroup = auth()->user()->id_group;
+        $routers = Bwmrtr::select('hostname','id_group')
+            ->where('id_group', $idgroup)->get();
+
+        return response()->json($routers);
+    }
+
+    public function getInterfaces($hostname, $groupId, Request $request)
+    {
+        if (!$request->ajax()) {
+            return redirect('/main');
+        }
+        $interfaces = Bwmrtr::where('hostname', $hostname)
+            ->where('id_group', $groupId)
+            ->pluck('interface');
+
+        return response()->json($interfaces);
+    }
 
     /**
      * Show the form for creating a new resource.
