@@ -480,9 +480,10 @@ $(document).ready(function () {
 
 //START SEARCH INTERFACE
 $(document).ready(function () {
+    const baseUrl = window.APP_URL;         // base URL Laravel
     // load hostnames saat page ready
     $.ajax({
-        url: '/esa-app/services/bwm/get-hostname',
+        url: baseUrl + '/services/bwm/get-hostname',
         type: 'GET',
         success: function (data) {
             var options = '<option value="">--- Choose Hostname ---</option>';
@@ -510,7 +511,7 @@ $(document).ready(function () {
 
         if (hostname && groupId) {
             $.ajax({
-                url: '/esa-app/services/bwm/get-interface/' + hostname + '/' + groupId,
+                url: baseUrl + '/services/bwm/get-interface/' + hostname + '/' + groupId,
                 type: 'GET',
                 success: function (data) {
                     var options = '<option value="">--- Choose Interface ---</option>';
