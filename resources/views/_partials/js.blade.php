@@ -54,6 +54,9 @@
 -->
 
 <!-- CUSTOM JS -->
+<script>
+    window.APP_URL = "{{ url('/') }}"; 
+</script>
 <script src="{{ url('/public/js/pages/customize.js') }}?v={{ time() }}"></script>
 
 

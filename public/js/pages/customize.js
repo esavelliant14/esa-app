@@ -6,7 +6,7 @@ $(document).ready(function () {
 
         if (id !== '') {
             $.ajax({
-                url: '/esa-app/privilege/combo-privilege/' + id,
+                url: window.APP_URL + '/privilege/combo-privilege/' + id,
                 type: 'GET',
                 success: function (data) {
                     var options = '<option value="">--- Choose Privilege ---</option>';
@@ -106,7 +106,7 @@ $(document).ready(function () {
 
         if (id !== '') {
             $.ajax({
-                url: '/esa-app/privilege/combo-privilege/' + id,
+                url: window.APP_URL + '/privilege/combo-privilege/' + id,
                 type: 'GET',
                 success: function (data) {
                     var options = '<option value="">-- Choose Privilege --</option>';
@@ -445,7 +445,7 @@ $(document).ready(function () {
         $('#id_search_hostname').html('<option value="">Loading...</option>');
 
         $.ajax({
-            url: '/esa-app/services/bwm/search-hostname/' + userGroupId,
+            url: window.APP_URL + '/services/bwm/search-hostname/' + userGroupId,
             type: 'GET',
             success: function (data) {
                 var options = '<option value="">--- Choose Hostname ---</option>';
