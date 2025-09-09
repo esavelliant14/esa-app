@@ -17,7 +17,7 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            return redirect('/main');
+            return redirect()->route('main.index');
         }
         return $next($request);
     }
