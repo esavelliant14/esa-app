@@ -6,7 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use App\Models\group;
+use App\Models\Group;
 use App\Models\Privilege;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Logging;
@@ -23,11 +23,11 @@ class UserController extends Controller
         }
         if ( auth()->user()->id_group == 1 ){
             $show_privilege = Privilege::all();
-            $show_group = group::all();
+            $show_group = Group::all();
             $show_user = User::all();
         } else {
             $show_privilege = Privilege::where('id_group' , auth()->user()->id_group)->get();
-            $show_group = group::where('id' , auth()->user()->id_group)->get();
+            $show_group = Group::where('id' , auth()->user()->id_group)->get();
             $show_user = User::where('id_group' , auth()->user()->id_group)->get();
         }
 
