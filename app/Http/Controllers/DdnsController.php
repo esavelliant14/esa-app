@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class DdnsController extends Controller
 {
     public function lists(){
+        if (!Gate::allows('access-permission' , '61')) {
+            return redirect('/main')->with('access_denied', true);
+        }
         return view('index-ddns-lists',[
             'title_url' => 'LIST DDNS',
             'active' => 'list-ddns',

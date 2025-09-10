@@ -13,7 +13,7 @@ class LoggingController extends Controller
             return redirect('/main')->with('access_denied', true);
         }
 
-        $show_log = Logging::orderBy('created_at', 'desc')->get();
+        $show_log = Logging::orderBy('created_at', 'desc')->where('id_group', auth()->user()->id_group)->get();
         
         return view('log',[
             'title_url' => 'LOG | ESA.NET',

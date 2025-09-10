@@ -11,7 +11,6 @@ use App\Models\Group;
 use App\Models\Privilege;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Validator;
 use App\Models\Logging;
 use App\Models\Bwmclient;
@@ -21,6 +20,9 @@ class BwmController extends Controller
 {
 
     public function rtr(){
+        if (!Gate::allows('access-permission' , '63')) {
+            return redirect('/main')->with('access_denied', true);
+        }
         if ( auth()->user()->id_group == 1 ){
             $show_group = Group::all();
             $show_rtr = Bwmrtr::all();
@@ -190,6 +192,9 @@ class BwmController extends Controller
     }
 
     public function bw(){
+        if (!Gate::allows('access-permission' , '63')) {
+            return redirect('/main')->with('access_denied', true);
+        }
         if ( auth()->user()->id_group == 1 ){
             $show_group = Group::all();
             $show_bw = Bwm::all();
@@ -315,6 +320,9 @@ class BwmController extends Controller
     }
     
     public function client(){
+        if (!Gate::allows('access-permission' , '63')) {
+            return redirect('/main')->with('access_denied', true);
+        }
         if ( auth()->user()->id_group == 1 ){
             $show_group = Group::all();
             $show_client = Bwmclient::all();
@@ -410,6 +418,15 @@ class BwmController extends Controller
             ->pluck('interface');
 
         return response()->json($interfaces);
+    }
+
+    public function bod(){
+        return view('index-bod-lists',[
+            'title_url' => 'LIST BOD',
+            'active' => 'list-bod',
+            'title_menu' => 'BWM',
+            'title_submenu' => 'LIST BOD',
+        ]);
     }
 
     /**

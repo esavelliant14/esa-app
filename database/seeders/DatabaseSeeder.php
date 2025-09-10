@@ -149,8 +149,30 @@ class DatabaseSeeder extends Seeder
             'name_permission' => 'Full Access Nas Profiles',
         ]);
 
-        
+        Permission::create([
+            'id' => '60',
+            'name_permission' => 'View Services',
+        ]);
 
+        Permission::create([
+            'id' => '61',
+            'name_permission' => 'View Domain Management',
+        ]);
+
+        Permission::create([
+            'id' => '62',
+            'name_permission' => 'Full Access Domain Management',
+        ]);
+
+        Permission::create([
+            'id' => '63',
+            'name_permission' => 'View BWM',
+        ]);
+
+        Permission::create([
+            'id' => '64',
+            'name_permission' => 'Full Access BWM',
+        ]);
 
         DB::table('table_privilege_permissions')->insert([
             'id_permission' => 1, 
@@ -250,6 +272,30 @@ class DatabaseSeeder extends Seeder
             'id_permission' => 59, 
             'id_privilege' => 1,
         ]);
-        
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 60, 
+            'id_privilege' => 1,
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 61, 
+            'id_privilege' => 1,
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 62, 
+            'id_privilege' => 1,
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 63, 
+            'id_privilege' => 1,
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 64, 
+            'id_privilege' => 1,
+        ]);
     }
 }

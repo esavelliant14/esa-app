@@ -19,10 +19,12 @@
                             <li class="menu-title" key="t-radius">MENU</li>
                             @can('access-permission' , '1')
                                 <li>
+                                    @can('access-permission' , '50')
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="bx bx-data"></i>
                                         <span key="t-dashboards">NAS</span>
                                     </a>
+                                    @endcan
                                     <ul class="sub-menu" aria-expanded="false">
                                         @can('access-permission' , '51')
                                             <li><a href="{{ route('nas.lists') }}" key="t-tui-calendar">NAS Routers</a></li>
@@ -51,8 +53,9 @@
                                     <span key="t-backhaul">SERVICES</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('dns.lists') }}" key="t-list-services">DNS Management</a></li>
-                                    <li>
+                                        <li>
+                                            <a href="{{ route('dns.lists') }}" key="t-list-services">DNS Management</a></li>
+                                        <li>
                                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                                             <span key="t-ddns">BW Management</span>
                                         </a>
@@ -60,6 +63,7 @@
                                             <li><a href="{{ route('bwmrtr.lists') }}" key="t-list-router">List Routers POP</a></li>
                                             <li><a href="{{ route('bwmbw.lists') }}" key="t-ddns">List Bandwidth</a></li>
                                             <li><a href="{{ route('bwmclient.lists') }}" key="t-forwarding">List Clients</a></li>
+                                            <li><a href="{{ route('bwmbod.lists') }}" key="t-forwarding">List Clients BOD</a></li>
                                         </ul>
                                     </li>
                                 </ul>
