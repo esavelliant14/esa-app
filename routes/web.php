@@ -82,7 +82,7 @@ Route::post('/services/bwm/client-lists', [BwmController::class , 'addclient'])-
 // });
 
 //WEB KOSONG
-Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
+// Route::fallback(function () {})->middleware([RedirectIfAuthenticated::class , RedirectIfNotAuthenticated::class]);
 
 //TEST
 //Route::get('/user/test/', [UserController::class , 'test']);
