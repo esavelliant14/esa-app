@@ -32,4 +32,9 @@ class Group extends Model
     {
         return $this->hasMany(bwmclient::class);
     }
+
+    public function logging(): HasMany
+    {
+        return $this->hasMany(logging::class);
+    }
 }

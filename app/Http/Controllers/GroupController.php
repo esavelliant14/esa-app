@@ -57,7 +57,7 @@ class GroupController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success add new group=' . $var_data_valid['txt_name_group'],
-
+                'id_group' => auth()->user()->id_group,
             ]); 
             return redirect('/group')->with('success', 'Create Group Successfully');
         };
@@ -77,6 +77,7 @@ class GroupController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success delete group=' . $name_group,
+                'id_group' => auth()->user()->id_group,
             ]);
             return redirect('/group')->with('success', 'Delete Group Successfully');
         }else {
@@ -87,6 +88,7 @@ class GroupController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Failed delete group=' . $name_group . ' because group still used by privilege',
+                'id_group' => auth()->user()->id_group,
             ]);
             return redirect('/group')->with('failed', 'Group still used by privilege');
         }

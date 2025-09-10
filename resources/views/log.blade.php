@@ -49,7 +49,7 @@
                             <td>{{ $item->status }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-light view-log" data-logcreatedat="{{ $item->created_at }}" data-logdetails="{{ $item->details }}" data-logagent="{{ $item->agent }}" data-logstatus="{{ $item->status }}" data-logipaddress="{{ $item->ip_address }}" data-logcategory="{{ $item->category_action }}" data-logactionby="{{ $item->action_by }}" data-bs-toggle="modal" data-bs-target="#ModalViewLog">
+                                <button type="button" class="btn btn-sm btn-light view-log" data-logidgroup="{{ $item->group->name_group }}" data-logcreatedat="{{ $item->created_at }}" data-logdetails="{{ $item->details }}" data-logagent="{{ $item->agent }}" data-logstatus="{{ $item->status }}" data-logipaddress="{{ $item->ip_address }}" data-logcategory="{{ $item->category_action }}" data-logactionby="{{ $item->action_by }}" data-bs-toggle="modal" data-bs-target="#ModalViewLog">
                                     <span class="mdi mdi-eye" ></span>
                                 </button>
                             </td>

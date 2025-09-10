@@ -583,6 +583,12 @@
                             </div>
                         </div>
                         <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Group</label>
+                                <input type="text" id="varLogIdGroup" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
                             <div class="text-end">
                                 <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Close</button>
                             </div>

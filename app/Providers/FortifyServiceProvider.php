@@ -19,6 +19,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Models\Logging;
 use App\Rules\ReCaptcha;
+use Illuminate\Support\Facades\DB;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -78,10 +79,20 @@ class FortifyServiceProvider extends ServiceProvider
         //     // 'password' => 'required',
         //     'g-recaptcha-response' => [new ReCaptcha()],
         // ]);
+        $idGroup = DB::table('table_logins')
+                ->where('email', $post_login->email)
+                ->value('id_group');
+        if($idGroup){
+            $ResultIdGroup = $idGroup;
+        }else{
+            $ResultIdGroup = '1';
+        }
         if ($user && Hash::check($post_login->password, $user->password)) {
+
             if($user->status == 1){
                 return $user;
             }else{
+
                 Logging::create([
                     'action_by' => $post_login->email,
                     'category_action' => 'Login',
@@ -89,7 +100,7 @@ class FortifyServiceProvider extends ServiceProvider
                     'ip_address' => request()->ip(),
                     'agent' => request()->header('User-Agent'),
                     'details' => 'Failed login user=' . $post_login->email . ' because user is inactive',
-    
+                    'id_group' => $ResultIdGroup,
                 ]);
                 Session::flash('error');
             }
@@ -102,7 +113,7 @@ class FortifyServiceProvider extends ServiceProvider
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Failed login user=' . $post_login->email . ' because wrong credentials',
-
+                'id_group' => $ResultIdGroup,
             ]);
             Session::flash('error');
         }

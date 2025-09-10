@@ -68,7 +68,7 @@
 
                             
 
-                            {{-- <li class="menu-title" key="t-task">TASK</li>
+                            <li class="menu-title" key="t-task">TASK</li>
                             <li>
                                 <a href="#" class="has-arrow waves-effect">
                                     <i class="bx bx-task"></i>
@@ -79,7 +79,7 @@
                                     <li><a href="{{ url('task/project') }}" key="t-dailytask">Project Task</a></li>
                                     <li><a href="{{ url('task/planning') }}" key="t-dailytask">Planning Task</a></li>
                                 </ul>
-                            </li> --}}
+                            </li>
                             @can('access-permission' , '1')
                                 <li class="menu-title" key="t-administrator">ADMINISTRATOR</li>
                                 <li>

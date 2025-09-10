@@ -422,6 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const logagent = this.dataset.logagent;
             const logdetails = this.dataset.logdetails;
             const logcreatedat = this.dataset.logcreatedat;
+            const logidgroup = this.dataset.logidgroup;
 
             document.getElementById('varLogActionBy').value = logactionby;
             document.getElementById('varLogCategory').value = logcategory;
@@ -430,6 +431,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('varLogAgent').value = logagent;
             document.getElementById('varLogDetails').value = logdetails;
             document.getElementById('varLogCreatedAt').value = logcreatedat;
+            document.getElementById('varLogIdGroup').value = logidgroup;
             
         });
     });

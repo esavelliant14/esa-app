@@ -103,7 +103,7 @@ class UserController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Creating user ' . $var_data_valid['txt_email'],
-
+                'id_group' => auth()->user()->id_group,
             ]);
             return redirect('/user')->with('success', 'Create User Successfully');
         };
@@ -128,7 +128,7 @@ class UserController extends Controller
             'ip_address' => request()->ip(),
             'agent' => request()->header('User-Agent'),
             'details' => 'Success update user=' . $post_edit_user->txt_email . ' from PRIVILEGE=' . $existing_privilege . ' and STATUS=' . $existing_status . ' CHANGES TO PRIVILEGE=' .$new_privilege. ' and STATUS='. $new_status,
-            
+            'id_group' => auth()->user()->id_group,
         ]);
         return redirect('/user')->with('success', 'Update User Successfully');
         
@@ -149,7 +149,7 @@ class UserController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success reset password user=' . $id->email,
-
+                'id_group' => auth()->user()->id_group,
             ]); 
         return redirect('/user')->with('success', 'Reset User Successfully');
         
@@ -165,7 +165,7 @@ class UserController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success delete user=' . $id->email,
-
+                'id_group' => auth()->user()->id_group,
             ]);   
             return redirect('/user')->with('success', 'Delete User Successfully');
     }

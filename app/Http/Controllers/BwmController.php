@@ -126,6 +126,7 @@ class BwmController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success add new pop=' . $var_data_valid['txt_hostname'] . ' , IP Address=' . $var_data_valid['txt_ip_address'] . ' , interface='. $var_data_valid['txt_interface'] . ' brand=' . $var_data_valid['txt_brand'] . ' Group=' . $name_group,
+                'id_group' => auth()->user()->id_group,
 
             ]); 
             return redirect(route('bwmrtr.lists'))->with('success', 'Create BWM Router Successfully');
@@ -151,6 +152,7 @@ class BwmController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success delete router=' . $hostname . ' ,IP Address=' . $ip_address . ' ,interface=' . $interface . ' brand=' . $brand . ' Group=' . $name_group,
+                'id_group' => auth()->user()->id_group,
             ]);
             return redirect(route('bwmrtr.lists'))->with('success', 'Delete BWM Router Successfully');
         }else {
@@ -161,6 +163,7 @@ class BwmController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Failed delete router=' . $hostname . ' ,IP Address=' . $ip_address . ' ,interface=' . $interface . ' brand=' . $brand . ' Group=' . $name_group .' because still used by BWM or Client',
+                'id_group' => auth()->user()->id_group,
             ]);
             return redirect(route('bwmrtr.lists'))->with('failed', 'BWM Router still used by BWM/Client');
         }
@@ -268,7 +271,7 @@ class BwmController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success add new bandwidth at pop=' . $var_data_valid['txt_hostname'] . ' , Polcer Name=' . $var_data_valid['txt_policer_name'] . ' , bandwidth='. $result_bandwidth,
-
+                'id_group' => auth()->user()->id_group,
             ]); 
             return redirect(route('bwmbw.lists'))->with('success', 'Create BWM Bandwidth Successfully');
         };
@@ -293,6 +296,7 @@ class BwmController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success delete Bandwidth=' . $policer_name . ' ,hostname=' . $hostname . ' ,group=' . $name_group ,
+                'id_group' => auth()->user()->id_group,
             ]);
             return redirect(route('bwmbw.lists'))->with('success', 'Delete BWM Bandwidth Successfully');
         }else{
@@ -303,6 +307,7 @@ class BwmController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Failed delete Bandwidth=' . $policer_name . ' ,Hostname=' . $hostname .  ' Group=' . $name_group .' because still used by Client',
+                'id_group' => auth()->user()->id_group,
             ]);
             return redirect(route('bwmbw.lists'))->with('failed', 'BWM Bandwidth still used by Client');
         }
@@ -375,7 +380,7 @@ class BwmController extends Controller
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
                 'details' => 'Success add new bandwidth at pop=' . $var_data_valid['txt_hostname'] . ' , Interface=' . $var_data_valid['txt_interface'] . ' , unit='. $var_data_valid['txt_unit_interface'] ,
-
+                'id_group' => auth()->user()->id_group,
             ]); 
             return redirect(route('bwmclient.lists'))->with('success', 'Create BWM Client Successfully');
         };

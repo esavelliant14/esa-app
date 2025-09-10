@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('ip_address');
             $table->text('agent');
             $table->text('details');
+            $table->text('id_group');
             $table->timestamps();
         });
     }
