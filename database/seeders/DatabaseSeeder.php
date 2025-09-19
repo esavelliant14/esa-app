@@ -39,11 +39,6 @@ class DatabaseSeeder extends Seeder
             'id_group' => 1,
         ]);
 
-        Privilege::create([
-            'name_privilege' => 'Full Access',
-            'id_group' => 2,
-        ]);
-
         Permission::create([
             'name_permission' => 'Administrator Menu',
         ]);
