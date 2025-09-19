@@ -279,20 +279,29 @@ class BwmController extends Controller
                 'id_group' => $data['id_group'],
                 'id_user' => $data['id_user'],
                 
-            ]);
-            Logging::create([
-                'action_by' => auth()->user()->email,
-                'category_action' => 'Add BWM Bandwidth',
-                'status' => 'Success',
-                'ip_address' => request()->ip(),
-                'agent' => request()->header('User-Agent'),
-                'details' => 'Success add new bandwidth at pop=' . $data['hostname'] . ' , Polcer Name=' . $data['policer_name'] . ' , bandwidth='. $data['limit_bandwidth'],
-                'id_group' => auth()->user()->id_group,
-            ]); 
+                ]);
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add BWM Bandwidth',
+                    'status' => 'Success',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Success add new bandwidth at pop=' . $data['hostname'] . ' , Policer Name=' . $data['policer_name'] . ' , bandwidth='. $data['limit_bandwidth'],
+                    'id_group' => auth()->user()->id_group,
+                ]); 
                 return redirect(route('bwmbw.lists'))->with($data['status'], $data['message']);
 
             }else{
                 $data = $response->json();
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add BWM Bandwidth',
+                    'status' => 'Failed',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Failed add new bandwidth at pop=' . $data['hostname']. ' because ' . $data['message'],
+                    'id_group' => auth()->user()->id_group,
+                ]); 
                 return redirect(route('bwmbw.lists'))->with($data['status'], $data['message']);
             }
 
@@ -302,42 +311,41 @@ class BwmController extends Controller
         };
     }
 
-    public function deletebw($id){
-        $bw = Bwm::findOrFail($id);
-        $hostname = $bw->hostname;
-        $policer_name = $bw->policer_name;
-        $id_group = $bw->id_group;
-        $name_group = $bw->group->name_group;
-        $check_client = Bwmclient::where('hostname' , $hostname)->where('id_group', $id_group)
-                        ->where('input_policer', $policer_name)
-                        ->where('output_policer', $policer_name)
-                        ->count();
-        if($check_client == 0) {
-            Bwm::destroy('id' , $id);      
-            Logging::create([
-                'action_by' => auth()->user()->email,
-                'category_action' => 'Delete BWM Bandwidth',
-                'status' => 'Success',
-                'ip_address' => request()->ip(),
-                'agent' => request()->header('User-Agent'),
-                'details' => 'Success delete Bandwidth=' . $policer_name . ' ,hostname=' . $hostname . ' ,group=' . $name_group ,
-                'id_group' => auth()->user()->id_group,
-            ]);
-            return redirect(route('bwmbw.lists'))->with('success', 'Delete BWM Bandwidth Successfully');
-        }else{
-            Logging::create([
-                'action_by' => auth()->user()->email,
-                'category_action' => 'Delete BWM Bandwidth',
-                'status' => 'Failed',
-                'ip_address' => request()->ip(),
-                'agent' => request()->header('User-Agent'),
-                'details' => 'Failed delete Bandwidth=' . $policer_name . ' ,Hostname=' . $hostname .  ' Group=' . $name_group .' because still used by Client',
-                'id_group' => auth()->user()->id_group,
-            ]);
-            return redirect(route('bwmbw.lists'))->with('failed', 'BWM Bandwidth still used by Client');
-        }
-
-    }
+    // public function deletebw($id){
+    //     $bw = Bwm::findOrFail($id);
+    //     $hostname = $bw->hostname;
+    //     $policer_name = $bw->policer_name;
+    //     $id_group = $bw->id_group;
+    //     $name_group = $bw->group->name_group;
+    //     $check_client = Bwmclient::where('hostname' , $hostname)->where('id_group', $id_group)
+    //                     ->where('input_policer', $policer_name)
+    //                     ->where('output_policer', $policer_name)
+    //                     ->count();
+    //     if($check_client == 0) {
+    //         Bwm::destroy('id' , $id);      
+    //         Logging::create([
+    //             'action_by' => auth()->user()->email,
+    //             'category_action' => 'Delete BWM Bandwidth',
+    //             'status' => 'Success',
+    //             'ip_address' => request()->ip(),
+    //             'agent' => request()->header('User-Agent'),
+    //             'details' => 'Success delete Bandwidth=' . $policer_name . ' ,hostname=' . $hostname . ' ,group=' . $name_group ,
+    //             'id_group' => auth()->user()->id_group,
+    //         ]);
+    //         return redirect(route('bwmbw.lists'))->with('success', 'Delete BWM Bandwidth Successfully');
+    //     }else{
+    //         Logging::create([
+    //             'action_by' => auth()->user()->email,
+    //             'category_action' => 'Delete BWM Bandwidth',
+    //             'status' => 'Failed',
+    //             'ip_address' => request()->ip(),
+    //             'agent' => request()->header('User-Agent'),
+    //             'details' => 'Failed delete Bandwidth=' . $policer_name . ' ,Hostname=' . $hostname .  ' Group=' . $name_group .' because still used by Client',
+    //             'id_group' => auth()->user()->id_group,
+    //         ]);
+    //         return redirect(route('bwmbw.lists'))->with('failed', 'BWM Bandwidth still used by Client');
+    //     }
+    // }
     
     public function client(){
         if (!Gate::allows('access-permission' , '63')) {
@@ -578,9 +586,27 @@ class BwmController extends Controller
                     'id_group' => $data['id_group'],
                     'id_user' => $data['id_user'],
                 ]);
-                return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add BOD Client',
+                    'status' => 'Success',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Success create BOD for client '. $data['description'] .' at POP=' . $data['hostname'] . ' , from existing Bandwidth(up/down)=' . $data['old_input_policer']. '/'. $data['old_output_policer'] . ' , to bandwidth(up/down)='. $data['bod_input_policer']. '/'. $data['bod_output_policer'],
+                    'id_group' => $data['id_group'],
+                ]); 
+                return redirect(route('bwmbod.lists'))->with($data['status'], $data['message']);
             }else{
                 $data = $response->json();
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add BOD Client',
+                    'status' => 'Failed',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Failed create BOD for client' . $data['description']. 'because ' . $data['message'],
+                    'id_group' => $data['id_group'],
+                ]); 
                 return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
             }
         }

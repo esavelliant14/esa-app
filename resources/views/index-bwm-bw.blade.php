@@ -66,13 +66,13 @@
                             <td>{{ $item->group->name_group }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>
-                                <form class="delete-form d-inline"  action="{{ route('bwmbw.delete',$item->id) }}" method="POST">
+                                {{-- <form class="delete-form d-inline"  action="{{ route('bwmbw.delete',$item->id) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button type="button" class="btn btn-sm btn-danger delete-button">
                                         <span class="mdi mdi-delete" ></span>
                                     </button>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                         @endforeach

@@ -61,7 +61,7 @@
                             <td>{{ $item->old_input_policer }}/{{ $item->old_output_policer }} </td>
                             <td>{{ $item->bod_input_policer }}/{{ $item->bod_output_policer }}</td>
                             <td>{{ $item->bod_until }}</td>
-                            <td></td>
+                            <td>{{ $item->status }}</td>
                             <td>
                             </td>
                         </tr>
