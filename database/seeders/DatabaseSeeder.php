@@ -21,30 +21,17 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Administrator',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('asdasdasd'),
+            'email' => 'esa.hypernet@gmail.com',
+            'password' => bcrypt('1q2w3e4r'),
             'id_group' => 1,
             'id_privilege' => 1,
             'status' => 1,
         ]);
 
-        User::create([
-            'name' => 'Esa V',
-            'email' => 'esa@gmail.com',
-            'password' => bcrypt('asdasdasd'),
-            'id_group' => 2,
-            'id_privilege' => 2,
-            'status' => 1,
-        ]);
 
         Group::create([
             'name_group' => 'GLOBAL ADMIN',
             'id' => 1
-        ]);
-
-        Group::create([
-            'name_group' => 'PT HIPERNET INDODATA',
-            'id' => 2
         ]);
 
         Privilege::create([
@@ -289,14 +276,5 @@ class DatabaseSeeder extends Seeder
             'id_privilege' => 1,
         ]);
 
-        DB::table('table_privilege_permissions')->insert([
-            'id_permission' => 63, 
-            'id_privilege' => 2,
-        ]);
-
-        DB::table('table_privilege_permissions')->insert([
-            'id_permission' => 64, 
-            'id_privilege' => 2,
-        ]);
     }
 }
