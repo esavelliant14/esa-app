@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Logging;
 use App\Models\Bwmclient;
 use App\Models\Bwm;
+use App\Models\Bwmbod;
+use Illuminate\Support\Facades\Http;
 
 class BwmController extends Controller
 {
@@ -237,11 +239,9 @@ class BwmController extends Controller
         $var_data->after(function($var_data) use ($post_create_bwmbw) {
             $hostname = $post_create_bwmbw->txt_hostname;
             $policer_name = $post_create_bwmbw->txt_policer_name;
-            $interface = $post_create_bwmbw->txt_interface;
             $id_group = $post_create_bwmbw->txt_id_group;
-            $brand = $post_create_bwmbw->txt_brand;
 
-            $existAll = DB::table('table_bwm_rtr')
+            $existAll = DB::table('table_bwm_bw')
                 ->where('hostname', $hostname)
                 ->where('policer_name', $policer_name)
                 ->where('id_group', $id_group)
@@ -260,25 +260,45 @@ class BwmController extends Controller
             $var_data_valid = $var_data->validated();
             $result_bandwidth = ($var_data_valid['txt_bandwidth'] . $var_data_valid['txt_bandwidth_unit']);
             $result_burst = ($var_data_valid['txt_burst_limit'] . $var_data_valid['txt_burst_limit_unit']);
-            Bwm::create([
+            $response = Http::post('http://127.0.0.1:8000/receive-bw', [
                 'hostname' => $var_data_valid['txt_hostname'],
                 'policer_name' => $var_data_valid['txt_policer_name'],
-                'bandwidth' => $result_bandwidth,
-                'burst_limit' => $result_burst,
+                'limit_bandwidth' => $result_bandwidth,
+                'limit_burst' => $result_burst,
                 'id_group' => $var_data_valid['txt_id_group'],
                 'id_user' => $var_data_valid['txt_id_user'],
+            ]);
+            if($response->successful()){
+                $data = $response->json();
+                Bwm::create([
+                'hostname' => $data['hostname'],
+                'policer_name' => $data['policer_name'],
+                'bandwidth' => $data['limit_bandwidth'],
+                'burst_limit' => $data['limit_burst'],
+                'policer_status' => 'Active',
+                'id_group' => $data['id_group'],
+                'id_user' => $data['id_user'],
                 
             ]);
             Logging::create([
                 'action_by' => auth()->user()->email,
-                'category_action' => 'Add BWM Router',
+                'category_action' => 'Add BWM Bandwidth',
                 'status' => 'Success',
                 'ip_address' => request()->ip(),
                 'agent' => request()->header('User-Agent'),
-                'details' => 'Success add new bandwidth at pop=' . $var_data_valid['txt_hostname'] . ' , Polcer Name=' . $var_data_valid['txt_policer_name'] . ' , bandwidth='. $result_bandwidth,
+                'details' => 'Success add new bandwidth at pop=' . $data['hostname'] . ' , Polcer Name=' . $data['policer_name'] . ' , bandwidth='. $data['limit_bandwidth'],
                 'id_group' => auth()->user()->id_group,
             ]); 
-            return redirect(route('bwmbw.lists'))->with('success', 'Create BWM Bandwidth Successfully');
+                return redirect(route('bwmbw.lists'))->with($data['status'], $data['message']);
+
+            }else{
+                $data = $response->json();
+                return redirect(route('bwmbw.lists'))->with($data['status'], $data['message']);
+            }
+
+
+
+            
         };
     }
 
@@ -349,9 +369,9 @@ class BwmController extends Controller
             'txt_id_user' => 'required',
         ],[
             'txt_hostname.required' => 'Router hostname is required',
-            'txt_interface.required' => 'Bandwidth is required',
-            'txt_unit_inteface.required' => 'Unit interface is required',
-            'txt_unit_inteface.integer' => 'Unit interface value must be an integer',
+            'txt_interface.required' => 'Interface is required',
+            'txt_unit_interface.required' => 'Unit interface is required',
+            'txt_unit_interface.integer' => 'Unit interface value must be an integer',
         ]);
         $var_data->after(function($var_data) use ($post_create_bwmclient) {
             $hostname = $post_create_bwmclient->txt_hostname;
@@ -365,7 +385,7 @@ class BwmController extends Controller
                 ->where('unit_interface', $unit)
                 ->exists();
             if($existAll) {
-                $var_data->errors()->add('txt_hostname', 'Data already exist');
+                $var_data->errors()->add('txt_unit_interface', 'Data already exist');
             }
         });
         if( $var_data->fails() ){
@@ -374,23 +394,55 @@ class BwmController extends Controller
             ->withInput();
         }else{
             $var_data_valid = $var_data->validated();
-            // Bwm::create([
-            //     'hostname' => $var_data_valid['txt_hostname'],
-            //     'policer_name' => $var_data_valid['txt_policer_name'],
-            //     'id_group' => $var_data_valid['txt_id_group'],
-            //     'id_user' => $var_data_valid['txt_id_user'],
-                
-            // ]);
-            Logging::create([
-                'action_by' => auth()->user()->email,
-                'category_action' => 'Add BWM Client',
-                'status' => 'Success',
-                'ip_address' => request()->ip(),
-                'agent' => request()->header('User-Agent'),
-                'details' => 'Success add new bandwidth at pop=' . $var_data_valid['txt_hostname'] . ' , Interface=' . $var_data_valid['txt_interface'] . ' , unit='. $var_data_valid['txt_unit_interface'] ,
-                'id_group' => auth()->user()->id_group,
-            ]); 
-            return redirect(route('bwmclient.lists'))->with('success', 'Create BWM Client Successfully');
+            
+            $response = Http::post('http://127.0.0.1:8000/receive-client', [
+                'hostname' => $var_data_valid['txt_hostname'],
+                'interface' => $var_data_valid['txt_interface'],
+                'unit' => $var_data_valid['txt_unit_interface']
+            ]);
+
+            if($response->successful()){
+                $data = $response->json();
+                Bwmclient::create([
+                    'hostname' => $data['hostname'],
+                    'interface' => $data['interface'],
+                    'unit_interface' => $data['unit'],
+                    'status_unit' => $data['status_unit'],
+                    'description' => $data['description'],
+                    'ip_address' => $data['ip'],
+                    'vlan_id' => $data['vlan_id'],
+                    'policer_status' => $data['status_policer'],
+                    'input_policer' => $data['input_policer'],
+                    'input_policer_status' => $data['status_input_policer'],
+                    'output_policer' => $data['output_policer'],
+                    'output_policer_status' => $data['status_output_policer'],
+                    'id_group' => $var_data_valid['txt_id_group'],
+                    'id_user' => $var_data_valid['txt_id_user'],
+
+                ]);
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add BWM Client',
+                    'status' => 'Success',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Success add new client at pop=' . $var_data_valid['txt_hostname'] . ' , Interface=' . $var_data_valid['txt_interface'] . ' , unit='. $var_data_valid['txt_unit_interface'] ,
+                    'id_group' => auth()->user()->id_group,
+                ]); 
+                return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
+            }else{
+                $data = $response->json();
+                Logging::create([
+                    'action_by' => auth()->user()->email,
+                    'category_action' => 'Add BWM Client',
+                    'status' => 'Failed',
+                    'ip_address' => request()->ip(),
+                    'agent' => request()->header('User-Agent'),
+                    'details' => 'Failed add new client at pop=' . $var_data_valid['txt_hostname'] . ' , Interface=' . $var_data_valid['txt_interface'] . ' , unit='. $var_data_valid['txt_unit_interface'] ,
+                    'id_group' => auth()->user()->id_group,
+                ]); 
+                return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
+            }
         };
 
     }
@@ -420,14 +472,122 @@ class BwmController extends Controller
         return response()->json($interfaces);
     }
 
-    public function bod(){
+    public function searchPolicer($id_group, $hostname, Request $request)
+    {
+        // Ambil data policer berdasarkan group dan hostname dari tabel kalian
+        // Misal tabelnya bernama 'policers'
+        if (!$request->ajax()) {
+            return redirect('/main');
+        }
+        $policers = DB::table('table_bwm_bw')
+            ->where('id_group', $id_group)
+            ->where('hostname', $hostname)
+            ->where('policer_status', 'Active')
+            ->pluck('policer_name'); 
+            // pluck akan ambil kolom 'policer_name' jadi array
+
+        // Kembalikan dalam bentuk JSON
+        return response()->json($policers);
+    }
+    public function bod()
+    {
+        if (!Gate::allows('access-permission' , '63')) {
+            return redirect('/main')->with('access_denied', true);
+        }
+        if ( auth()->user()->id_group == 1 ){
+            $show_group = Group::all();
+            $show_bod = Bwmbod::all();
+        } else {
+            $show_group = Group::where('id' , auth()->user()->id_group)->get();
+            $show_bod = Bwmbod::where('id_group', auth()->user()->id_group)->get();
+        }
         return view('index-bod-lists',[
             'title_url' => 'LIST BOD',
             'active' => 'list-bod',
             'title_menu' => 'BWM',
             'title_submenu' => 'LIST BOD',
+            'var_show' => $show_bod,
+            'var_show_group' => $show_group,
         ]);
     }
+
+    public function addbod(Request $post_create_bwmbod)
+    {
+        // dd($post_create_bwmbod->all());
+        $maxDate = now()->addMonths(2)->toDateTimeString();
+        $var_data = Validator::make($post_create_bwmbod->all(), [
+                'txt_hostname' => 'required',
+                'txt_description' => 'required',
+                'txt_interface' => 'required',
+                'txt_unit_interface' => 'required|integer',
+                'txt_input_policer' => 'required',
+                'txt_output_policer' => 'required',
+                'txt_input_policer_bod' => 'required',
+                'txt_output_policer_bod' => 'required',
+                'txt_date' => 'required|after_or_equal:now|date|before_or_equal:' . $maxDate,
+                'txt_id_group' => 'required',
+                'txt_id_user' => 'required',
+            ],[
+                'txt_hostname.required' => 'Router hostname is required',
+                'txt_interface.required' => 'Interface is required',
+                'txt_unit_inteface.required' => 'Unit interface is required',
+                'txt_unit_inteface.integer' => 'Unit interface value must be an integer',
+                'txt_input_policer.required' => 'Old input policer is required',
+                'txt_output_policer.required' => 'Old output policer is required',
+                'txt_input_policer_bod.required' => 'New input policer is required',
+                'txt_output_policer_bod.required' => 'New output policer is required',
+                'txt_date.required' => 'Date is required',
+                'txt_date.date' => 'Date wrong format',
+                'txt_date.after_or_equal' => 'Date start from now',
+                'txt_date.before_or_equal' => 'Date cannot exceed 2 months from now',
+            ]);
+        if( $var_data->fails() ){
+            return redirect(route('bwmclient.lists'))
+            ->withErrors($var_data, 'BwmBodForm')
+            ->withInput();
+        }else{
+            $var_data_valid = $var_data->validated();
+            // dd($var_data_valid);
+            $newDate = \Carbon\Carbon::parse($var_data_valid['txt_date'])->format('Y-m-d H:i:s');
+            $response = Http::post('http://127.0.0.1:8000/receive-bod', [
+                'hostname' => $var_data_valid['txt_hostname'],
+                'interface' => $var_data_valid['txt_interface'],
+                'description' => $var_data_valid['txt_description'],
+                'unit' => $var_data_valid['txt_unit_interface'],
+                'old_input_policer' => $var_data_valid['txt_input_policer'],
+                'old_output_policer' => $var_data_valid['txt_output_policer'],
+                'bod_input_policer' => $var_data_valid['txt_input_policer_bod'],
+                'bod_output_policer' => $var_data_valid['txt_output_policer_bod'],
+                'date' => $newDate,
+                'id_group' => $var_data_valid['txt_id_group'],
+                'id_user' => $var_data_valid['txt_id_user'],
+            ]);
+            if($response->successful()){
+                $data = $response->json();
+                Bwmbod::create([
+                    'hostname' => $data['hostname'],
+                    'description' => $data['description'],
+                    'interface' => $data['interface'],
+                    'unit_interface' => $data['unit'],
+                    'old_input_policer' => $data['old_input_policer'],
+                    'old_output_policer' => $data['old_output_policer'],
+                    'bod_input_policer' => $data['bod_input_policer'],
+                    'bod_output_policer' => $data['bod_output_policer'],
+                    'bod_until' => $data['date'],
+                    'status' => 'Active',
+                    'id_group' => $data['id_group'],
+                    'id_user' => $data['id_user'],
+                ]);
+                return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
+            }else{
+                $data = $response->json();
+                return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
+            }
+        }
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

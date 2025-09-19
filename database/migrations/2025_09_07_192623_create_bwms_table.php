@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('policer_name',64);
             $table->string('bandwidth',64);
             $table->string('burst_limit',64);
+            $table->string('policer_status',64);
             $table->string('id_group',64);
             $table->string('id_user',10);
             $table->timestamps();

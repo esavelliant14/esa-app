@@ -77,6 +77,8 @@ Route::delete('/services/bwm/bw-lists/{id}' , [BwmController::class , 'deletebw'
 Route::get('/services/bwm/client-lists', [BwmController::class , 'client'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmclient.lists');
 Route::post('/services/bwm/client-lists', [BwmController::class , 'addclient'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmclient.post');
 Route::get('/services/bwm/bod-lists', [BwmController::class , 'bod'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbod.lists');
+Route::post('/services/bwm/bod-lists', [BwmController::class , 'addbod'])->middleware(RedirectIfNotAuthenticated::class)->name('bwmbod.post');
+Route::get('/services/bwm/search-policer/{id_group}/{hostname}', [BwmController::class, 'searchPolicer'])->middleware(RedirectIfNotAuthenticated::class)->name('policer.get');
 // TESTING
 // Route::get('/test', function(){
 //     dd(auth()->user());

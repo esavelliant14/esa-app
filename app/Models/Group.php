@@ -14,7 +14,7 @@ class Group extends Model
     ];
     public function user(): HasMany
     {
-        return $this->hasMany(user::class);
+        return $this->hasMany(User::class);
     }
     public function privilege(): HasMany
     {
@@ -22,19 +22,24 @@ class Group extends Model
     }
     public function bwmbw(): HasMany
     {
-        return $this->hasMany(bwm::class);
+        return $this->hasMany(Bwm::class);
     }
     public function bwmrtr(): HasMany
     {
-        return $this->hasMany(bwmrtr::class);
+        return $this->hasMany(Bwmrtr::class);
     }
     public function bwmclient(): HasMany
     {
-        return $this->hasMany(bwmclient::class);
+        return $this->hasMany(Bwmclient::class);
+    }
+
+    public function bwmbod(): HasMany
+    {
+        return $this->hasMany(Bwmbod::class);
     }
 
     public function logging(): HasMany
     {
-        return $this->hasMany(logging::class);
+        return $this->hasMany(Logging::class);
     }
 }

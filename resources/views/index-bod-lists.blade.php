@@ -17,6 +17,21 @@
                     
             </script>
         @endif
+        @if(session()->has('failed'))
+            <script>
+                    Swal.fire({
+                        title:"Failed!",
+                        text: "{{ session('failed') }}",
+                        icon:"error",
+                        confirmButtonColor:"#34c38f",
+                        customClass: {
+                            confirmButton: "rounded-pill",
+                            cancelButton: "rounded-pill"
+                        }
+                    })
+                    
+            </script>
+        @endif
         <div class="card">
             <div class="card-body">
                 
@@ -28,9 +43,10 @@
                         <tr>
                             <th>No</th>
                             <th>Client</th>
-                            <th>Bandwidth Existing</th>
-                            <th>Bandwidth BOD</th>
+                            <th>Bandwidth Existing (up/down)</th>
+                            <th>Bandwidth BOD (up/down)</th>
                             <th>BOD Until</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -38,17 +54,18 @@
                     
                     <tbody>
                         
-                        {{-- @foreach ( $var_show as $item ) --}}
+                        @foreach ( $var_show as $item )
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->description }}</td>
+                            <td>{{ $item->old_input_policer }}/{{ $item->old_output_policer }} </td>
+                            <td>{{ $item->bod_input_policer }}/{{ $item->bod_output_policer }}</td>
+                            <td>{{ $item->bod_until }}</td>
                             <td></td>
                             <td>
                             </td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                         
                     </tbody>
                 </table>

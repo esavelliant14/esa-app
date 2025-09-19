@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('hostname',128);
             $table->string('interface',15);
             $table->integer('unit_interface');
-            $table->string('status_unit',10);
+            $table->string('status_unit',50);
             $table->string('description',128);
             $table->string('ip_address',50);
             $table->integer('vlan_id');

@@ -843,7 +843,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Unit Interface</label>
-                                <input type="text" name="txt_unit_interface" id="name_unit_interface" class="form-control @error('txt_unit_interface') is-invalid @enderror" placeholder="Enter Unit Inteface" value="{{ old('txt_unit_inteface') }}"required />
+                                <input type="text" name="txt_unit_interface" id="name_unit_interface" class="form-control @error('txt_unit_interface') is-invalid @enderror" placeholder="Enter Unit Inteface" value="{{ old('txt_unit_inteface') }}" required />
                                 <div class="invalid-feedback">
                                     @error('txt_unit_interface')
                                         {{ $message }}
@@ -870,6 +870,107 @@
     <!-- end modal-dialog -->
 </div>
 <!-- END MODAL ADD BWM CLIENT -->
+
+{{-- START MODAL BOD --}}
+<div class="modal fade" id="ModalBwmBod" tabindex="-1" aria-labelledby="viewBodModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewLogModalLabel">Form Bandwidth On Demand</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('bwmbod.post') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Router POP</label>
+                                <input type="text" name="txt_hostname" id="varBodRouter" class="form-control" value="{{ old('txt_hostname') }}" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <input type="text" name="txt_description" id="varBodDescription" class="form-control" value="{{ old('txt_description') }}" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Interface</label>
+                                <input type="text" name="txt_interface" id="varBodInterface" value="{{ old('txt_interface') }}" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Unit</label>
+                                <input type="text" name="txt_unit_interface" value="{{ old('txt_unit_interface') }}" id="varBodUnit" class="form-control" required readonly />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Upload Existing</label>
+                                    <input type="text" value="{{ old('txt_input_policer') }}" name="txt_input_policer" id="varBodUploadOld" class="form-control" required readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Download Existing</label>
+                                    <input type="text" value="{{ old('txt_output_policer') }}" name="txt_output_policer" id="varBodDownloadOld" class="form-control" required readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Upload BOD</label>
+                                    <select name="txt_input_policer_bod" id="id_search_policer_upload" class="form-select @error('txt_input_policer_bod','BwmBodForm') is-invalid @enderror" required>
+                                        <option value="">--- Select Bandwidth ---</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        @error('txt_input_policer_bod','BwmBodForm')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Download BOD</label>
+                                    <select name="txt_output_policer_bod" id="id_search_policer_download" class="form-select @error('txt_output_policer_bod','BwmBodForm') is-invalid @enderror" required>
+                                        <option value="">--- Select Bandwidth ---</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        @error('txt_output_policer_bod','BwmBodForm')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">BOD Until</label>
+                                <input type="datetime-local" name="txt_date" id="varLogCreatedAt" class="form-control @error('txt_date','BwmBodForm') is-invalid @enderror" required min="{{ now()->format('Y-m-d\TH:i') }}" max="{{ now()->addMonths(2)->format('Y-m-d\TH:i') }}" />
+                                    <div class="invalid-feedback">
+                                        @error('txt_date','BwmBodForm')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                            </div>
+                        </div>
+                        <input type="text" name="txt_id_group" id="varBodIdGroup" class="form-control" hidden required readonly/>
+                        <input type="text" name="txt_id_user" id="varBodIdUser" class="form-control" hidden required readonly/>
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="submit" id="addBwmBod-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+{{-- END MODAL VIEW BOD --}}
+
 
 <script>
     window.userGroupId = "{{ auth()->user()->id_group }}";

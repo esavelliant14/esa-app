@@ -547,11 +547,57 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $('#interface_select').html('<option value="">--- NOT FOUND ---</option>');
+            $('#interface_select').html('<option value="">--- Not Found ---</option>');
         }
     });
 });
-
-
-
 //END SEARCH INTERFACE
+
+
+//START VIEW BOD
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.bwm-bod');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const hostname = this.dataset.hostname;
+            const description = this.dataset.description;
+            const interface = this.dataset.interface;
+            const unit = this.dataset.unit;
+            const inputpolicerold = this.dataset.inputpolicerold;
+            const outputpolicerold = this.dataset.outputpolicerold;
+            const bodidgroup = this.dataset.bodidgroup;
+            const bodiduser = this.dataset.bodiduser
+
+            document.getElementById('varBodRouter').value = hostname;
+            document.getElementById('varBodDescription').value = description;
+            document.getElementById('varBodInterface').value = interface;
+            document.getElementById('varBodUnit').value = unit;
+            document.getElementById('varBodUploadOld').value = inputpolicerold;
+            document.getElementById('varBodDownloadOld').value = outputpolicerold;
+            document.getElementById('varBodIdGroup').value = bodidgroup;
+            document.getElementById('varBodIdUser').value = bodiduser;
+            
+            function loadPolicer(selector) {
+                $(selector).html('<option value="">Loading...</option>');
+                $.ajax({
+                    url: baseUrl + '/services/bwm/search-policer/' + bodidgroup + '/' + hostname,
+                    type: 'GET',
+                    success: function(data) {
+                        var options = '<option value="">--- Select Bandwidth ---</option>';
+                        $.each(data, function(key, value) {
+                            options += '<option value="' + value + '">' + value + '</option>';
+                        });
+                        $(selector).html(options);
+                    },
+                    error: function() {
+                        alert(hostname);
+                    }
+                });
+            }
+
+            loadPolicer('#id_search_policer_upload'); // Upload BOD
+            loadPolicer('#id_search_policer_download'); // Download 
+        });
+    });
+});
+//END VIEW BOD

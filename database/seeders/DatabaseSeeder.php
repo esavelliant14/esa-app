@@ -29,15 +29,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Putri Dwi',
-            'email' => 'putri@gmail.com',
-            'password' => bcrypt('asdasdasd'),
-            'id_group' => 1,
-            'id_privilege' => 1,
-            'status' => 1,
-        ]);
-
-        User::create([
             'name' => 'Esa V',
             'email' => 'esa@gmail.com',
             'password' => bcrypt('asdasdasd'),
@@ -296,6 +287,16 @@ class DatabaseSeeder extends Seeder
         DB::table('table_privilege_permissions')->insert([
             'id_permission' => 64, 
             'id_privilege' => 1,
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 63, 
+            'id_privilege' => 2,
+        ]);
+
+        DB::table('table_privilege_permissions')->insert([
+            'id_permission' => 64, 
+            'id_privilege' => 2,
         ]);
     }
 }
