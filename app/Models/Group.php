@@ -14,11 +14,11 @@ class Group extends Model
     ];
     public function user(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(user::class);
     }
     public function privilege(): HasMany
     {
-        return $this->hasMany(Privilege::class);
+        return $this->hasMany(privilege::class);
     }
     public function bwmbw(): HasMany
     {
