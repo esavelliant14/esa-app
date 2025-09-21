@@ -53,9 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const idPrivilege = this.getAttribute('data-id');
             const nameGroup = this.getAttribute('data-group');
             const namePrivilege = this.getAttribute('data-privilege');
+            const baseUrl = window.APP_URL; 
             
             // Lakukan AJAX request ke controller untuk mendapatkan data permission
-            fetch(`/esa-app/privilege/view-permission-privilege/${idPrivilege}`, {
+            fetch(`${baseUrl}/privilege/view-permission-privilege/${idPrivilege}`, {
                 method: 'GET',  // Pastikan menggunakan metode yang sesuai (GET, POST, dsb.)
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',  // Menambahkan header untuk mendeteksi permintaan sebagai AJAX
