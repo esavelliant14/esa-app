@@ -7,9 +7,10 @@
 
 <!-- apexcharts -->
 <script src="{{ url('/public/libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ url('/public/js/pages/apex.js') }}"></script>
 
 <!-- dashboard init -->
-<script src="{{ url('/public/js/pages/dashboard.init.js')  }}"></script>
+<script src="{{ url('/public/js/pages/dashboard.js')  }}"></script>
 
 <!-- App js -->
 <script src="{{ url('/public/js/app.js') }}"></script>
