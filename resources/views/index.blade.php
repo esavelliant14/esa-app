@@ -86,7 +86,7 @@
 
             <div class="card">           
                 <div class="card-body">
-                <h4 class="card-title mb-4">Spline Area</h4>
+                <h4 class="card-title mb-4">Chart BOD Request</h4>
                 <div id="spline_area" data-active='@json($activeArray)' data-done='@json($doneArray)' data-dates='@json($dates)' data-colors='["--bs-primary", "--bs-success"]' class="apex-charts" dir="ltr"></div>
                 </div>
             </div>

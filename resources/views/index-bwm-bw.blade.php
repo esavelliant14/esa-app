@@ -37,8 +37,9 @@
             <div class="card-body">
                 
                 <h4 class="card-title"></h4>
+                @can('access-permission' , '64')
                 <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddBwmBw" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addPrivilege-modal"><i class="mdi mdi-plus me-1"></i>New Bandwidth</button>
-                
+                @endcan
                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                     <thead>
                         <tr>

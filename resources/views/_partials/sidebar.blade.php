@@ -53,11 +53,18 @@
                                     <span key="t-backhaul">SERVICES</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                        <li>
-                                            <a href="{{ route('dns.lists') }}" key="t-list-services">DNS Management</a></li>
-                                        <li>
+                                    <li>
                                         <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                            <span key="t-ddns">BW Management</span>
+                                            <span key="t-dns">DNS Management</span>
+                                        </a>    
+                                        <ul class="sub-menu" aria-expanded="false">
+                                            <li><a href="{{ route('dnsmon.lists') }}" key="t-list-services">DNS Monitoring</a></li>
+                                        </ul>
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                            <span key="t-bwm">BW Management</span>
                                         </a>
                                         <ul class="sub-menu" aria-expanded="false">
                                             <li><a href="{{ route('bwmrtr.lists') }}" key="t-list-router">List Routers POP</a></li>

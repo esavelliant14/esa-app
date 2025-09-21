@@ -649,14 +649,40 @@
                                 </div>
                             </div>
                             <div class="mb-3">
+                                <label for="" class="form-label">Regional</label>
+                                <select name="txt_regional" class="form-select"  required>
+                                    <option value="">--- Choose Regional ---</option>
+                                    <option value="Jakarta">Jakarta</option>
+                                    <option value="Bandung">Bandung</option>
+                                    <option value="Semarang">Semarang</option>
+                                    <option value="Surabaya">Surabaya</option>
+                                    <option value="Bali">Bali</option>
+                                    <option value="Palembang">Palembang</option>
+                                    <option value="Medan">Medan</option>
+                                    <option value="Makassar">Makassar</option>
+                                    <option value="Kalimantan">Kalimantan</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="" class="form-label">Brand</label>
-                                <select name="txt_brand" class="form-select" required>
+                                <select id="deviceSelect" name="txt_brand" class="form-select"  required>
                                     <option value="">--- Choose Brand ---</option>
                                     <option value="Juniper">Juniper</option>
                                     <option value="Mikrotik">MikroTik</option>
                                     <option value="H3C">H3C</option>
                                     <option value="Cisco">Cisco</option>
                                     <option value="Huawei">Huawei</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Logical System</label>
+                                <select id="logicalSystemSelect1" name="txt_logical_system" class="form-select @error('txt_logical_system') is-invalid @enderror" style="display:none;" disabled required>
+                                    <option value="">--- Choose ---</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                                <select id="logicalSystemSelect2" name="txt_logical_system" class="form-select @error('txt_logical_system') is-invalid @enderror" style="display:none;" disabled required>
+                                    <option value="no">No</option>
                                 </select>
                             </div>
                             <input type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}" readonly hidden>
@@ -976,5 +1002,21 @@
     window.userGroupId = "{{ auth()->user()->id_group }}";
     window.APP_URL = "{{ url('/') }}";
     window.groupId = "{{ session('group_id') }}";
+
+document.getElementById('deviceSelect').addEventListener('change', function () {
+  if (this.value === 'Juniper') {
+    document.getElementById('logicalSystemSelect1').disabled = false;
+    document.getElementById('logicalSystemSelect1').style.display = 'block';
+    document.getElementById('logicalSystemSelect2').disabled = true;
+    document.getElementById('logicalSystemSelect2').style.display = 'none';
+
+  } else {
+    document.getElementById('logicalSystemSelect1').disabled = true;
+    document.getElementById('logicalSystemSelect1').style.display = 'none';
+    document.getElementById('logicalSystemSelect2').disabled = false;
+    document.getElementById('logicalSystemSelect2').style.display = 'block';
+
+  }
+});
 </script>
 

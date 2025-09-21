@@ -57,7 +57,7 @@ Route::get('/nas/profile-bandwidth', [NasController::class , 'profile_bandwidth'
 Route::get('/nas/profile-ppp', [NasController::class , 'profile_ppp'])->middleware(RedirectIfNotAuthenticated::class)->name('nas.ppp');
 
 //SERVICE DNS
-Route::get('/services/dns-management', [DnsController::class , 'lists'])->middleware(RedirectIfNotAuthenticated::class)->name('dns.lists');
+Route::get('/services/dns/monitoring', [DnsController::class , 'dnsMon'])->middleware(RedirectIfNotAuthenticated::class)->name('dnsmon.lists');
 
 //SERVICE DDNS
 Route::get('/services/ddns-lists', [DdnsController::class , 'lists'])->middleware(RedirectIfNotAuthenticated::class)->name('ddns.lists');

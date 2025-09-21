@@ -51,13 +51,17 @@ class BwmController extends Controller
             'txt_interface' => 'required',
             'txt_id_group' => 'required',
             'txt_id_user' => 'required',
-            'txt_brand' => 'required'
+            'txt_brand' => 'required',
+            'txt_logical_system' => 'required',
+            'txt_regional' => 'required',
         ],[
             'txt_hostname.required' => 'Router hostname is required',
             'txt_ip_address.required' => 'IP Address is required',
             'txt_ip_address.ip' => 'Wrong format IP Address',
             'txt_interface.required' => 'Interface is required',
-            'txt_brand.required' => 'Brand name is required'
+            'txt_brand.required' => 'Brand name is required',
+            'txt_logical_system.required' => 'Logical System parameter is Required',
+            'txt_regional' => 'Regional parameter is required'
         ]);
 
         $var_data->after(function($var_data) use ($post_create_bwmrtr) {
@@ -66,6 +70,7 @@ class BwmController extends Controller
             $interface = $post_create_bwmrtr->txt_interface;
             $id_group = $post_create_bwmrtr->txt_id_group;
             $brand = $post_create_bwmrtr->txt_brand;
+            $logical_system = $post_create_bwmrtr->txt_logical_system;
 
             $existAll = DB::table('table_bwm_rtr')
                 ->where('hostname', $hostname)
@@ -119,6 +124,8 @@ class BwmController extends Controller
                 'ip_address' => $var_data_valid['txt_ip_address'],
                 'interface' => $var_data_valid['txt_interface'],
                 'brand' => $var_data_valid['txt_brand'],
+                'regional' => $var_data_valid['txt_regional'],
+                'logical_system' => $var_data_valid['txt_logical_system'],
                 'id_group' => $var_data_valid['txt_id_group'],
                 'id_user' => $var_data_valid['txt_id_user'],
                 

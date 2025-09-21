@@ -38,6 +38,11 @@ class Group extends Model
         return $this->hasMany(Bwmbod::class);
     }
 
+    public function dnsmon(): HasMany
+    {
+        return $this->hasMany(Dnsmon::class);
+    }
+
     public function logging(): HasMany
     {
         return $this->hasMany(Logging::class);

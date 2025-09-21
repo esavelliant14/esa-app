@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('ip_address',64);
             $table->string('interface',10);
             $table->string('brand',50);
+            $table->string('logical_system',5);
+            $table->string('regional',50);
             $table->string('id_group',10);
             $table->string('id_user',10);
             $table->timestamps();

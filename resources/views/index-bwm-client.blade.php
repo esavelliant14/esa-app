@@ -38,8 +38,9 @@
             <div class="card-body">
                 
                 <h4 class="card-title"></h4>
+                @can('access-permission' , '64')
                 <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddBwmClient" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addPrivilege-modal"><i class="mdi mdi-plus me-1"></i>New Client</button>
-                
+                @endcan
                 <table id="datatable" class="table table-bordered dt-responsive w-100">
                     <thead>
                         <tr>
@@ -65,9 +66,11 @@
                             <td>{{ $item->ip_address }}</td>
                             <td>{{ $item->input_policer }}/{{ $item->output_policer }}</td>
                             <td>
+                                @can('access-permission' , '64')
                                 <button type="button" class="btn btn-sm btn-info bwm-bod" data-hostname="{{ $item->hostname }}" data-description="{{ $item->description }}" data-interface="{{ $item->interface }}" data-unit="{{ $item->unit_interface }}" data-inputpolicerold="{{ $item->input_policer }}" data-outputpolicerold="{{ $item->output_policer }}" data-bodidgroup="{{ $item->id_group }}" data-bodiduser="{{ $item->id_user }}" data-bs-toggle="modal" data-bs-target="#ModalBwmBod">
                                     <span class="mdi mdi-speedometer" ></span>
                                 </button>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
