@@ -396,6 +396,11 @@
                                     <input type="checkbox" id="filter_menu_enabledisable_nasusers" name="txt_permission[]" value="57" class="" disabled/> Disable Enable Nas Users<br>
                                     <input type="checkbox" id="filter_menu_nasprofiles" name="txt_permission[]" value="58" class="" disabled/> View Nas Profiles<br>
                                     <input type="checkbox" id="filter_menu_full_nasprofiles" name="txt_permission[]" value="59" class="" disabled/> Full Access Nas Profiles<br>
+                                    <input type="checkbox" id="filter_menu_viewservices" name="txt_permission[]" value="60" disabled/> View Services Menu<br>
+                                    <input type="checkbox" id="filter_menu_dns" name="txt_permission[]" value="61" disabled/> View DNS Management<br>
+                                    <input type="checkbox" id="filter_menu_full_dns" name="txt_permission[]" value="62" disabled/> Full Access DNS Management<br>
+                                    <input type="checkbox" id="filter_menu_bwm" name="txt_permission[]" value="63" disabled/> View BWM<br>
+                                    <input type="checkbox" id="filter_menu_full_bwm" name="txt_permission[]" value="64" disabled/> Full Access BWM<br>
                                 </div>
                             </div>
 
