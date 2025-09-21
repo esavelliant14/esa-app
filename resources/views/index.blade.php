@@ -33,7 +33,7 @@
                                 <div class="flex-shrink-0 align-self-center">
                                     <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
                                         <span class="avatar-title">
-                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                            <i class="mdi mdi-router font-size-24"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                 <div class="flex-shrink-0 align-self-center ">
                                     <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                         <span class="avatar-title rounded-circle bg-primary">
-                                            <i class="bx bx-archive-in font-size-24"></i>
+                                            <i class="fas fa-users font-size-24"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="flex-shrink-0 align-self-center">
                                     <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                         <span class="avatar-title rounded-circle bg-primary">
-                                            <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                            <i class="mdi mdi-speedometer font-size-24"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -94,35 +94,7 @@
         </div>
 
 
-    </div><!-- end row -->
-@endsection
+    </div>
+    <!-- end row -->
 
-@section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const activeArray = @json($activeArray);
-    const doneArray   = @json($doneArray);
-    const dates       = @json($dates);
-
-    console.log(activeArray, doneArray, dates); // cek dulu
-
-    var colors = getChartColorsArray("spline_area");
-
-    var options = {
-        chart: { height: 350, type: "area", toolbar: { show: false } },
-        dataLabels: { enabled: false },
-        stroke: { curve: "smooth", width: 3 },
-        series: [
-          { name: "Client BOD Active", data: activeArray },
-          { name: "Client BOD Done", data: doneArray }
-        ],
-        colors: colors,
-        xaxis: { type: "datetime", categories: dates },
-        grid: { borderColor: "#f1f1f1" },
-        tooltip: { x: { format: "dd/MM/yy" } }
-    };
-
-    new ApexCharts(document.querySelector("#spline_area"), options).render();
-});
-</script>
 @endsection

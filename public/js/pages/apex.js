@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var doneArray   = JSON.parse(splineDiv.dataset.done);
     var phpDates    = JSON.parse(splineDiv.dataset.dates); // array ISO string
 
-    console.log(activeArray, doneArray, phpDates);
 
     var colors = getChartColorsArray("spline_area");
 

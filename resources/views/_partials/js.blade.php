@@ -10,7 +10,7 @@
 <script src="{{ url('/public/js/pages/apex.js') }}"></script>
 
 <!-- dashboard init -->
-<script src="{{ url('/public/js/pages/dashboard.js')  }}"></script>
+<script src="{{ url('/public/js/pages/dashboard.init.js')  }}"></script>
 
 <!-- App js -->
 <script src="{{ url('/public/js/app.js') }}"></script>
@@ -20,9 +20,9 @@
 <script src="{{ url('/public/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <!-- Buttons examples -->
 <script src="{{ url('/public/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ url('public/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}/"></script>
+<script src="{{ url('public/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
 <script src="{{ url('/public/libs/jszip/jszip.min.js') }}"></script>
-<script src="{{ url('public/libs/pdfmake/build/pdfmake.min.js') }}/"></script>
+<script src="{{ url('public/libs/pdfmake/build/pdfmake.min.js') }}"></script>
 <script src="{{ url('/public/libs/pdfmake/build/vfs_fonts.js') }}"></script>
 <script src="{{ url('/public/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ url('/public/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
@@ -60,8 +60,6 @@
 
 </script>
 <script src="{{ url('/public/js/pages/customize.js') }}?v={{ time() }}"></script>
-
-
 
 
   
