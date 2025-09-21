@@ -32,7 +32,7 @@ class UserController extends Controller
         }
 
         return view('user',[
-            'title_url' => 'USER | ESA.NET',
+            'title_url' => 'USER | SUPERAPPS',
             'active' => 'user',
             'title_menu' => 'USER',
             'title_submenu' => 'USER',

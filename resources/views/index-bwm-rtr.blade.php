@@ -72,7 +72,7 @@
                                 <form class="delete-form d-inline"  action="{{ route('bwmrtr.delete',$item->id) }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="button" class="btn btn-sm btn-danger delete-button">
+                                    <button type="button" class="btn btn-sm btn-danger delete-button rounded-pill">
                                         <span class="mdi mdi-delete" ></span>
                                     </button>
                                 </form>

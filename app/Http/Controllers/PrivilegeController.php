@@ -32,7 +32,7 @@ class PrivilegeController extends Controller
         }
 
         return view('privilege',[
-            'title_url' => 'USER | ESA.NET',
+            'title_url' => 'USER | SUPERAPPS',
             'active' => 'privilege',
             'title_menu' => 'PRIVILEGE',
             'title_submenu' => 'PRIVILEGE',

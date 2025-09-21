@@ -67,10 +67,17 @@
                             <td>{{ $item->input_policer }}/{{ $item->output_policer }}</td>
                             <td>
                                 @can('access-permission' , '64')
-                                <button type="button" class="btn btn-sm btn-info bwm-bod" data-hostname="{{ $item->hostname }}" data-description="{{ $item->description }}" data-interface="{{ $item->interface }}" data-unit="{{ $item->unit_interface }}" data-inputpolicerold="{{ $item->input_policer }}" data-outputpolicerold="{{ $item->output_policer }}" data-bodidgroup="{{ $item->id_group }}" data-bodiduser="{{ $item->id_user }}" data-bs-toggle="modal" data-bs-target="#ModalBwmBod">
+                                <button type="button" class="btn btn-sm btn-info bwm-bod rounded-pill" data-hostname="{{ $item->hostname }}" data-description="{{ $item->description }}" data-interface="{{ $item->interface }}" data-unit="{{ $item->unit_interface }}" data-inputpolicerold="{{ $item->input_policer }}" data-outputpolicerold="{{ $item->output_policer }}" data-bodidgroup="{{ $item->id_group }}" data-bodiduser="{{ $item->id_user }}" data-bs-toggle="modal" data-bs-target="#ModalBwmBod">
                                     <span class="mdi mdi-speedometer" ></span>
                                 </button>
                                 @endcan
+                                <form class="d-inline" action="{{ route('bwmclient.refresh',$item->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-success rounded-pill">
+                                        <span class="mdi mdi-refresh"></span>
+                                    </button>
+                                </form>
+
                             </td>
                         </tr>
                         @endforeach

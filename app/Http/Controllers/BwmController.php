@@ -452,6 +452,26 @@ class BwmController extends Controller
 
     }
 
+    public function refreshclient($id)
+    {
+        $getclient = BwmClient::findOrFail($id);
+        
+        $response = Http::post('http://127.0.0.1:8000/refresh-client',[
+            'hostname' => $getclient->hostname,
+            'interface' => $getclient->interface,
+            'description' => $getclient->description,
+            'unit' => $getclient->unit_interface,
+            'input_policer' => $getclient->input_policer,
+            'output_policer' => $getclient->output_policer,
+        ]);
+        if($response->successful()){
+            $data = $response->json();
+            return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
+        }else{
+            $data = $response->json();
+            return redirect(route('bwmclient.lists'))->with($data['status'], $data['message']);
+        }
+    }
 
     public function getHostnames(Request $request)
     {
