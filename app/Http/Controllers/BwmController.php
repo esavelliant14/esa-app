@@ -25,13 +25,10 @@ class BwmController extends Controller
         if (!Gate::allows('access-permission' , '63')) {
             return redirect('/main')->with('access_denied', true);
         }
-        if ( auth()->user()->id_group == 1 ){
-            $show_group = Group::all();
-            $show_rtr = Bwmrtr::all();
-        } else {
-            $show_group = Group::where('id' , auth()->user()->id_group)->get();
-            $show_rtr = Bwmrtr::where('id_group', auth()->user()->id_group)->get();
-        }
+
+        $show_group = Group::where('id' , auth()->user()->id_group)->get();
+        $show_rtr = Bwmrtr::where('id_group', auth()->user()->id_group)->get();
+        
         return view('index-bwm-rtr',[
             'title_url' => 'LIST BWM ROUTER',
             'active' => 'rtr-lists',
@@ -61,7 +58,7 @@ class BwmController extends Controller
             'txt_interface.required' => 'Interface is required',
             'txt_brand.required' => 'Brand name is required',
             'txt_logical_system.required' => 'Logical System parameter is Required',
-            'txt_regional' => 'Regional parameter is required'
+            'txt_regional.required' => 'Regional parameter is required'
         ]);
 
         $var_data->after(function($var_data) use ($post_create_bwmrtr) {
@@ -204,14 +201,10 @@ class BwmController extends Controller
         if (!Gate::allows('access-permission' , '63')) {
             return redirect('/main')->with('access_denied', true);
         }
-        if ( auth()->user()->id_group == 1 ){
-            $show_group = Group::all();
-            $show_bw = Bwm::all();
-        } else {
-            $show_group = Group::where('id' , auth()->user()->id_group)->get();
-            $show_bw = Bwm::where('id_group', auth()->user()->id_group)->get();
 
-        }
+        $show_group = Group::where('id' , auth()->user()->id_group)->get();
+        $show_bw = Bwm::where('id_group', auth()->user()->id_group)->get();
+
         return view('index-bwm-bw',[
             'title_url' => 'LIST BWM',
             'active' => 'bw-lists',
@@ -358,13 +351,10 @@ class BwmController extends Controller
         if (!Gate::allows('access-permission' , '63')) {
             return redirect('/main')->with('access_denied', true);
         }
-        if ( auth()->user()->id_group == 1 ){
-            $show_group = Group::all();
-            $show_client = Bwmclient::all();
-        } else {
-            $show_group = Group::where('id' , auth()->user()->id_group)->get();
-            $show_client = Bwmclient::where('id_group', auth()->user()->id_group)->get();
-        }
+
+        $show_group = Group::where('id' , auth()->user()->id_group)->get();
+        $show_client = Bwmclient::where('id_group', auth()->user()->id_group)->get();
+
         return view('index-bwm-client',[
             'title_url' => 'LIST BWM CLIENT',
             'active' => 'client-lists',
@@ -509,13 +499,10 @@ class BwmController extends Controller
         if (!Gate::allows('access-permission' , '63')) {
             return redirect('/main')->with('access_denied', true);
         }
-        if ( auth()->user()->id_group == 1 ){
-            $show_group = Group::all();
-            $show_bod = Bwmbod::all();
-        } else {
-            $show_group = Group::where('id' , auth()->user()->id_group)->get();
-            $show_bod = Bwmbod::where('id_group', auth()->user()->id_group)->get();
-        }
+
+        $show_group = Group::where('id' , auth()->user()->id_group)->get();
+        $show_bod = Bwmbod::where('id_group', auth()->user()->id_group)->get();
+
         return view('index-bod-lists',[
             'title_url' => 'LIST BOD',
             'active' => 'list-bod',

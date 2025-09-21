@@ -68,6 +68,7 @@
                             <td>{{ $item->group->name_group }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>
+                                @can('access-permission' , '64')
                                 <form class="delete-form d-inline"  action="{{ route('bwmrtr.delete',$item->id) }}" method="POST">
                                     @csrf
                                     @method('delete')
@@ -75,6 +76,7 @@
                                         <span class="mdi mdi-delete" ></span>
                                     </button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

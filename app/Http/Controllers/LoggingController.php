@@ -16,7 +16,7 @@ class LoggingController extends Controller
         $show_log = Logging::orderBy('created_at', 'desc')->where('id_group', auth()->user()->id_group)->get();
         
         return view('log',[
-            'title_url' => 'LOG | ESA.NET',
+            'title_url' => 'LOG | SUPERAPPS',
             'active' => 'log',
             'title_menu' => 'LOG',
             'title_submenu' => 'LOG',

@@ -684,6 +684,11 @@
                                 <select id="logicalSystemSelect2" name="txt_logical_system" class="form-select @error('txt_logical_system') is-invalid @enderror" style="display:none;" disabled required>
                                     <option value="no">No</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    @error('txt_logical_system')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
                             <input type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}" readonly hidden>
                             <input type="text" name="txt_id_user" value="{{ auth()->user()->id }}" readonly hidden>
