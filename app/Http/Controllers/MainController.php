@@ -17,7 +17,7 @@ class MainController extends Controller
         // group per tanggal
         $bodGrouped = Bwmbod::selectRaw('DATE(created_at) as tanggal, 
             SUM(CASE WHEN status="Active" THEN 1 ELSE 0 END) as active_count,
-            SUM(CASE WHEN status="Done" THEN 1 ELSE 0 END) as done_count')
+            SUM(CASE WHEN status="Inactive" THEN 1 ELSE 0 END) as done_count')
             ->where('id_group', auth()->user()->id_group)
             ->groupBy('tanggal')
             ->orderBy('tanggal')
