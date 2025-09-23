@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status_unit',50);
             $table->string('description',128);
             $table->string('ip_address',50);
-            $table->integer('vlan_id');
+            $table->integer('vlan_id')->nullable();
             $table->string('policer_status',50);
             $table->string('input_policer',10);
             $table->string('input_policer_status',50);
