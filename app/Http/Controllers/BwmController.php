@@ -480,7 +480,7 @@ class BwmController extends Controller
         }
         $idgroup = auth()->user()->id_group;
         $routers = Bwmrtr::select('hostname','id_group')
-            ->where('id_group', $idgroup)->get();
+            ->where('id_group', $idgroup)->distinct()->get();
 
         return response()->json($routers);
     }
