@@ -521,7 +521,7 @@ class BwmController extends Controller
         }
 
         $show_group = Group::where('id' , auth()->user()->id_group)->get();
-        $show_bod = Bwmbod::where('id_group', auth()->user()->id_group)->get();
+        $show_bod = Bwmbod::orderBy('created_at', 'desc')->where('id_group', auth()->user()->id_group)->get();
 
         return view('index-bod-lists',[
             'title_url' => 'LIST BOD',
