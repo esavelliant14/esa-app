@@ -885,7 +885,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Upload BOD</label>
-                                    <select name="txt_input_policer_bod" id="id_search_policer_upload" class="form-select @error('txt_input_policer_bod','BwmBodForm') is-invalid @enderror" required>
+                                    <select name="txt_input_policer_bod" style="width:100%" id="id_search_policer_upload" class="form-control select2 @error('txt_input_policer_bod','BwmBodForm') is-invalid @enderror" required>
                                         <option value="">--- Select Bandwidth ---</option>
                                     </select>
                                     <div class="invalid-feedback">
@@ -896,7 +896,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Download BOD</label>
-                                    <select name="txt_output_policer_bod" id="id_search_policer_download" class="form-select @error('txt_output_policer_bod','BwmBodForm') is-invalid @enderror" required>
+                                    <select name="txt_output_policer_bod" style="width:100%" id="id_search_policer_download" class="form-control select2 @error('txt_output_policer_bod','BwmBodForm') is-invalid @enderror" required>
                                         <option value="">--- Select Bandwidth ---</option>
                                     </select>
                                     <div class="invalid-feedback">
@@ -956,6 +956,13 @@ document.getElementById('deviceSelect').addEventListener('change', function () {
     document.getElementById('logicalSystemSelect2').style.display = 'block';
 
   }
+});
+
+// supaya load select2 di modal add bwm
+$(document).ready(function() {
+  $('#ModalBwmBod .select2').select2({
+    dropdownParent: $('#ModalBwmBod')
+  });
 });
 </script>
 

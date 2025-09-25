@@ -53,7 +53,6 @@
                       <input type="password" class="form-control" id="horizontal-password-input" name="password_confirmation" placeholder="Repeat New Password" required>
                     </div>
                 </div>
-
                 <div class="row">
                     <div>
                         <button type="submit" class="btn btn-success rounded-pill">Submit</button>
