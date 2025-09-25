@@ -68,7 +68,32 @@
                             <td>{{ $item->group->name_group }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>
+
                                 @can('access-permission' , '64')
+                                <form class="d-inline" action="{{ route('bwmrtr.getclient') }}" method="post">
+                                    @csrf
+                                    <input hidden readonly type="text" name="txt_hostname" value="{{ $item->hostname }}">
+                                    <input hidden readonly type="text" name="txt_interface" value="{{ $item->interface}}">
+                                    <input hidden readonly type="text" name="txt_ip_address" value="{{ $item->ip_address }}">
+                                    <input hidden readonly type="text" name="txt_logical_system" value="{{ $item->logical_system }}">
+                                    <input hidden readonly type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}">
+                                    <input hidden readonly type="text" name="txt_id_user" value="{{ auth()->user()->id }}">
+                                    <button type="submit" class="btn btn-sm btn-info rounded-pill">
+                                        <span class="fas fa-sync" ></span>
+                                    </button>
+                                </form>
+                                <form class="d-inline" action="{{ route('bwmbw.getpolicer') }}" method="post">
+                                    @csrf
+                                    <input hidden readonly type="text" name="txt_hostname" value="{{ $item->hostname }}">
+                                    <input hidden readonly type="text" name="txt_interface" value="{{ $item->interface}}">
+                                    <input hidden readonly type="text" name="txt_ip_address" value="{{ $item->ip_address }}">
+                                    <input hidden readonly type="text" name="txt_logical_system" value="{{ $item->logical_system }}">
+                                    <input hidden readonly type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}">
+                                    <input hidden readonly type="text" name="txt_id_user" value="{{ auth()->user()->id }}">
+                                    <button type="submit" class="btn btn-sm btn-success rounded-pill">
+                                        <span class="mdi mdi-fire" ></span>
+                                    </button>
+                                </form>
                                 <form class="delete-form d-inline"  action="{{ route('bwmrtr.delete',$item->id) }}" method="POST">
                                     @csrf
                                     @method('delete')

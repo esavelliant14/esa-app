@@ -18,6 +18,10 @@
 
     </script>
     <script src="{{ url('/public/js/plugin.js') }}"></script>
+
+    {{-- VITE --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     
 
     <!-- Sweet Alert-->

@@ -39,6 +39,28 @@ class BwmController extends Controller
         ]);
     }
 
+    public function getclient(Request $get_rtr)
+    {
+        $response = Http::post('http://127.0.0.1:8000/get-client', [
+            'hostname' => $get_rtr['txt_hostname'],
+            'ip_address' => $get_rtr['txt_ip_address'],
+            'interface' => $get_rtr['txt_interface'],
+            'logical_system' => $get_rtr['txt_logical_system'],
+            'id_group' => $get_rtr['txt_id_group'],
+            'id_user' => $get_rtr['txt_id_user'],
+        ]);
+
+        if($response->successful())
+        {
+            $data = $response->json();
+            return redirect(route('bwmrtr.lists'))->with($data['status'], $data['message']);
+        }else{
+            $data = $response->json();
+            return redirect(route('bwmrtr.lists'))->with($data['status'], $data['message']);
+        }
+        
+    }
+
 
     public function addrtr(Request $post_create_bwmrtr){
         
@@ -213,6 +235,28 @@ class BwmController extends Controller
             'var_show' => $show_bw,
             'var_show_group' => $show_group,
         ]);
+    }
+
+    public function getpolicer(Request $get_rtr)
+    {
+        $response = Http::post('http://127.0.0.1:8000/get-policer', [
+            'hostname' => $get_rtr['txt_hostname'],
+            'ip_address' => $get_rtr['txt_ip_address'],
+            'interface' => $get_rtr['txt_interface'],
+            'logical_system' => $get_rtr['txt_logical_system'],
+            'id_group' => $get_rtr['txt_id_group'],
+            'id_user' => $get_rtr['txt_id_user'],
+        ]);
+
+        if($response->successful())
+        {
+            $data = $response->json();
+            return redirect(route('bwmrtr.lists'))->with($data['status'], $data['message']);
+        }else{
+            $data = $response->json();
+            return redirect(route('bwmrtr.lists'))->with($data['status'], $data['message']);
+        }
+        
     }
 
     public function addbw(Request $post_create_bwmbw){
