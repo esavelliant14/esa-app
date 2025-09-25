@@ -7,7 +7,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ url('/public/img/favicon.ico') }}">
 
-        {{-- VITE --}}
     
     <link href="{{ url('/public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 
@@ -43,5 +42,7 @@
     <link href="{{ url('/public/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
     <script src="{{ url('/public/js/plugin.js') }}"></script>
-  @vite(['resources/css/app.css'])
+  
+    {{-- VITE --}}
+    @vite(['resources/css/app.css'])
 </head>
