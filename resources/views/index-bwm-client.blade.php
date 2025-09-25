@@ -38,9 +38,7 @@
             <div class="card-body">
                 
                 <h4 class="card-title"></h4>
-                @can('access-permission' , '64')
-                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddBwmClient" class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 addPrivilege-modal"><i class="mdi mdi-plus me-1"></i>New Client</button>
-                @endcan
+
                 <table id="datatable" class="table table-bordered dt-responsive w-100">
                     <thead>
                         <tr>
@@ -88,14 +86,6 @@
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
-@if ($errors->any())
-        <script>
-            window.onload = function() {
-            var myModal = new bootstrap.Modal(document.getElementById('ModalAddBwmClient'));
-            myModal.show();
-            }
-        </script>
-@endif
 @if ($errors->BwmBodForm->any())
         <script>
             window.onload = function() {
