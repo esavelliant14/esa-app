@@ -53,6 +53,7 @@
                                     <span key="t-backhaul">SERVICES</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
+                                    @can('access-permission' , '61')
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                                             <span key="t-dns">DNS Management</span>
@@ -60,8 +61,9 @@
                                         <ul class="sub-menu" aria-expanded="false">
                                             <li><a href="{{ route('dnsmon.lists') }}" key="t-list-services">DNS Monitoring</a></li>
                                         </ul>
-                                        
                                     </li>
+                                    @endcan
+                                    @can('access-permission' , '63')
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                                             <span key="t-bwm">BW Management</span>
@@ -73,6 +75,7 @@
                                             <li><a href="{{ route('bwmbod.lists') }}" key="t-forwarding">List Clients BOD</a></li>
                                         </ul>
                                     </li>
+                                    @endcan
                                 </ul>
                                 
                             </li>
