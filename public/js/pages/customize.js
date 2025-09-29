@@ -607,15 +607,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //countdown domain
 document.addEventListener('DOMContentLoaded', () => {
+  const items = [];
   document.querySelectorAll('.countdown').forEach(span => {
-    const expiryDate = new Date(span.dataset.expiry.replace(' ', 'T'));
+    items.push({
+      el: span,
+      expiryDate: new Date(span.dataset.expiry.replace(' ', 'T'))
+    });
+  });
 
-    function update() {
-      const now = new Date();
-      const diff = expiryDate - now;
-
+  function updateAll() {
+    const now = new Date();
+    items.forEach(item => {
+      const diff = item.expiryDate - now;
       if (diff <= 0) {
-        span.textContent = 'Expired';
+        item.el.textContent = 'Expired';
         return;
       }
 
@@ -625,22 +630,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = totalSeconds % 60;
 
-      // perkiraan bulan dari jumlah hari
       const months = Math.floor(days / 30);
       const daysLeft = days % 30;
 
       let text = '';
-      if (months > 0) text += `${months} Months `;
-      if (daysLeft > 0) text += `${daysLeft} Days `;
-
+      if (months > 0) text += `${months} Month${months > 1 ? 's' : ''} `;
+      if (daysLeft > 0) text += `${daysLeft} Day${daysLeft > 1 ? 's' : ''} `;
       text += `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-      span.textContent = text.trim();
-    }
+      item.el.textContent = text.trim();
+    });
+  }
 
-    update();
-    setInterval(update, 1000);
-  });
+  updateAll();
+  setInterval(updateAll, 1000);
 });
+
 
 
 
