@@ -119,6 +119,7 @@ class DnsController extends Controller
                             'expiry_date' => $api['expiry_date'] ?? null,
                             'order_status' => $api['order_status'] ?? null,
                             'suspended' => isset($api['suspended']) ? ($api['suspended'] ? 'true' : 'false') : null,
+                            'owner_type' => $domain->owner_type ?? null,
                             'vendor' => 'RESELLER_CAMP',
                         ];
                     }
@@ -143,6 +144,7 @@ class DnsController extends Controller
                             'expiry_date' => $expiryTimestamp ? date('Y-m-d H:i:s', $expiryTimestamp) : null,
                             'order_status' => $api['currentstatus'] ?? null,
                             'suspended' => $api['paused'] ?? null,
+                            'owner_type' => $domain->owner_type ?? null,
                             'vendor' => 'RESELLER_CLUB'
                         ];
                     }
@@ -198,6 +200,7 @@ class DnsController extends Controller
             'txt_domain_name' => 'required_if:txt_vendor,RESELLER_CLUB',
             'txt_id_group' => 'required',
             'txt_id_user' => 'required',
+            'txt_owner_type' => 'required',
         ],[
             'txt_vendor.required' => 'Vendor name is required',
             'txt_domain_id.required_if' => 'Domain ID is required for vendor Reseller Camp',
@@ -205,6 +208,7 @@ class DnsController extends Controller
             'txt_domain_name.required_if' => 'Domain Name is Required for vendor Reseller Club',
             'txt_id_group.required' => 'sometimes required',
             'txt_id_user.required' => 'somesimtes required',
+            'txt_owner_type.required' => 'Owner Type is required'
         ]);
 
 
@@ -212,7 +216,6 @@ class DnsController extends Controller
             $var_data->after(function($var_data) use ($post_add_dnsmon) {
                 $vendor = $post_add_dnsmon->txt_vendor;
                 $domain_id = $post_add_dnsmon->txt_domain_id;
-                $domain_name = $post_add_dnsmon->txt_domain_name;
 
                 $existDomainId = DB::table('table_dns_mon')
                     ->where('vendor', $vendor)
@@ -234,6 +237,7 @@ class DnsController extends Controller
                         'vendor' => $var_data_valid['txt_vendor'],
                         'id_group' => $var_data_valid['txt_id_group'],
                         'id_user' => $var_data_valid['txt_id_user'],
+                        'owner_type' => $var_data_valid['txt_owner_type'],
                     ]);
                     Logging::create([
                         'action_by' => auth()->user()->email,
@@ -249,7 +253,6 @@ class DnsController extends Controller
         }else if ($post_add_dnsmon->txt_vendor == 'RESELLER_CLUB') {
             $var_data->after(function($var_data) use ($post_add_dnsmon) {
                 $vendor = $post_add_dnsmon->txt_vendor;
-                $domain_id = $post_add_dnsmon->txt_domain_id;
                 $domain_name = $post_add_dnsmon->txt_domain_name;
 
                 $existDomainName = DB::table('table_dns_mon')
@@ -274,6 +277,7 @@ class DnsController extends Controller
                     'vendor' => $var_data_valid['txt_vendor'],
                     'id_group' => $var_data_valid['txt_id_group'],
                     'id_user' => $var_data_valid['txt_id_user'],
+                    'owner_type' => $var_data_valid['txt_owner_type'],
                 ]);
                 Logging::create([
                     'action_by' => auth()->user()->email,

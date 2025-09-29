@@ -975,6 +975,14 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Owner Type</label>
+                                <select name="txt_owner_type" class="form-select"  required>
+                                    <option value="">--- Choose Owner Type ---</option>
+                                    <option value="INTERNAL">Internal</option>
+                                    <option value="CLIENT">Client</option>
+                                </select>
+                            </div>
 
                             <input type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}" hidden readonly>
                             <input type="text" name="txt_id_user" value="{{ auth()->user()->id }}" hidden readonly>

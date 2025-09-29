@@ -49,6 +49,7 @@
                             <th>Suspended</th>
                             <th>Expired Date</th>
                             <th>Countdown</th>
+                            <th>Owner Type</th>
                             <th>Vendor</th>
                         </tr>
                     </thead>
@@ -67,6 +68,7 @@
                                 <td>{{ $item['api']['suspended'] }}</td>
                                 <td>{{ $item['api']['expiry_date'] }}</td>
                                 <td><span class="countdown" data-expiry="{{ $item['api']['expiry_date'] }}"></span></td>
+                                <td>{{ $item['api']['owner_type'] }}</td>
                                 <td>{{ $item['api']['vendor'] }}</td>
                             </tr>
                         @endforeach

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('id_domain',128)->nullable();
             $table->string('name_domain',150)->nullable();
             $table->string('vendor',128);
+            $table->string('owner_type',20);
             $table->integer('id_group');
             $table->integer('id_user');
             $table->timestamps();
