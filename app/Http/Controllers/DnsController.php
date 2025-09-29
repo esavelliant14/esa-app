@@ -197,61 +197,78 @@ class DnsController extends Controller
             'txt_domain_id' => 'required_if:txt_vendor,RESELLER_CAMP|integer',
             'txt_domain_name' => 'required_if:txt_vendor,RESELLER_CLUB',
             'txt_id_group' => 'required',
-            'txt_id_user' => 'required'
+            'txt_id_user' => 'required',
         ],[
             'txt_vendor.required' => 'Vendor name is required',
-            'txt_domain_id.required' => 'Domain ID is required for vendor Reseller Camp',
+            'txt_domain_id.required_if' => 'Domain ID is required for vendor Reseller Camp',
             'txt_domain_id.integer' => 'Domain ID must a valid integer',
-            'txt_domain_name.required' => 'Domain Name is Required for vendor Reseller Club'
+            'txt_domain_name.required_if' => 'Domain Name is Required for vendor Reseller Club',
+            'txt_id_group.required' => 'sometimes required',
+            'txt_id_user.required' => 'somesimtes required',
         ]);
 
-        $var_data->after(function($var_data) use ($post_add_dnsmon) {
-            $vendor = $post_add_dnsmon->txt_vendor;
-            $domain_id = $post_add_dnsmon->txt_domain_id;
-            $domain_name = $post_add_dnsmon->txt_domain_name;
 
-            $existDomainId = DB::table('table_dns_mon')
-                ->where('vendor', $vendor)
-                ->where('id_domain', $domain_id)
-                ->exists();
-            if($existDomainId) {
-                $var_data->errors()->add('txt_vendor', 'Data already exist');
-            }
+        if ( $post_add_dnsmon->txt_vendor == 'RESELLER_CAMP' ){
+            $var_data->after(function($var_data) use ($post_add_dnsmon) {
+                $vendor = $post_add_dnsmon->txt_vendor;
+                $domain_id = $post_add_dnsmon->txt_domain_id;
+                $domain_name = $post_add_dnsmon->txt_domain_name;
 
-            $existDomainName = DB::table('table_dns_mon')
-                ->where('vendor', $vendor)
-                ->where('name_domain', $domain_name)
-                ->exists();
-
-            if($existDomainName) {
-                $var_data->errors()->add('txt_vendor', 'Data already exist');
-            }
-        });
-        if( $var_data->fails() ){
-            return redirect(route('dnsmon.lists'))
-            ->withErrors($var_data)
-            ->withInput();
-        }else{
-            $var_data_valid = $var_data->validated();
-            $name_group = Group::where('id', $var_data_valid['txt_id_group'])->pluck('name_group');
-            if( $var_data_valid['txt_vendor'] == 'RESELLER_CAMP' ) {
-                Dnsmon::create([
-                    'id_domain' => $var_data_valid['txt_domain_id'],
-                    'vendor' => $var_data_valid['txt_vendor'],
-                    'id_group' => $var_data_valid['txt_id_group'],
-                    'id_user' => $var_data_valid['txt_id_user'],
-                ]);
-                Logging::create([
-                    'action_by' => auth()->user()->email,
-                    'category_action' => 'Add DNS Monitoring',
-                    'status' => 'Success',
-                    'ip_address' => request()->ip(),
-                    'agent' => request()->header('User-Agent'),
-                    'details' => 'Success add new domain_id=' . $var_data_valid['txt_domain_id'] .  ' , on vendor='. $var_data_valid['txt_vendor'] . ' Group=' . $name_group,
-                    'id_group' => auth()->user()->id_group,
-
-                ]); 
+                $existDomainId = DB::table('table_dns_mon')
+                    ->where('vendor', $vendor)
+                    ->where('id_domain', $domain_id)
+                    ->exists();
+                if($existDomainId) {
+                    $var_data->errors()->add('txt_vendor', 'Data already exist');
+                }
+            });
+            if( $var_data->fails() ){
+                return redirect(route('dnsmon.lists'))
+                ->withErrors($var_data)
+                ->withInput();
             }else{
+                $var_data_valid = $var_data->validated();
+                $name_group = Group::where('id', $var_data_valid['txt_id_group'])->pluck('name_group');
+                    Dnsmon::create([
+                        'id_domain' => $var_data_valid['txt_domain_id'],
+                        'vendor' => $var_data_valid['txt_vendor'],
+                        'id_group' => $var_data_valid['txt_id_group'],
+                        'id_user' => $var_data_valid['txt_id_user'],
+                    ]);
+                    Logging::create([
+                        'action_by' => auth()->user()->email,
+                        'category_action' => 'Add DNS Monitoring',
+                        'status' => 'Success',
+                        'ip_address' => request()->ip(),
+                        'agent' => request()->header('User-Agent'),
+                        'details' => 'Success add new domain_id=' . $var_data_valid['txt_domain_id'] .  ' , on vendor='. $var_data_valid['txt_vendor'] . ' Group=' . $name_group,
+                        'id_group' => auth()->user()->id_group,
+                    ]); 
+            }
+
+        }else if ($post_add_dnsmon->txt_vendor == 'RESELLER_CLUB') {
+            $var_data->after(function($var_data) use ($post_add_dnsmon) {
+                $vendor = $post_add_dnsmon->txt_vendor;
+                $domain_id = $post_add_dnsmon->txt_domain_id;
+                $domain_name = $post_add_dnsmon->txt_domain_name;
+
+                $existDomainName = DB::table('table_dns_mon')
+                    ->where('vendor', $vendor)
+                    ->where('name_domain', $domain_name)
+                    ->exists();
+
+                if($existDomainName) {
+                    $var_data->errors()->add('txt_vendor', 'Data already exist');
+                }
+            });
+            if( $var_data->fails() ){
+                return redirect(route('dnsmon.lists'))
+                ->withErrors($var_data)
+                ->withInput();
+            }else{
+                $var_data_valid = $var_data->validated();
+                $name_group = Group::where('id', $var_data_valid['txt_id_group'])->pluck('name_group');
+        
                 Dnsmon::create([
                     'name_domain' => $var_data_valid['txt_domain_name'],
                     'vendor' => $var_data_valid['txt_vendor'],
@@ -270,7 +287,10 @@ class DnsController extends Controller
                 ]); 
 
             }
-            return redirect(route('dnsmon.lists'))->with('success', 'Add new domain successfully');
         }
+
+            
+            return redirect(route('dnsmon.lists'))->with('success', 'Add new domain successfully');
+        
     }
 }
