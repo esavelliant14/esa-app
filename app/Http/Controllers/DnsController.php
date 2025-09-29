@@ -15,79 +15,6 @@ use App\Models\Group;
 class DnsController extends Controller
 {
 
-    // public function dnsMon(){
-    //     if (!Gate::allows('access-permission' , '61')) {
-    //         return redirect('/main')->with('access_denied', true);
-    //     }
-
-    //     // Ambil semua row dari table dnsmon
-    //     $domains = Dnsmon::all();
-
-    //     $results = [];
-    //     foreach ($domains as $domain) {
-    //         $apiData = null;
-
-    //         if ($domain->vendor === 'RESELLER_CAMP') {
-    //             // API RESELLER_CAMP
-    //             $url = "https://api.liqu.id/v1/domains/{$domain->id_domain}?fields=all";
-    //             $response = Http::withBasicAuth(
-    //                 env('RESELLER_CAMP_USER'),
-    //                 env('RESELLER_CAMP_KEY')
-    //             )->get($url);
-
-    //             if ($response->successful()) {
-    //                 $api = $response->json();
-    //                 $apiData = [
-    //                     'domain_name' => $api['domain_name'] ?? null,
-    //                     'expiry_date' => $api['expiry_date'] ?? null,
-    //                     'order_status' => $api['order_status'] ?? null,
-    //                     'suspended' => $api['suspended'] ?? null,
-
-    //                 ];
-    //             } else {
-    //                 $apiData = ['error' => $response->body()];
-    //             }
-
-    //         } elseif ($domain->vendor === 'RESELLER_CLUB') {
-    //             // API RESELLER_CLUB
-    //             $url = "https://test.httpapi.com/api/domains/details-by-name.json";
-    //             $response = Http::get($url, [
-    //                 'auth-userid' => env('RESELLER_CLUB_USERID'),
-    //                 'api-key' => env('RESELLER_CLUB_KEY'),
-    //                 'domain-name' => $domain->domain, // asumsinya kolom id = domain-name untuk club
-    //                 'options' => 'All'
-    //             ]);
-
-    //             if ($response->successful()) {
-    //                 $api = $response->json();
-    //                 $expiryTimestamp = $api['endtime'] ?? null;
-    //                 $apiData = [
-    //                     'domain_name' => $domain->domain,
-    //                     'expiry_date' => $expiryTimestamp ? date('Y-m-d H:i:s', $expiryTimestamp) : null,
-    //                     'order_status' => $api['currentstatus'] ?? null,
-    //                     'suspended' => $api['paused'] ?? null,
-    //                 ];
-    //             } else {
-    //                 $apiData = ['error' => $response->body()];
-    //             }
-
-    //         } else {
-    //             $apiData = ['error' => "Vendor {$domain->vendor} tidak dikenali."];
-    //         }
-
-    //         $results[] = [
-    //             'api'   => $apiData,
-    //         ];
-    //     }
-    //     dd($results);
-    //     // return view('index-dnsmon-lists', [
-    //     //     'title_url' => 'DNS MONITORING',
-    //     //     'active' => 'list-dns',
-    //     //     'title_menu' => 'DNS',
-    //     //     'title_submenu' => 'DNS MONITORING',
-    //     //     'domains' => $results // kita kirim data ke view
-    //     // ]);
-    // }
     public function dnsMon()
     {
         if (!Gate::allows('access-permission' , '61')) {
@@ -231,7 +158,10 @@ class DnsController extends Controller
                 ->withInput();
             }else{
                 $var_data_valid = $var_data->validated();
-                $name_group = Group::where('id', $var_data_valid['txt_id_group'])->pluck('name_group');
+                $response = Http::withBasicAuth(env('RESELLER_CAMP_USER'), env('RESELLER_CAMP_KEY'))
+                        ->get("https://api.liqu.id/v1/domains/{$var_data_valid['txt_domain_id']}?fields=all");
+                if ($response->successful()) {
+                    $name_group = Group::where('id', $var_data_valid['txt_id_group'])->pluck('name_group');
                     Dnsmon::create([
                         'id_domain' => $var_data_valid['txt_domain_id'],
                         'vendor' => $var_data_valid['txt_vendor'],
@@ -248,8 +178,11 @@ class DnsController extends Controller
                         'details' => 'Success add new domain_id=' . $var_data_valid['txt_domain_id'] .  ' , on vendor='. $var_data_valid['txt_vendor'] . ' Group=' . $name_group,
                         'id_group' => auth()->user()->id_group,
                     ]); 
+                    return redirect(route('dnsmon.lists'))->with('success', 'Add new domain successfully');
+                } else {
+                    return redirect(route('dnsmon.lists'))->with('failed', 'Data not found on Reseller Camp');
+                }
             }
-
         }else if ($post_add_dnsmon->txt_vendor == 'RESELLER_CLUB') {
             $var_data->after(function($var_data) use ($post_add_dnsmon) {
                 $vendor = $post_add_dnsmon->txt_vendor;
@@ -270,31 +203,36 @@ class DnsController extends Controller
                 ->withInput();
             }else{
                 $var_data_valid = $var_data->validated();
-                $name_group = Group::where('id', $var_data_valid['txt_id_group'])->pluck('name_group');
-        
-                Dnsmon::create([
-                    'name_domain' => $var_data_valid['txt_domain_name'],
-                    'vendor' => $var_data_valid['txt_vendor'],
-                    'id_group' => $var_data_valid['txt_id_group'],
-                    'id_user' => $var_data_valid['txt_id_user'],
-                    'owner_type' => $var_data_valid['txt_owner_type'],
+                $response = Http::get("https://test.httpapi.com/api/domains/details-by-name.json", [
+                    'auth-userid' => env('RESELLER_CLUB_USERID'),
+                    'api-key' => env('RESELLER_CLUB_KEY'),
+                    'domain-name' => $var_data_valid['txt_domain_name'],
+                    'options' => 'All'
                 ]);
-                Logging::create([
-                    'action_by' => auth()->user()->email,
-                    'category_action' => 'Add DNS Monitoring',
-                    'status' => 'Success',
-                    'ip_address' => request()->ip(),
-                    'agent' => request()->header('User-Agent'),
-                    'details' => 'Success add new domain_name=' . $var_data_valid['txt_domain_name'] .  ' , on vendor='. $var_data_valid['txt_vendor'] . ' Group=' . $name_group,
-                    'id_group' => auth()->user()->id_group,
-
-                ]); 
-
+                if ($response->successful()) {
+                    $name_group = Group::where('id', $var_data_valid['txt_id_group'])->pluck('name_group');
+                    Dnsmon::create([
+                        'name_domain' => $var_data_valid['txt_domain_name'],
+                        'vendor' => $var_data_valid['txt_vendor'],
+                        'id_group' => $var_data_valid['txt_id_group'],
+                        'id_user' => $var_data_valid['txt_id_user'],
+                        'owner_type' => $var_data_valid['txt_owner_type'],
+                    ]);
+                    Logging::create([
+                        'action_by' => auth()->user()->email,
+                        'category_action' => 'Add DNS Monitoring',
+                        'status' => 'Success',
+                        'ip_address' => request()->ip(),
+                        'agent' => request()->header('User-Agent'),
+                        'details' => 'Success add new domain_name=' . $var_data_valid['txt_domain_name'] .  ' , on vendor='. $var_data_valid['txt_vendor'] . ' Group=' . $name_group,
+                        'id_group' => auth()->user()->id_group,
+                    ]); 
+                    return redirect(route('dnsmon.lists'))->with('success', 'Add new domain successfully');
+                }else{
+                    return redirect(route('dnsmon.lists'))->with('failed', 'Data not found on Reseller Club');
+                }
             }
-        }
-
-            
-            return redirect(route('dnsmon.lists'))->with('success', 'Add new domain successfully');
+        }  
         
     }
 }

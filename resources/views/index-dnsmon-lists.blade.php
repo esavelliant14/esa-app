@@ -63,13 +63,13 @@
                                 {{ $item['is_expiring'] === '3bulan' ? 'table-warning' : '' }}
                             ">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item['api']['domain_name'] }}</td>
-                                <td>{{ $item['api']['order_status'] }}</td>
-                                <td>{{ $item['api']['suspended'] }}</td>
-                                <td>{{ $item['api']['expiry_date'] }}</td>
-                                <td><span class="countdown" data-expiry="{{ $item['api']['expiry_date'] }}"></span></td>
-                                <td>{{ $item['api']['owner_type'] }}</td>
-                                <td>{{ $item['api']['vendor'] }}</td>
+                                <td>{{ $item['api']['domain_name'] ?? 'N/A' }}</td>
+                                <td>{{ $item['api']['order_status'] ?? 'N/A' }}</td>
+                                <td>{{ $item['api']['suspended'] ?? 'N/A' }}</td>
+                                <td>{{ $item['api']['expiry_date'] ?? 'N/A' }}</td>
+                                <td><span class="countdown" data-expiry="{{ $item['api']['expiry_date'] ?? '' }}"></span></td>
+                                <td>{{ $item['api']['owner_type'] ?? 'N/A' }}</td>
+                                <td>{{ $item['api']['vendor'] ?? 'N/A' }}</td>
                             </tr>
                         @endforeach
                         

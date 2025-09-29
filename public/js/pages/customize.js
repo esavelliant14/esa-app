@@ -615,31 +615,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  function updateAll() {
-    const now = new Date();
-    items.forEach(item => {
-      const diff = item.expiryDate - now;
-      if (diff <= 0) {
-        item.el.textContent = 'Expired';
-        return;
-      }
+function updateAll() {
+  const now = new Date();
+  items.forEach(item => {
+    const expiryDate = item.expiryDate;
 
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / 86400);
-      const hours = Math.floor((totalSeconds % 86400) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
+    if (isNaN(expiryDate.getTime())) {
+      item.el.textContent = 'N/A';
+      return;
+    }
 
-      const months = Math.floor(days / 30);
-      const daysLeft = days % 30;
+    const diff = expiryDate - now;
+    if (diff <= 0) {
+      item.el.textContent = 'Expired';
+      return;
+    }
 
-      let text = '';
-      if (months > 0) text += `${months} Month${months > 1 ? 's' : ''} `;
-      if (daysLeft > 0) text += `${daysLeft} Day${daysLeft > 1 ? 's' : ''} `;
-      text += `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-      item.el.textContent = text.trim();
-    });
-  }
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const months = Math.floor(days / 30);
+    const daysLeft = days % 30;
+
+    let text = '';
+    if (months > 0) text += `${months} Month${months > 1 ? 's' : ''} `;
+    if (daysLeft > 0) text += `${daysLeft} Day${daysLeft > 1 ? 's' : ''} `;
+    text += `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+    item.el.textContent = text.trim();
+  });
+}
+
 
   updateAll();
   setInterval(updateAll, 1000);
