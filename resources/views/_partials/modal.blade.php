@@ -936,12 +936,74 @@
 </div>
 {{-- END MODAL VIEW BOD --}}
 
+<!-- START MODAL ADD DOMAIN MONITORING -->
+<div class="modal fade" id="ModalAddMonDomain" tabindex="-1" aria-labelledby="newBwmRouterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newCustomerModalLabel">Add Doman</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ route('dnsmon.post') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Vendor</label>
+                                <select id="vendorSelect" name="txt_vendor" class="form-select"  required>
+                                    <option value="">--- Choose Vendor ---</option>
+                                    <option value="RESELLER_CAMP">Reseller Camp</option>
+                                    <option value="RESELLER_CLUB">Reseller Club</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="group_vendor1" style="display:none;">
+                                <label for="" class="form-label">Domain ID</label>
+                                <input type="text" id="input1" class="form-control @error('txt_domain_id') is-invalid @enderror" name="txt_domain_id" disabled required>
+                                <div class="invalid-feedback">
+                                    @error('txt_domain_id')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-3" id="group_vendor2" style="display:none;">
+                                <label for="" class="form-label">Domain Name</label>
+                                <input type="text" id="input2" class="form-control @error('txt_domain_name') is-invalid @enderror" name="txt_domain_name" disabled required>
+                                <div class="invalid-feedback">
+                                    @error('txt_domain_name')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <input type="text" name="txt_id_group" value="{{ auth()->user()->id_group }}" hidden readonly>
+                            <input type="text" name="txt_id_user" value="{{ auth()->user()->id }}" hidden readonly>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="text-end">
+                                <button type="submit" id="addDnsMon-btn" class="btn btn-sm rounded-pill btn-success">Add</button>
+                                <button type="button" class="btn btn-sm rounded-pill btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal body -->
+        </div>
+        <!-- end modal-content -->
+    </div>
+    <!-- end modal-dialog -->
+</div>
+<!-- END MODAL ADD DOMAIN MONITORING -->
+
 
 <script>
     window.userGroupId = "{{ auth()->user()->id_group }}";
     window.APP_URL = "{{ url('/') }}";
     window.groupId = "{{ session('group_id') }}";
 
+//pilihan logical system untuk BWM ADD RTR
 document.getElementById('deviceSelect').addEventListener('change', function () {
   if (this.value === 'Juniper') {
     document.getElementById('logicalSystemSelect1').disabled = false;
@@ -957,6 +1019,29 @@ document.getElementById('deviceSelect').addEventListener('change', function () {
 
   }
 });
+
+//pilihan untuk ketika reseller_camp atau reseller_club untuk yang add domain
+document.getElementById('vendorSelect').addEventListener('change', function () {
+  const group1 = document.getElementById('group_vendor1');
+  const group2 = document.getElementById('group_vendor2');
+
+  if (this.value === 'RESELLER_CAMP') {
+    group1.style.display = 'block';
+    group2.style.display = 'none';
+    input1.disabled = false;
+    input2.disabled = true;
+  } else if (this.value === 'RESELLER_CLUB') {
+    group1.style.display = 'none';
+    group2.style.display = 'block';
+    input1.disabled = true;
+    input2.disabled = false;
+  } else {
+    group1.style.display = 'none';
+    group2.style.display = 'none';
+  }
+});
+
+
 
 // supaya load select2 di modal add bwm
 $(document).ready(function() {

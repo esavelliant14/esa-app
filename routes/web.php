@@ -58,6 +58,7 @@ Route::get('/nas/profile-ppp', [NasController::class , 'profile_ppp'])->middlewa
 
 //SERVICE DNS
 Route::get('/services/dns/monitoring', [DnsController::class , 'dnsMon'])->middleware(RedirectIfNotAuthenticated::class)->name('dnsmon.lists');
+Route::post('/services/dns/monitoring', [DnsController::class , 'dnsMonAdd'])->middleware(RedirectIfNotAuthenticated::class)->name('dnsmon.post');
 
 //SERVICE DDNS
 Route::get('/services/ddns-lists', [DdnsController::class , 'lists'])->middleware(RedirectIfNotAuthenticated::class)->name('ddns.lists');
