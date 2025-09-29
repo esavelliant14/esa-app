@@ -11,113 +11,120 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Logging;
 use App\Models\Group;
+use GuzzleHttp\Promise;
 
 class DnsController extends Controller
 {
 
-    public function dnsMon()
-    {
-        if (!Gate::allows('access-permission' , '61')) {
-            return redirect('/main')->with('access_denied', true);
+public function dnsMon()
+{
+    if (!Gate::allows('access-permission', '61')) {
+        return redirect('/main')->with('access_denied', true);
+    }
+
+    $domains = Dnsmon::with('group', 'user')
+        ->where('id_group', auth()->user()->id_group)
+        ->get();
+
+   $results = [];
+
+foreach ($domains->chunk(30) as $chunk) {
+    $promises = [];
+
+    // buat request async tapi jangan di cache dulu
+    foreach ($chunk as $domain) {
+        if ($domain->vendor === 'RESELLER_CAMP') {
+            $promises[$domain->id] = Http::withBasicAuth(env('RESELLER_CAMP_USER'), env('RESELLER_CAMP_KEY'))
+                ->async()
+                ->get("https://api.liqu.id/v1/domains/{$domain->id_domain}?fields=all");
+        } elseif ($domain->vendor === 'RESELLER_CLUB') {
+            $promises[$domain->id] = Http::async()->get("https://test.httpapi.com/api/domains/details-by-name.json", [
+                'auth-userid' => env('RESELLER_CLUB_USERID'),
+                'api-key' => env('RESELLER_CLUB_KEY'),
+                'domain-name' => $domain->name_domain,
+                'options' => 'All'
+            ]);
         }
+    }
 
-        // ambil semua domain
-        $domains = Dnsmon::where('id_group', auth()->user()->id_group)->get();;
+    $responses = \GuzzleHttp\Promise\Utils::settle($promises)->wait();
 
-        $results = [];
-        foreach ($domains as $domain) {
+    foreach ($chunk as $domain) {
+        $res = $responses[$domain->id] ?? null;
 
-            // bikin key cache unik per vendor+id_domain/domain
-            $cacheKey = 'dnsmon_'.$domain->vendor.'_'.$domain->id;
+        $apiData = Cache::remember('dnsmon_'.$domain->vendor.'_'.$domain->id, now()->addMinutes(10), function() use ($res, $domain) {
+            $data = ['vendor' => $domain->vendor, 'owner_type' => $domain->owner_type ?? null];
 
-            $apiData = Cache::remember($cacheKey, now()->addMinutes(1), function () use ($domain) {
-                // isi function ini persis seperti API call kamu sekarang
+            if ($res && $res['state'] === 'fulfilled') {
+                $response = $res['value'];
+                $api = $response->json();
+
                 if ($domain->vendor === 'RESELLER_CAMP') {
-                    $url = "https://api.liqu.id/v1/domains/{$domain->id_domain}?fields=all";
-                    $response = Http::withBasicAuth(
-                        env('RESELLER_CAMP_USER'),
-                        env('RESELLER_CAMP_KEY')
-                    )->get($url);
-
-                    if ($response->successful()) {
-                        $api = $response->json();
-                        return [
-                            'domain_name' => $api['domain_name'] ?? null,
-                            'expiry_date' => $api['expiry_date'] ?? null,
-                            'order_status' => $api['order_status'] ?? null,
-                            'suspended' => isset($api['suspended']) ? ($api['suspended'] ? 'true' : 'false') : null,
-                            'owner_type' => $domain->owner_type ?? null,
-                            'vendor' => 'RESELLER_CAMP',
-                        ];
-                    }
-
-                    return ['error' => $response->body()];
+                    $data = [
+                        'domain_name' => $api['domain_name'] ?? null,
+                        'expiry_date' => $api['expiry_date'] ?? null,
+                        'order_status' => $api['order_status'] ?? null,
+                        'suspended' => isset($api['suspended']) ? ($api['suspended'] ? 'true' : 'false') : null,
+                        'owner_type' => $domain->owner_type ?? null,
+                        'vendor' => 'RESELLER_CAMP',
+                    ];
+                } elseif ($domain->vendor === 'RESELLER_CLUB') {
+                    $expiryTimestamp = $api['endtime'] ?? null;
+                    $data = [
+                        'domain_name' => $domain->name_domain,
+                        'expiry_date' => $expiryTimestamp ? date('Y-m-d H:i:s', $expiryTimestamp) : null,
+                        'order_status' => $api['currentstatus'] ?? null,
+                        'suspended' => $api['paused'] ?? null,
+                        'owner_type' => $domain->owner_type ?? null,
+                        'vendor' => 'RESELLER_CLUB'
+                    ];
                 }
-
-                if ($domain->vendor === 'RESELLER_CLUB') {
-                    $url = "https://test.httpapi.com/api/domains/details-by-name.json";
-                    $response = Http::get($url, [
-                        'auth-userid' => env('RESELLER_CLUB_USERID'),
-                        'api-key' => env('RESELLER_CLUB_KEY'),
-                        'domain-name' => $domain->name_domain,
-                        'options' => 'All'
-                    ]);
-
-                    if ($response->successful()) {
-                        $api = $response->json();
-                        $expiryTimestamp = $api['endtime'] ?? null;
-                        return [
-                            'domain_name' => $domain->name_domain,
-                            'expiry_date' => $expiryTimestamp ? date('Y-m-d H:i:s', $expiryTimestamp) : null,
-                            'order_status' => $api['currentstatus'] ?? null,
-                            'suspended' => $api['paused'] ?? null,
-                            'owner_type' => $domain->owner_type ?? null,
-                            'vendor' => 'RESELLER_CLUB'
-                        ];
-                    }
-
-                    return ['error' => $response->body()];
-                }
-
-                return ['error' => "Vendor {$domain->vendor} tidak dikenali."];
-            });
-
-            $expiryDate = $apiData['expiry_date'] ?? null;
-            $isExpiring = false;
-            if ($expiryDate) {
-                $timestamp = strtotime($expiryDate);
-                $threeMonthsLater = strtotime('+3 months');
-                $aMonthLater = strtotime('+1 month');
-
-                if ($timestamp <= $aMonthLater) {
-                    $isExpiring = "1bulan";
-                }
-                elseif ($timestamp <= $threeMonthsLater){
-                    $isExpiring = "3bulan";
-                }
-                
+            } elseif ($res && $res['state'] === 'rejected') {
+                $data['error'] = $res['reason'];
             }
 
-            $results[] = [
-                'api' => $apiData,
-                'is_expiring' => $isExpiring,
-            ];
+            return $data;
+        });
+
+        // cek expiring
+        $expiryDate = $apiData['expiry_date'] ?? null;
+        $isExpiring = false;
+        if ($expiryDate) {
+            $timestamp = strtotime($expiryDate);
+            $threeMonthsLater = strtotime('+3 months');
+            $aMonthLater = strtotime('+1 month');
+
+            if ($timestamp <= $aMonthLater) {
+                $isExpiring = "1bulan";
+            } elseif ($timestamp <= $threeMonthsLater) {
+                $isExpiring = "3bulan";
+            }
         }
 
-        usort($results, function ($a, $b) {
-            $dateA = isset($a['api']['expiry_date']) ? strtotime($a['api']['expiry_date']) : PHP_INT_MAX;
-            $dateB = isset($b['api']['expiry_date']) ? strtotime($b['api']['expiry_date']) : PHP_INT_MAX;
-            return $dateA <=> $dateB;
-        });
-        // dd($results); 
-        return view('index-dnsmon-lists', [
-            'title_url' => 'DNS MONITORING',
-            'active' => 'list-dns',
-            'title_menu' => 'DNS',
-            'title_submenu' => 'DNS MONITORING',
-            'var_show' => $results
-        ]);
+        $results[] = [
+            'api' => $apiData,
+            'is_expiring' => $isExpiring,
+        ];
     }
+}
+
+
+    // urutkan berdasarkan expiry_date
+    usort($results, function ($a, $b) {
+        $dateA = isset($a['api']['expiry_date']) ? strtotime($a['api']['expiry_date']) : PHP_INT_MAX;
+        $dateB = isset($b['api']['expiry_date']) ? strtotime($b['api']['expiry_date']) : PHP_INT_MAX;
+        return $dateA <=> $dateB;
+    });
+
+    return view('index-dnsmon-lists', [
+        'title_url' => 'DNS MONITORING',
+        'active' => 'list-dns',
+        'title_menu' => 'DNS',
+        'title_submenu' => 'DNS MONITORING',
+        'var_show' => $results
+    ]);
+}
+
 
     public function dnsMonAdd(Request $post_add_dnsmon){
         
